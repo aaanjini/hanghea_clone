@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Input, Grid, Button } from "../elements/Index";
+import { Text, Input, Grid, Button } from "../elements/index";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { emailCheck } from "../shared/common";

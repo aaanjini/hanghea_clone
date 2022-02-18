@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Text, Input, Button } from "../elements/Index";
+import { Grid, Text, Input, Button } from "../elements/index";
 
 const Main = (props) => {
     return(
