@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Text = (props) => {
-  const { bold, color, size, children, margin , inline_block, ellipsis} = props;
+  const { bold, color, size, children, margin , inline_block, ellipsis, align} = props;
 
   const styles = {
     bold: bold, 
@@ -11,6 +11,7 @@ const Text = (props) => {
     margin:margin, 
     inline_block:inline_block,
     ellipsis:ellipsis,
+    align:align,
   };
 
   if(ellipsis){
@@ -35,6 +36,7 @@ Text.defaultProps = {
   size: "14px",
   margin: false,
   inline_block:false,
+  align:false
 };
 
 const P = styled.p`
@@ -45,6 +47,7 @@ const P = styled.p`
   ${(props) => (props.margin? `margin: ${props.margin};` : '')};
   white-space: normal;
   line-height: 16px;
+  ${(props) => (props.align ? `vertical-align: ${props.align}` : "")};
 `;
 
 const Ellipsis = styled.p` //말줄임

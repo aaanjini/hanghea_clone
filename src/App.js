@@ -26,7 +26,8 @@ function App() {
           <Route path="/signup" exact component={Signup}/>{/* 회원가입 */}
           <Route path="/write" exact component={PostWrite}/>{/* 작성페이지 */}
           <Route path="/write/:postId" exact component={PostWrite}/>{/* 수정페이지 */}
-          <Route path="/post/:postId" exact component={PostDetail}/>{/* 상세페이지 */}
+          {/* <Route path="/post/:postId" exact component={PostDetail}/>상세페이지 */}
+          <Route path="/post" exact component={PostDetail}/>{/* 상세페이지 */}
           <Route path="/mypage" exact component={Mypage}/>{/* 마이페이지 */}    
           <Route path="/mypage/edit" exact component={MyWrite}/>{/* 프로필 변경 페이지 */}
           <Route path="/search" exact component={Search}/>{/* 검색결과 페이지 */}

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Grid = (props) => {
-    const {is_flex,relative, width, height, padding, margin, bg, center, border, radius, min_height, display, align, children, _onClick} = props;
+    const {is_scroll,is_flex,relative, width, height, padding, margin, bg, center, border, radius, min_height, display, align, children, _onClick} = props;
     const styles = {
         width: width,
         height:height,
@@ -17,6 +17,7 @@ const Grid = (props) => {
         display:display,
         relative:relative,
         align:align,
+        is_scroll:is_scroll,
     }
 
     return(
@@ -41,10 +42,10 @@ Grid.defaultProps = {
     radius:"0",
     _onClick: () => {},
     min_height:false,
-    is_scroll:false,
     display:"block",
     relative:false,
     align:false,
+    scroll:false,
 };
 
 const GridBox = styled.div`
@@ -65,7 +66,8 @@ const GridBox = styled.div`
     ${(props)=>props.min_height ? `min-height: ${props.min_height};` : ''};
     ${(props) => (!props.is_flex && props.display ? `display: ${props.display};` : "block")};
     ${(props) => (props.relative ? `position: relative` : "")};
-    ${(props) => (props.align ? `vertical-align: bottom` : "")};
+    ${(props) => (props.align ? `vertical-align: ${props.align}` : "")};
+    ${(props) => (props.is_scroll ? `overflow-y: scroll` : "")};
 `;
 
 

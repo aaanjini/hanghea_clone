@@ -50,6 +50,7 @@ const NaviWrap = styled.div`
     padding: 10px 20px;
     border-top: 1px solid #eee;
     background-color: white;
+    z-index: 3;
 `;
 
 export default SearchBox;
