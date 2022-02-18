@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Grid = (props) => {
-    const {is_flex, relative, width, padding, margin, bg, center, border, radius, min_height, display, align, children, _onClick} = props;
+    const {is_flex,relative, width, padding, margin, bg, center, border, radius, min_height, display, align, children, _onClick} = props;
     const styles = {
         width: width,
         padding: padding,
@@ -29,6 +29,7 @@ const Grid = (props) => {
 Grid.defaultProps = {
     children:null,
     is_flex: false,
+    is_flex2: false,
     width:"100%",
     padding: false,    
     margin: false,
@@ -47,7 +48,6 @@ Grid.defaultProps = {
 const GridBox = styled.div`
     width: ${(props) => props.width};    
     max-width: 800px;
-    height: 100%;
     box-sizing: border-box;
     ${(props) => (props.padding? `padding: ${props.padding}`: '' )};
     ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
