@@ -1,29 +1,52 @@
 import React from "react";
-import { MobileView } from "../elements";
-import { Grid } from "../elements";
+import { MobileViewMyInfo, Grid, CardMyInfo, Image}  from "../elements";
+import styled from "styled-components";
+// import { useSelector, useDispatch } from "react-redux";
+// import { actionCreators as MyActions } from "../redux/modules/mypage";
 
 
-const Mypage = () => {
+const Mypage = (props) => {
+
+//   const dispatch = useDispatch();
+//   const post_list = useSelector((state) => state.mypage.my_list);
+//   console.log(post_list);
+
+//   React.useEffect(() => {
+//     dispatch(MyActions.myPostDB());
+//   }, []);
+
     return(
         <React.Fragment>
-    
-            <MobileView>
-             <Grid>
-                 
-             </Grid>
-        
-                
-                
+            <div className="title" style={{textAlign:"center", fontSize:"25px"}}> Mypage </div>
+            <MobileViewMyInfo>
+            <Grid padding="20px">
+            <Image size="100" style={{margin:"16px 16px"}}/>
+            <Line />
+            <CardMyInfo>          
+
+            </CardMyInfo>
+            <CardMyInfo>          
+
+            </CardMyInfo>
+            </Grid>
 
 
 
-            </MobileView>
+            </MobileViewMyInfo>
 
 
 
             </React.Fragment>
     );
 }
+
+const Line = styled.hr`
+border-color: black,
+padding: 15px,
+margin: 16px,
+
+
+`
 
 
 

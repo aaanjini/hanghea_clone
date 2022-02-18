@@ -1,11 +1,6 @@
 import React from "react";
-<<<<<<< HEAD
 import { Grid, Text, Input, Button } from "../elements/index";
-
-=======
-import { Grid, Text, Input, Button } from "../elements/Index";
 import Card from "../elements/Card";
->>>>>>> developer
 const Main = (props) => {
     return(
         <React.Fragment>
