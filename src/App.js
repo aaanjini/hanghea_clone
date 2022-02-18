@@ -3,7 +3,7 @@ import {Route} from "react-router-dom";
 import { ConnectedRouter } from 'connected-react-router';
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "./redux/configureStore";
-import {Grid} from './elements/Index';
+import {Grid} from './elements';
 
 //page import
 import Main from './pages/Main';

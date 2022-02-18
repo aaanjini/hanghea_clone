@@ -4,6 +4,7 @@ import Text from "./Text";
 import Button from "./Button";
 import Tag from "./Tag";
 import TagGrid from "./TagGrid";
+import Image from "./Image"
 
 
-export {Grid, Input, Button, Text, Tag, TagGrid};
+export {Grid, Input, Button, Text, Tag, TagGrid, Image};
