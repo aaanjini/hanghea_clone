@@ -42,6 +42,7 @@ const Main = (props) => {
                         bg="transparent" 
                         relative="relative" 
                         padding="10px 0"
+                        inline_block
                         _onClick={()=>{
                             console.log("1눌림");
                             likeBtn()
@@ -57,6 +58,7 @@ const Main = (props) => {
                         bg="transparent" 
                         relative="relative" 
                         padding="10px 0"
+                        inline_block
                         _onClick={()=>{
                             console.log("2눌림");
                             newBtn()
