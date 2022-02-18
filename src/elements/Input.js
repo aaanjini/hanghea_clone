@@ -1,11 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-import {Text, Grid} from "./Index";
+import {Text, Grid, Button} from "./Index";
 
 const Input = (props) => {
-    const {label, placeholder, _onChange , type, multiLine, value, radius, is_submit, onSubmit,} = props;   
+    const {label, placeholder, _onChange , type, multiLine, value, radius, is_submit, onSubmit,double} = props;   
    
+
+    if(double){
+      return (
+        <React.Fragment>
+            <DoubleInput type={type} placeholder={placeholder} onChange={_onChange} radius={radius}/>
+        </React.Fragment>
+      );
+    }
+
     if(multiLine){
       return (
         <Grid>
@@ -24,7 +33,7 @@ const Input = (props) => {
     return (
       <React.Fragment>
         <Grid>
-        {label && <Text margin="0px" color="#ffffff">{label}</Text>}
+        {label && <Text color="#333" margin="0 0 10px 0" size="16px" bold>{label}</Text>}
           {is_submit ? (
           <ElInput
             type={type}
@@ -39,7 +48,7 @@ const Input = (props) => {
             }}
           />
           ) : (
-            <ElInput type={type} placeholder={placeholder} onChange={_onChange} />
+            <ElInput type={type} placeholder={placeholder} onChange={_onChange} radius={radius}/>
           )}
         </Grid>
       </React.Fragment>
@@ -49,12 +58,13 @@ const Input = (props) => {
 Input.defaultProps = {
     bg: false,
     multiLine: false,
+    double:false,
     labelNone:false,
     label: false,
     placeholder: '텍스트를 입력해주세요.',
     type: "text",
     value: "",
-    radius:"0",
+    radius:false,
     is_submit: false,
     onSubmit: () => {},
     _onChange: () => {}
@@ -73,16 +83,33 @@ const ElTextarea = styled.textarea`
 
 const ElInput = styled.input`
     border: none;
-    border-bottom: 2px solid #F0EDCC;
-    transition: border-color 0.3s ease-in-out;
+    border: 1px solid #ddd;
     width: 100%;
     padding: 12px 4px;
     box-sizing: border-box;
     border-radius: ${(props) => props.radius};
     background-color: inherit;
-    color:#ffffff;
+    color:#999;
     outline: none;
-    
+    :placeholder {
+      color: #999;
+    }
 `;
+
+const DoubleInput = styled.input`
+    border: none;
+    border: 1px solid #ddd;
+    width: calc(70% - 10px);
+    padding: 12px 4px;
+    box-sizing: border-box;
+    border-radius: ${(props) => props.radius};
+    background-color: inherit;
+    color:#999;
+    outline: none;
+    :placeholder {
+      color: #999;
+    }
+`;
+
 
 export default Input;

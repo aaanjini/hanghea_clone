@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 const Button = (props) => {
-    const {text, size, children, _onClick, margin, width, height, color, bg, padding , border, is_fixed} = props;
+    const {text, size, children, _onClick, margin, width, height, color, bg, padding , border, double} = props;
     const styles = {
         margin: margin,
         width: width,
@@ -13,17 +13,17 @@ const Button = (props) => {
         padding: padding,
         border: border,
         size:size,
-        is_fixed:is_fixed,
+        double:double,
     }
-   
-    if(is_fixed){
+    if(double){
         return(
             <React.Fragment>
-                <FixedButton {...styles} type="button" onClick={_onClick}>{text? text: children}</FixedButton>
+                <DoubleBtn {...styles} type="button" onClick={_onClick}>{text? text: children}</DoubleBtn>
             </React.Fragment>
-        ); 
-
+        );
     }
+
+
     return(
         <React.Fragment>
             <DefaultButton {...styles} type="button" onClick={_onClick}>{text? text: children}</DefaultButton>
@@ -38,12 +38,13 @@ Button.defaultProps = {
     margin: false,
     width: "100%",
     height: '',
-    color: "black",
-    bg: "#FFD662",
+    color: "white",
+    bg: "#ccc",
     padding: "12px 0px",
     border:"none",
     size:"",
     is_fixed:false,
+    double:false
 };
 
 const DefaultButton = styled.button`    
@@ -54,7 +55,7 @@ const DefaultButton = styled.button`
     padding: ${(props) => props.padding};
     box-sizing: border-box;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     ${(props) => (props.margin? `margin: ${props.margin};` : '')};
     border: ${(props) => props.border};
     cursor: pointer;
@@ -62,18 +63,15 @@ const DefaultButton = styled.button`
     ${(props) => (props.size? `font-size: ${props.size};` : '')};
 `;
 
-const FixedButton = styled.button`
-    width: 100%;
-    height: 50px;
-    background-color: #FFD662;
-    color: #02343F;
-    font-size: 16px;
-    border: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-    cursor: pointer;    
+const DoubleBtn = styled.button`
+  width: 30%;
+  margin-left: 10px;
+  padding: 12px 4px;
+  background-color: ${(props) => props.bg};
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 `;
 
 

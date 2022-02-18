@@ -1,8 +1,13 @@
 import React from "react";
+import { Grid, Text, Input, Button } from "../elements/Index";
 
-const Main = () => {
+const Main = (props) => {
     return(
-        <React.Fragment></React.Fragment>
+        <React.Fragment>
+            <Grid padding="16px 8px">
+
+            </Grid>
+        </React.Fragment>
     );
 }
 

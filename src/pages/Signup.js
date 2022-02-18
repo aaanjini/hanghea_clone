@@ -2,15 +2,19 @@ import React from "react";
 import { Grid, Text, Input, Button } from "../elements/Index";
 import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
 import { emailCheck, passwordCheck} from "../shared/common";
+import Header from "../components/Header";
 
 const Signup = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [id, setId] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [pwd_check, setPwdCheck] = React.useState("");
   const [nick_name, setNickName] = React.useState("");
+
+
 
 
   const Signup = () => {
@@ -31,30 +35,46 @@ const Signup = () => {
       window.alert("패스워드가 일치하지않습니다.");
       return;
     }
-    
     console.log("회원가입완료!");
+    dispatch(userActions.signupAction(id,nick_name,pwd));
   }; 
+
+  const idCheck = () => {
+    
+  }
+
+
   
 
   return (
     <React.Fragment>
       <Grid padding="16px">
-        <Text size="32px" color="#F0EDCC" bold>
-          회원가입
-        </Text>
-
+        <Header text="회원가입"/>
         <Grid padding="16px 0px">
-          <Input
-            label="아이디"
-            placeholder="아이디를 입력해주세요."
-            _onChange={(e) => {
-              setId(e.target.value);
-            }}
-          />
+          <Text color="#333" margin="0 0 10px 0" size="16px" bold>아이디</Text>
+          <Grid>
+            <Input
+              double
+              radius="6px"
+              label="아이디"
+              placeholder="아이디를 입력해주세요."
+              _onChange={(e) => {
+                setId(e.target.value);
+              }}
+            />
+            <Button double 
+              bg={id === "" ? "#ddd" : "#ff8c32"}
+              _onClick={()=>{
+                console.log("눌림")
+              }}
+            >중복확인</Button>
+          </Grid>
+          
         </Grid>
 
         <Grid padding="16px 0px">
           <Input
+            radius="6px"
             label="닉네임"
             placeholder="닉네임을 입력해주세요."
             _onChange={(e) => {
@@ -65,6 +85,7 @@ const Signup = () => {
 
         <Grid padding="16px 0px">
           <Input
+            radius="6px"
             label="비밀번호"
             placeholder="8~10자리 숫자,영어 대소문자 입력해주세요."
             type="password"
@@ -74,8 +95,9 @@ const Signup = () => {
           />
         </Grid>
 
-        <Grid padding="16px 0px">
+        <Grid padding="16px 0px" margin="0 0 40px">
           <Input
+            radius="6px"
             label="비밀번호 확인"
             placeholder="비밀번호를 다시 입력해주세요."
             type="password"
@@ -85,10 +107,16 @@ const Signup = () => {
           />
         </Grid>
 
-        <Button text="회원가입하기" _onClick={Signup}></Button>
+        <Button text="회원가입" _onClick={Signup}
+          disabled={id === "" || pwd === "" || pwd_check === "" || nick_name === "" ? true : false}
+          bg={id === "" || pwd === "" || pwd_check === "" || nick_name === "" ? "#ddd" : "#00c8d2"} 
+        ></Button>
       </Grid>
     </React.Fragment>
   );
 }
+
+
+
 
 export default Signup;
