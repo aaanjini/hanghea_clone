@@ -14,7 +14,7 @@ import Mypage from './pages/Mypage';
 import MyWrite from './pages/MyWrite';
 import PostWrite from './pages/PostWrite';
 import PostDetail from './pages/PostDetail';
-
+import Navigete from "./components/Navigate";
 
 function App() {
   return (
@@ -30,7 +30,8 @@ function App() {
           <Route path="/mypage" exact component={Mypage}/>{/* 마이페이지 */}    
           <Route path="/mypage/edit" exact component={MyWrite}/>{/* 프로필 변경 페이지 */}
           <Route path="/search" exact component={Search}/>{/* 검색결과 페이지 */}
-        </ConnectedRouter>        
+        </ConnectedRouter>    
+        <Navigete/>    
       </MobileView>
     </React.Fragment>
   );

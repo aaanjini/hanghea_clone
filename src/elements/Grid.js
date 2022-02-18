@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const Grid = (props) => {
-    const {is_flex,relative, width, padding, margin, bg, center, border, radius, min_height, display, align, children, _onClick} = props;
+    const {is_flex,relative, width, height, padding, margin, bg, center, border, radius, min_height, display, align, children, _onClick} = props;
     const styles = {
         width: width,
+        height:height,
         padding: padding,
         margin: margin,
         bg: bg,
@@ -31,6 +32,7 @@ Grid.defaultProps = {
     is_flex: false,
     is_flex2: false,
     width:"100%",
+    height:"auto",
     padding: false,    
     margin: false,
     bg: false,
@@ -47,6 +49,7 @@ Grid.defaultProps = {
 
 const GridBox = styled.div`
     width: ${(props) => props.width};    
+    height: ${(props) => props.height};   
     max-width: 800px;
     box-sizing: border-box;
     ${(props) => (props.padding? `padding: ${props.padding}`: '' )};

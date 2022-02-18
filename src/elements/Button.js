@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 const Button = (props) => {
-    const {text, size, children, _onClick, margin, width, height, color, bg, padding , border, double} = props;
+    const {id, text, size, children, _onClick, margin, width, height, color, bg, padding , border, double, zIndex, relative} = props;
     const styles = {
         margin: margin,
         width: width,
@@ -14,6 +14,9 @@ const Button = (props) => {
         border: border,
         size:size,
         double:double,
+        zIndex:zIndex,
+        relative:relative,
+        id:id,
     }
     if(double){
         return(
@@ -26,7 +29,7 @@ const Button = (props) => {
 
     return(
         <React.Fragment>
-            <DefaultButton {...styles} type="button" onClick={_onClick}>{text? text: children}</DefaultButton>
+            <DefaultButton {...styles} type="button" id={id} onClick={_onClick}>{text? text: children}</DefaultButton>
         </React.Fragment>
     );
 };
@@ -44,7 +47,10 @@ Button.defaultProps = {
     border:"none",
     size:"",
     is_fixed:false,
-    double:false
+    double:false,
+    zIndex:"1",
+    relative:false,
+    id:"",
 };
 
 const DefaultButton = styled.button`    
@@ -61,6 +67,7 @@ const DefaultButton = styled.button`
     cursor: pointer;
     z-index: 2;
     ${(props) => (props.size? `font-size: ${props.size};` : '')};
+    ${(props) => (props.relative ? `position: relative` : "")};
 `;
 
 const DoubleBtn = styled.button`

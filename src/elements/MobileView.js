@@ -25,6 +25,7 @@ const View = styled.div`
     border: 1px solid #eee;
     border-radius: 5px;
     margin: 50px auto 0; 
+    position: relative;
 `;
 
 export default MobileView;
