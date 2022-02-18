@@ -7,5 +7,6 @@ import TagGrid from "./TagGrid";
 import MobileView from "./MobileView";
 import Image from "./Image";
 import VeiwContent from "./VeiwContent";
+import CommentInput from "./CommentInput";
 
-export {Grid, Input, Button, Text, Image, Tag, TagGrid, MobileView, VeiwContent};
+export {Grid, Input, Button, Text, Image, Tag, TagGrid, MobileView, VeiwContent,CommentInput} ;
