@@ -37,7 +37,6 @@ Text.defaultProps = {
   margin: false,
   inline_block:false,
   align:"left",
-  // overflow:"auto",
 };
 
 const P = styled.p`
@@ -46,8 +45,9 @@ const P = styled.p`
   font-size: ${(props) => props.size};
   font-weight: ${(props) => (props.bold? "600" : "400")};
   ${(props) => (props.margin? `margin: ${props.margin};` : '')};
-  ${(props) => (props.align? `text-align: ${props.align};` : 'left')};
+  ${(props) => (props.align? `vertical-align: ${props.align};` : 'left')};
   white-space: normal;
+  line-height: 16px;
 `;
 
 const Ellipsis = styled.p` //말줄임
