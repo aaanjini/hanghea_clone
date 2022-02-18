@@ -3,7 +3,7 @@ import {Route} from "react-router-dom";
 import { ConnectedRouter } from 'connected-react-router';
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "./redux/configureStore";
-import {Grid} from './elements/Index';
+import {Grid, MobileView} from './elements/Index';
 
 //page import
 import Main from './pages/Main';
@@ -19,7 +19,7 @@ import PostDetail from './pages/PostDetail';
 function App() {
   return (
     <React.Fragment>
-      <Grid padding="16px" margin="0 auto">
+      <MobileView> 
         <ConnectedRouter history={history}>
           <Route path="/" exact component={Main}/>{/* 메인페이지 */}
           <Route path="/login" exact component={Login}/>{/* 로그인 */}
@@ -31,8 +31,7 @@ function App() {
           <Route path="/mypage/edit" exact component={MyWrite}/>{/* 프로필 변경 페이지 */}
           <Route path="/search" exact component={Search}/>{/* 검색결과 페이지 */}
         </ConnectedRouter>        
-      </Grid>
-      <img src="https://colley.kr/_nuxt/img/icon_colley_logo.08ca580.svg"></img>
+      </MobileView>
     </React.Fragment>
   );
 }
