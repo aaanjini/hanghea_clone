@@ -18,9 +18,10 @@ MobileView.defaultProps = {
 }
 
 const View = styled.div`
-    max-width: 440px;
-    height: 600px;
-    border: 1px solid #000;
+    box-sizing: border-box;
+    max-width: 420px;
+    min-height: 600px;
+    border: 1px solid #eee;
     border-radius: 5px;
     margin: 50px auto 0; 
 `;

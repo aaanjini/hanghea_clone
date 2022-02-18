@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, Input, Grid, Button } from "../elements/Index";
 import { emailCheck } from "../shared/common";
-
+import Header from "../components/Header";
 const Login = () => {
     const [id, setId] = React.useState("");
     const [pwd, setPwd] = React.useState("");
@@ -24,11 +24,8 @@ const Login = () => {
   
     return (
       <React.Fragment>
-        <Grid padding="16px">
-          <Text size="32px" color="#F0EDCC" bold >
-            로그인
-          </Text>
-  
+        <Header text="로그인"/>
+        <Grid padding="16px">  
           <Grid padding="16px 0px">
             <Input
               label="아이디"
@@ -37,8 +34,7 @@ const Login = () => {
                 setId(e.target.value);
               }}
             />
-          </Grid>
-  
+          </Grid>  
           <Grid padding="16px 0px">
             <Input
               label="패스워드"
@@ -48,8 +44,7 @@ const Login = () => {
                 setPwd(e.target.value);
               }}
             />
-          </Grid>
-  
+          </Grid>  
           <Button 
             text="로그인하기"
             _onClick={() => {
