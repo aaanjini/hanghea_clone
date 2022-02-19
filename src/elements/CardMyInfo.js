@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid, Text, Image } from ".";
+import { Grid, Text, Image } from "./Index";
 // import { history } from "../redux/configureStore";
 
-const Card = (props) => {
+const CardMyInfo = (props) => {
     return(
         <React.Fragment>            
             <Grid 
@@ -76,4 +76,4 @@ const Clip = styled.img`
 
 
 
-export default Card;
+export default CardMyInfo;

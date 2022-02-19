@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid, Text, Input, Button, Image } from "../elements/Index";
+import { Grid, Text, Input, Button, Image } from "../elements/index";
 import { history } from "../redux/configureStore";
 import { GoHome } from 'react-icons/go';
 import { AiOutlinePlus } from 'react-icons/ai';

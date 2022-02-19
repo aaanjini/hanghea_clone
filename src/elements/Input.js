@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import {Text, Grid, Button} from "./Index";
+import {Text, Grid, Button} from ".";
 
 const Input = (props) => {
     const {label, placeholder, _onChange , type, multiLine, value, bold, radius, size, is_submit, onSubmit,double, details} = props;   

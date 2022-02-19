@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+<<<<<<< HEAD
 import { Grid, Text, Input, Button, Image, CommentInput } from "../elements/Index";
+=======
+import { Grid, Text } from "../elements";
+>>>>>>> sojh2
 import Comment from "./Comment";
 
 

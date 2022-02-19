@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonMyInfo, MobileViewMyInfo, Grid, CardMyInfo, Image}  from "../elements";
+import { ButtonMyInfo, MobileViewMyInfo, Grid, CardMyInfo, Image}  from "../elements/Image";
 import styled from "styled-components";
 // import { useSelector, useDispatch } from "react-redux";
 // import { actionCreators as MyActions } from "../redux/modules/mypage";
@@ -52,5 +52,6 @@ const Line = styled.hr`
     padding: 15px;
     margin: 16px;
 `
+
 
 export default Mypage;

@@ -36,3 +36,21 @@ export const userApis = {
     ,
   
 }
+
+export const commentApis = {
+    // 게시물 불러오기
+    getComment: (post_id) => apis.get(`/comment/${post_id}`),
+    // 게시물 작성하기
+    createComment: (post_id, comment) =>
+      apis.post(`/comment/${post_id}`, comment),
+    // 게시물 수정하기
+    editComment: (comment_id, comment) =>
+      apis.put(`/comment/${comment_id}`, comment),
+    // 게시물 삭제하기
+    deleteComment: (comment_id) => apis.delete(`/comment/${comment_id}`),
+  };
+
+export const mypageApis = {
+    mypost: () => apis.get("/user/mypost"),
+    
+  };
