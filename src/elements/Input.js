@@ -4,8 +4,20 @@ import styled from "styled-components";
 import {Text, Grid, Button} from "./Index";
 
 const Input = (props) => {
-    const {label, placeholder, _onChange , type, multiLine, value, radius, is_submit, onSubmit,double} = props;   
-   
+    const {label, placeholder, _onChange , type, multiLine, value, bold, radius, size, is_submit, onSubmit,double, details} = props;   
+    const styles = {
+      size,
+      bold,
+    };
+
+    if(details){
+      return (
+        <React.Fragment>
+            <NolineInput {...styles} type={type} placeholder={placeholder} onChange={_onChange} radius={radius}/>
+        </React.Fragment>
+      );
+    }
+
 
     if(double){
       return (
@@ -64,8 +76,11 @@ Input.defaultProps = {
     placeholder: '텍스트를 입력해주세요.',
     type: "text",
     value: "",
-    radius:false,
+    radius:"0",
+    size:"16px",
     is_submit: false,
+    details:false,
+    bold:false,
     onSubmit: () => {},
     _onChange: () => {}
     
@@ -91,7 +106,7 @@ const ElInput = styled.input`
     background-color: inherit;
     color:#999;
     outline: none;
-    :placeholder {
+    ::placeholder {
       color: #999;
     }
 `;
@@ -106,9 +121,24 @@ const DoubleInput = styled.input`
     background-color: inherit;
     color:#999;
     outline: none;
-    :placeholder {
+    ::placeholder {
       color: #999;
     }
+`;
+
+const NolineInput = styled.input`
+  border: none;
+  width: 100%;
+  color:#262626;
+  outline: none;
+  ::placeholder {
+      color: #999;
+  }
+  padding: 5px 20px;
+  font-size: ${(props) => props.size};
+  box-sizing: border-box;
+  text-align: center;
+  font-weight: ${(props) => props.bold? "bold" : ""};;
 `;
 
 

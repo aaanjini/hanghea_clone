@@ -1,13 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import { history } from "../redux/configureStore";
+import { Button } from "../elements/Index";
+import { IoIosArrowBack } from 'react-icons/io';
 
 const Header = (props) => {
-    const {text,children,details} = props;
-
+    const {text,children,details, is_flex} = props;
+    const styles = {
+        is_flex,
+    };
 
     if(details){
         return(
-            <HeaderBox>
+            <HeaderBox {...styles} >                
+                <Button width="25px" height="25px" size="25px" padding="0" bg="transparent" 
+                    _onClick={()=>{
+                        history.go(-1);
+                    }}>
+                    <IoIosArrowBack style={{color:"#262626"}}                    
+                /></Button>
                 {children}
             </HeaderBox>
         );
@@ -25,6 +36,7 @@ Header.DafaultProps = {
     children: null,
     width: "100%",
     details:false,
+    is_flex:false,
 };
 
 const HeaderBox = styled.div`
@@ -42,11 +54,17 @@ const HeaderBox = styled.div`
     border-bottom: 1px solid #eee;
     padding: 10px 16px;
     background-color: white;
+    ${(props) =>
+        props.is_flex
+        ? `display: flex; align-items: center; justify-content: space-between; `
+    : ""};
     >h1 {
         font-family: 'OTWelcomeRA';
         margin: 0;
         font-size: 20px;
     }
+
+    
 `;
 
 

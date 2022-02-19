@@ -3,7 +3,6 @@ import { Grid, Text, Input, Button, Image } from "../elements/Index";
 import Header from "../components/Header";
 import VeiwContent from "../elements/VeiwContent";
 import CommentList from "../components/CommentList";
-import { IoIosArrowBack } from 'react-icons/io';
 import { BsHeart } from 'react-icons/bs';
 import { BsHeartFill } from 'react-icons/bs';
 
@@ -11,12 +10,11 @@ const PostDetail = () => {
     const [is_like, setIsLike] = React.useState(false);
 
     const likeClick = () => {
-        setIsLike(is_like => !is_like);
+        setIsLike(!is_like);
     }
     return(
         <React.Fragment>
-            <Header details>
-                <Button width="25px" height="25px" size="25px" padding="0" bg="transparent"><IoIosArrowBack style={{color:"#262626"}}/></Button>
+            <Header details is_flex>
             </Header>
 
             <Grid margin="51px 0 70px" height="calc(100% - 121px)" is_scroll>
