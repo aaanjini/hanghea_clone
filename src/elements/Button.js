@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 const Button = (props) => {
-    const {id, text, size, children, _onClick, margin, width, height, color, bg, padding , border, double, zIndex, relative} = props;
+    const {inline_block, id, text, size, children, _onClick, margin, width, height, color, bg, padding , border, double, zIndex, relative} = props;
     const styles = {
         margin: margin,
         width: width,
@@ -17,6 +17,7 @@ const Button = (props) => {
         zIndex:zIndex,
         relative:relative,
         id:id,
+        inline_block:inline_block,
     }
     if(double){
         return(
@@ -51,9 +52,11 @@ Button.defaultProps = {
     zIndex:"1",
     relative:false,
     id:"",
+    inline_block:false,
 };
 
 const DefaultButton = styled.button`    
+    display: ${(props) => (props.inline_block? "inline-block" : "block")};
     width: ${(props) => props.width};
     ${(props) => (props.height? `height: ${props.height};` : '')};
     background-color: ${(props) => props.bg};

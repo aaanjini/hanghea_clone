@@ -16,11 +16,11 @@ const ButtonMyInfo = (props) => {
 
 
 const Button = styled.button`
-background-color: "white",
-width: "",
-border: "1px solid black"
-height: "20px",
-border-radius: "15px",
+    background-color: "white";
+    width: "";
+    border: "1px solid black";
+    height: "20px";
+    border-radius: "15px";
 
 `
 

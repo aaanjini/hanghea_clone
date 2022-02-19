@@ -1,14 +1,20 @@
 import React from "react";
-import { Grid, Text, Input, Button, Image } from "../elements/index";
+import { Grid, Text, Input, Button, Image } from "../elements/Index";
 import Header from "../components/Header";
 import VeiwContent from "../elements/VeiwContent";
 import CommentList from "../components/CommentList";
-import { IoIosArrowBack } from 'react-icons/io';
+import { BsHeart } from 'react-icons/bs';
+import { BsHeartFill } from 'react-icons/bs';
+
 const PostDetail = () => {
+    const [is_like, setIsLike] = React.useState(false);
+
+    const likeClick = () => {
+        setIsLike(!is_like);
+    }
     return(
         <React.Fragment>
-            <Header details>
-                <Button width="25px" height="25px" size="25px" padding="0" bg="transparent"><IoIosArrowBack style={{color:"#262626"}}/></Button>
+            <Header details is_flex>
             </Header>
 
             <Grid margin="51px 0 70px" height="calc(100% - 121px)" is_scroll>
@@ -22,7 +28,13 @@ const PostDetail = () => {
                 <Image shape="rectangle" src="https://d2gvnkv9lw8qqa.cloudfront.net/item_165362_1_0_title_0.jpeg?d=250x250"/>
                 <Grid padding="8px 15px" margin="10px 0 20px">
                     <Grid margin="0 10px 0 0" width="auto" display="inline-block" >
-                        <img src="https://colley.kr/_nuxt/img/like.4df78e7.png" style={{height: "20px", width: "auto",marginRight: "5px"}} alt="react"/>
+                        <Button width="auto" bg="transparent" padding="0" inline_block size="20px" margin="0 5px 0 0 "
+                            _onClick={()=>{
+                                likeClick()
+                            }}
+                        >
+                            {is_like?  (<BsHeartFill style={{color:"ff8c32"}}/>) : (<BsHeart style={{color:"#9a9a9a"}}/>)}                            
+                        </Button>
                         <span style={{
                             color: "#9a9a9a",
                             letterSpacing:" -.015em",
@@ -32,7 +44,7 @@ const PostDetail = () => {
                         }}>30</span>
                     </Grid>
                     <Grid margin="0 10px 0 0" width="auto" display="inline-block">
-                        <img src="https://colley.kr/_nuxt/img/comment.5264184.png" style={{height: "20px", width: "auto",marginRight: "5px"}} alt="react"/>
+                        <img src="https://colley.kr/_nuxt/img/comment.5264184.png" style={{height: "20px", width: "auto",marginRight: "5px"}}/>
                         <span style={{
                             color: "#9a9a9a",
                             letterSpacing:" -.015em",

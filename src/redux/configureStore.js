@@ -3,10 +3,15 @@ import thunk from "redux-thunk";
 import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 
-
+import User from "./modules/user"; //user의 리듀서
+import Post from "./modules/post"; //image의 리듀서
+import Image from "./modules/image"; //image의 리듀서
 
 export const history = createBrowserHistory();
 const rootReducer = combineReducers({ //우리가 만든 리듀서 뭉치기
+    user:User,
+    post:Post,
+    image:Image,
     router: connectRouter(history),
 });
 

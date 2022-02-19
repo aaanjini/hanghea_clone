@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Grid = (props) => {
-    const {is_scroll,is_flex,relative, width, height, padding, margin, bg, center, border, radius, min_height, display, align, children, _onClick} = props;
+    const {is_scroll,is_flex,relative, width, height, padding, margin, bg, bg_img, center, border, radius, min_height, display, align, children, _onClick} = props;
     const styles = {
         width: width,
         height:height,
@@ -18,6 +18,7 @@ const Grid = (props) => {
         relative:relative,
         align:align,
         is_scroll:is_scroll,
+        bg_img:bg_img,
     }
 
     return(
@@ -46,6 +47,7 @@ Grid.defaultProps = {
     relative:false,
     align:false,
     scroll:false,
+    bg_img:false,
 };
 
 const GridBox = styled.div`
@@ -68,6 +70,7 @@ const GridBox = styled.div`
     ${(props) => (props.relative ? `position: relative` : "")};
     ${(props) => (props.align ? `vertical-align: ${props.align}` : "")};
     ${(props) => (props.is_scroll ? `overflow-y: scroll` : "")};
+    ${(props) => (props.bg_img ? `background-image: url("https://colley.kr/_nuxt/img/bg_dot.0db8a4c.png")` : "")};
 `;
 
 

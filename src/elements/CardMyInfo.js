@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid, Text, Image } from ".";
+import { Grid, Text, Image } from "../elements/Index";
 // import { history } from "../redux/configureStore";
 
 const CardMyInfo = (props) => {

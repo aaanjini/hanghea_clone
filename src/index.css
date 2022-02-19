@@ -3,6 +3,9 @@
   font-family: "Noto Sans KR",sans-serif;
 }
 
+body {
+  background-image: url("https://colley.kr/_nuxt/img/bg_dot.0db8a4c.png");
+}
 
 
 code {
