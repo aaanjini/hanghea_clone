@@ -7,8 +7,8 @@ import TagGrid from "./TagGrid";
 import MobileView from "./MobileView";
 import MobileViewMyInfo from "./MobileViewMyInfo";
 import Image from "./Image";
-import Card from "./Card";
+import VeiwContent from "./VeiwContent";
 import CardMyInfo from "./CardMyInfo";
+import ButtonMyInfo from "./ButtonMyInfo";
 
-
-export {Grid, Input, Button, Text, Image, Tag, TagGrid, MobileView, Card, CardMyInfo, MobileViewMyInfo};
+export {Grid, Input, Button, Text, Image, Tag, TagGrid, MobileView, VeiwContent, MobileViewMyInfo, CardMyInfo, ButtonMyInfo};

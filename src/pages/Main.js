@@ -1,6 +1,6 @@
 import React from "react";
-import { Grid, Text, Input, Button } from "../elements/index";
-import Card from "../elements/Card";
+import { Grid} from "../elements/index";
+// import Card from "../elements/Card";
 const Main = (props) => {
     return(
         <React.Fragment>
@@ -9,7 +9,7 @@ const Main = (props) => {
                     <Button width="60px">좋아요</Button>
                     <Button width="60px">신규</Button>
                 </Grid> */}
-                <Card/>
+                {/* <Card/> */}
             </Grid>
             
         </React.Fragment>

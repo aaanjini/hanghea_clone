@@ -14,7 +14,7 @@ const MobileViewMyInfo = (props) => {
 };
 
 MobileViewMyInfo.defaultProps = {
-    children:true,
+    children:null,
 }
 
 const View = styled.div`

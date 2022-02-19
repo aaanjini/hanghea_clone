@@ -24,6 +24,7 @@ Header.DafaultProps = {
     text: false,
     children: null,
     width: "100%",
+    details:false,
 };
 
 const HeaderBox = styled.div`
@@ -33,9 +34,14 @@ const HeaderBox = styled.div`
         font-weight: normal;
         font-style: normal;
     }
-
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    top:0;
+    left: 0;
     border-bottom: 1px solid #eee;
-    padding: 16px;
+    padding: 10px 16px;
+    background-color: white;
     >h1 {
         font-family: 'OTWelcomeRA';
         margin: 0;

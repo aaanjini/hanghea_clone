@@ -1,5 +1,5 @@
 import React from "react";
-import { MobileViewMyInfo, Grid, CardMyInfo, Image}  from "../elements";
+import { ButtonMyInfo, MobileViewMyInfo, Grid, CardMyInfo, Image}  from "../elements";
 import styled from "styled-components";
 // import { useSelector, useDispatch } from "react-redux";
 // import { actionCreators as MyActions } from "../redux/modules/mypage";
@@ -21,7 +21,14 @@ const Mypage = (props) => {
             <MobileViewMyInfo>
             <Grid padding="20px">
             <Image size="100" style={{margin:"16px 16px"}}/>
+            <ButtonMyInfo style={{textAlign: "right", margin: "50px 50px 50px 0"}}/>
             <Line />
+            <CardMyInfo>          
+
+            </CardMyInfo>
+            <CardMyInfo>          
+
+            </CardMyInfo>
             <CardMyInfo>          
 
             </CardMyInfo>
