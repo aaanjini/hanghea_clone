@@ -27,7 +27,8 @@ const getPostDB = () => {
         postApis.getPost()
         .then((res)=>{
             console.log("포스트리스트 가져오기", res.data);
-            dispatch(getPost(res.data)); //받아온 리스트 메인에 뿌려주기
+            const post_list = res.data
+            dispatch(getPost(post_list)); //받아온 리스트 리덕스 저장
         }).catch((error)=>{
             console.log("포스트 리스트 가져오기 실패", error);
         });
@@ -38,7 +39,6 @@ const getOnePostDB = (postId) => {
     return function (dispatch, getState, {history}){
         postApis.getOnePost(postId)
         .then((res)=>{
-            console.log("포스트 1개 가져오기 성공", res.data);
             const post = res.data
             dispatch(getPost([post]));
         }).catch((error)=>{

@@ -1,5 +1,6 @@
 import React from "react";
-import { Grid, Text, Input, Button, Image } from "../elements/Index";
+import styled from "styled-components";
+import { Grid, Text, Input, Button, Image , CommentInput} from "../elements/Index";
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as postActions } from "../redux/modules/post";
@@ -21,7 +22,6 @@ const PostDetail = (props) => {
     const [is_like, setIsLike] = React.useState(post.islike);
     const [likeCnt, setLikeCnt] = React.useState(post.likeCnt);
 
-
     const likeClick = () => {
         setIsLike(!is_like);
         setLikeCnt(likeCnt + (is_like ? -1 : +1));
@@ -31,14 +31,15 @@ const PostDetail = (props) => {
 
     const deletePost = () => {
         dispatch(postActions.deletePostDB(parseInt(postId)));
-    }
-
+    }   
+    
     React.useEffect(() => {
-        if(!post){
+        if(post){
             return;
         }
         dispatch(postActions.getOnePostDB(postId));
     },[]);
+
 
     return(
         <React.Fragment>
@@ -103,7 +104,19 @@ const PostDetail = (props) => {
                             <Text>{post.title}</Text>
                             <VeiwContent>{post.content}</VeiwContent>
                         </Grid>
-                        <CommentList postId={postId}/>
+                        <Grid >
+                            <Grid margin="40px 0 20px">
+                                <CommentWrap >
+                                    <Text margin="0 0 20px" bold>댓글</Text>                    
+                                </CommentWrap>
+                                <Grid padding="15px">
+                                    <CommentList postId={postId}/>             
+                                </Grid>                
+                            </Grid>
+                            <Grid padding="0 15px" margin="0 0 20px">
+                                <CommentInput postId={postId}/>
+                            </Grid>            
+                        </Grid>                        
                     </Grid>
                 </>
             )}
@@ -112,5 +125,11 @@ const PostDetail = (props) => {
         </React.Fragment>
     );
 }
+
+
+const CommentWrap = styled.div`
+    padding: 8px 15px;
+    border-bottom: 1px solid #eee;
+`;
 
 export default PostDetail;

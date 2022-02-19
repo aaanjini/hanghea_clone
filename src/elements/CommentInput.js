@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import { actionCreators as commentActions } from "../redux/modules/comment";
 import { FiArrowUp } from 'react-icons/fi';
 
 const CommentInput = (props) => {
@@ -8,8 +9,13 @@ const CommentInput = (props) => {
     const [comment,setComment] = React.useState("");
 
     const addComment = () => {
-       dispatch()
-    }
+        if (comment === "") {
+            alert("답글을 입력해주세요.");
+            return;
+        }
+       dispatch(commentActions.addCommentDB(props.postId,comment));
+       setComment("");
+    };   
 
     return(
         <React.Fragment>
@@ -20,7 +26,7 @@ const CommentInput = (props) => {
                     }}
                 ></Input>
                 <Btn onClick={()=>{
-                    console.log("안녕");
+                    addComment()
                 }}><FiArrowUp/></Btn>
             </InputWrap>
             

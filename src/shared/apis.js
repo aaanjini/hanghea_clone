@@ -57,11 +57,19 @@ export const postApis = {
     deletePost: (postId) => 
         apis.delete(`/post/${postId}`)
     ,  
+    //좋아요 
     likePost: (postId) => 
         apis.post(`/like/${postId}`) 
     ,
 }
 
 export const commentApis = {
-    
+    //댓글 가져오기
+    getComment: (postId) => apis.get(`/comment/${postId}`),
+    //댓글 추가하기
+    addComment: (postId,comment) => apis.post(`/comment/${postId}`,{
+        comment:comment
+    }),
+
+
 }

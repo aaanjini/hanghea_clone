@@ -9,15 +9,8 @@ const Comment = (props) => {
             <Grid margin="0 0 15px">
                 <Image shape="circle" size="30" inline_block></Image>
                 <Grid width="auto" display="inline-block"  margin="0 0 0 8px" >
-                    <Text margin="0" size="13px" color="#262626">댓글내용입니다.</Text>
-                    <Text margin="0" color="#585858" size="10px" ><After>닉네임</After><After>12시간전</After></Text>
-                </Grid>
-            </Grid>
-            <Grid>
-                <Image shape="circle" size="30" inline_block></Image>
-                <Grid width="auto" display="inline-block"  margin="0 0 0 8px">
-                    <Text margin="0" size="13px" color="#262626">댓글내용입니다.</Text>
-                    <Text margin="0" color="#585858" size="10px" ><After>닉네임</After><After>12시간전</After></Text>
+                    <Text margin="0" size="13px" color="#262626">{props.comment}</Text>
+                    <Text margin="0" color="#585858" size="10px" ><After>{props.nickname}</After><After>{props.commentDate}</After></Text>
                 </Grid>
             </Grid>
         </React.Fragment>
