@@ -4,10 +4,11 @@ import styled from "styled-components";
 import {Text, Grid, Button} from "./Index";
 
 const Input = (props) => {
-    const {label, placeholder, _onChange , type, multiLine, value, bold, radius, size, is_submit, onSubmit,double, details} = props;   
+    const {label, placeholder, _onChange , type, multiLine, value, bold, radius, size, is_submit, onSubmit,double, details, width } = props;   
     const styles = {
       size,
       bold,
+      width,
     };
 
     if(details){
@@ -37,6 +38,7 @@ const Input = (props) => {
             placeholder={placeholder}
             onChange={_onChange}
             radius={radius}
+            width={width}
           ></ElTextarea>
         </Grid>
       );
@@ -82,13 +84,14 @@ Input.defaultProps = {
     details:false,
     bold:false,
     onSubmit: () => {},
-    _onChange: () => {}
+    _onChange: () => {},
+    width: "",
     
 }
 
 const ElTextarea = styled.textarea`
-  border: none;
-  width: 100%;
+  border: 1px solid black;
+  width: ${(props) => props.width};
   padding: 12px 4px;
   box-sizing: border-box;
   background-color:#eee;

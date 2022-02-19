@@ -24,9 +24,9 @@ const MyWrite = (props) => {
       </label>
 
       <div style={{ margin: "30px 0 20px 38px" }}>소개</div>
-      <label>
-        <Input multiline></Input>
-      </label>
+      <Grid padding="0 40px 0 40px">
+        <Input multiline width="80%" border="1px solid black"></Input>
+      </Grid>
     </React.Fragment>
   );
 };

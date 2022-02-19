@@ -34,7 +34,7 @@ Text.defaultProps = {
   bold: false,
   color: "#222831",
   size: "14px",
-  margin: false,
+  margin: "0",
   inline_block:false,
   align:false
 };

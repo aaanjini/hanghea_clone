@@ -30,21 +30,13 @@ const Mypage = (props) => {
       </Header>
       <Grid margin="50px 0 50px" height="calc(100% - 121px)" is_scroll>
         <Grid padding="20px" is_flex>
-          <Image size="100" shape="circle" margin="0 10px 10px 0" />
-          <Grid width="auto" padding="0 0 0 0" margin="0 0 20px 50px">
-            닉네임
-            <br />
-            {}
-            <br />
-            소개글
-            <br />
-          </Grid>
+          <Image size="100" shape="circle" margin="0 10px 3px 30px" />
           <Button
-            width="40%"
+            width="30%"
             style={{
               textAlign: "right",
-              padding: "20px",
-              margin: "50px 50px 50px 0",
+              padding: "0px",
+              margin: "20px 40px 20px 0",
             }}
             _onClick={() => {
               history.push("/mypage/edit");
@@ -53,10 +45,14 @@ const Mypage = (props) => {
             프로필 수정
           </Button>
         </Grid>
+       
+        <div style={{ fontSize: "14px", margin:"0 0 0 75px"}}>닉네임</div>
+        <div style={{ fontSize: "13px", margin:"0 0 0 75px", padding:"7px"}}>소개</div>
+        
         <Grid padding="15px" margin="5px auto">
-          <Text size="20px" margin="auto">
+          <p style={{ fontsize: "20px", textAlign: "center" }}>
             내가 작성한 글
-          </Text>
+          </p>
         </Grid>
         <Grid padding="16px 8px">
           <Card />
