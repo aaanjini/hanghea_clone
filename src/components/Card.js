@@ -69,7 +69,7 @@ const Card = (props) => {
 const Clip = styled.img`
     width: 75px;
     height: 25px;
-    top: -10px;
+    top: -5px;
     transform: translateX(-50%) rotate(-4deg);
     position: absolute;
     left: 50%;
