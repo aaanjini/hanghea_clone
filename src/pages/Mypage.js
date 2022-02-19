@@ -22,11 +22,12 @@ const Mypage = (props) => {
             <Header text="내정보"/>            
             <Grid  margin="50px 0 70px" height="calc(100% - 121px)" is_scroll>
                 <Grid padding="20px" is_flex>
-                    <Image size="100"  shape="circle"/>
-                    <Grid>
-                        닉네임,소개글
+                    <Image size="100"  shape="circle" padding="0 0 1px 0 solid black"/>
+                    <Grid padding="0 0 0 40px" margin="0 0 20px 0">
+                        닉네임<br/>{}<br/>
+                        소개글<br/>
                     </Grid>
-                    <ButtonMyInfo style={{textAlign: "right", margin: "50px 50px 50px 0"}}/>
+                    <ButtonMyInfo style={{textAlign: "right", padding:"20px", margin: "50px 50px 50px 0"}}/>
                 </Grid>
                 <Grid padding="16px 8px">
                     <Card/><Card/>
@@ -42,11 +43,7 @@ const Mypage = (props) => {
     );
 }
 
-const Line = styled.hr`
-    border-color: black;
-    padding: 15px;
-    margin: 16px;
-`
+
 
 
 

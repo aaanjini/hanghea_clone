@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid, Text, Image } from "../elements";
+import { Grid, Text, Input, Button, Image } from "../elements/Index";
 
 
 const Comment = (props) => {

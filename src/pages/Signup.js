@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Text, Input, Button } from "../elements/index";
+import { Grid, Text, Input, Button } from "../elements/Index";
 import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
