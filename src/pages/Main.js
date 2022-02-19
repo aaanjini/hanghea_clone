@@ -66,7 +66,9 @@ const Main = (props) => {
                     >                        
                     </Button>
                 </Grid>
-                <Card/>
+                <Grid>
+                    <Card/>
+                </Grid>                
             </Grid>
             
         </React.Fragment>
