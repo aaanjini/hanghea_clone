@@ -13,7 +13,7 @@ const Input = (props) => {
     if(details){
       return (
         <React.Fragment>
-            <NolineInput {...styles} type={type} placeholder={placeholder} onChange={_onChange} radius={radius}/>
+            <NolineInput {...styles} type={type} placeholder={placeholder} value={value} onChange={_onChange} radius={radius}/>
         </React.Fragment>
       );
     }

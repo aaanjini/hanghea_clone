@@ -14,8 +14,6 @@ const Main = (props) => {
     const list = postList ? [...postList] : []
     const [type, setType] = React.useState("");
 
-    console.log(postList,type);
-
     const likeBtn = (e) => {
         const like = document.getElementById('sliderOne');
         const new_btn = document.getElementById('sliderTwo');
@@ -43,6 +41,7 @@ const Main = (props) => {
     };
 
     React.useEffect(() => {
+        dispatch(postActions.getPostDB()); //게시글 불러오기
         const post_type = localStorage.getItem("postType");
         if(post_type === "like"){
             const like = document.getElementById('sliderOne');

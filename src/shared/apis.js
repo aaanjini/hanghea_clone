@@ -42,20 +42,24 @@ export const postApis = {
     //포스트 가져오기
     getPost: () => apis.get("/"),
 
-    //좋아요순으로 포스트 가져오기
-    getPostLike: () => apis.get("/likes"),
+    //포스트 1개 가져오기
+    getOnePost: (postId) => apis.get(`/post/${postId}`),
 
     //게시글 추가하기
-    addPost: (post) => {
+    addPost: (post) => 
         apis.post("/post",post)
-    },
-    //게시글 삭제
-    deletePost: (postId) => {
-        apis.delete(`/post/${postId}`)
-    },
+    ,
     //게시글 수정
-    editPost: (postId, post) => {
+    editPost: (postId, post) => 
         apis.put(`/post/${postId}`, post)
-    },
+    ,
+    //게시글 삭제
+    deletePost: (postId) => 
+        apis.delete(`/post/${postId}`)
+    ,   
 
+}
+
+export const commentApis = {
+    
 }

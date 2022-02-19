@@ -7,13 +7,14 @@ import { postApis } from "../../shared/apis";
 
 const GET_POST = "GET_POST";
 const SET_POST = "SET_POST";
-const DELETE_POST = "DELETE_POST";
 const EDIT_POST = "EDIT_POST";
+const DELETE_POST = "DELETE_POST";
 
-const getPost = createAction(GET_POST,(post_list, type)=>({post_list, type}));
+const getPost = createAction(GET_POST,(post_list)=>({post_list}));
 const setPost = createAction(SET_POST, (post)=>({post}));
-const deletePost = createAction(DELETE_POST, (postId, post)=>({postId, post}));
 const editPost = createAction(EDIT_POST, (postId, post)=>({postId, post}));
+const deletePost = createAction(DELETE_POST, (post_list)=>({post_list}));
+
 
 
 const initialState = {
@@ -33,25 +34,33 @@ const getPostDB = () => {
     };
 }
 
-//좋아요순 리스트 가져오기
-const getPostLikeDB = () => {
+const getOnePostDB = (postId) => {
     return function (dispatch, getState, {history}){
-        postApis.getPostLike()
+        postApis.getOnePost(postId)
         .then((res)=>{
-            console.log("포스트리스트 좋아요순 가져오기", res.data);
-            dispatch(getPost(res.data,"like")); //받아온 리스트 메인에 뿌려주기
+            console.log("포스트 1개 가져오기 성공", res.data);
+            const post = res.data
+            dispatch(getPost([post]));
         }).catch((error)=>{
-            console.log("포스트 리스트 좋아요순 가져오기 실패", error);
+            console.log("포스트 1개 가져오기 실패", error);
         });
-    };
+    }
 }
 
 const addPostDB = (post) => {
     return function (dispatch, getState, {history}){
-        console.log("포스트등록",post);
         postApis.addPost(post)
         .then((res)=>{
-            console.log("포스트 등록성공", res);
+            console.log("포스트 등록성공",res.data);
+            const postId = res.data;
+            postApis.getOnePost(postId)
+            .then((res)=>{
+                dispatch(setPost(res.data));                
+            }).catch((err)=>{
+                console.log("포스트 등록 가져오기 오류", err);
+            })
+            window.alert("등록완료! 😚");
+            history.replace("/");
         }).catch((error)=>{
             console.log("포스트 등록실패", error);
         });
@@ -61,58 +70,69 @@ const addPostDB = (post) => {
 const editPostDB = (postId, post) => {
     return function (dispatch, getState, {history}){
         console.log("포스트수정",postId, post);
-        // postApis.editPost(postId, post)
-        // .then((res)=>{
-        //     console.log("포스트 수정성공", res);
-        // }).catch((error)=>{
-        //     console.log("포스트 수정실패", error);
-        // });
+        postApis.editPost(postId, post)
+        .then((res)=>{
+            console.log("포스트 수정성공", res);
+
+            postApis.getOnePost(postId)
+            .then((res)=>{
+                console.log("포스트 수정",res.data);
+                dispatch(editPost(res.data));                
+            }).catch((err)=>{
+                console.log("포스트 수정 가져오기 오류", err);
+            })
+            window.alert("수정완료! 😚");
+            history.replace("/");
+        }).catch((error)=>{
+            console.log("포스트 수정실패", error);
+        });
     }
 };
 
 const deletePostDB = (postId) => {
     return function (dispatch, getState, {history}){
         console.log("포스트삭제",postId);
-        // postApis.deletePost(postId)
-        // .then((res)=>{
-        //     console.log("포스트 수정성공", res);
-        // }).catch((error)=>{
-        //     console.log("포스트 수정실패", error);
-        // });
+        postApis.deletePost(postId)
+        .then((res)=>{
+            console.log("포스트 삭제성공", res);
+
+            const post_index = getState().post.list.findIndex(
+                (item) => item.postId === postId
+              );
+            const _post = getState().post.list.filter((item, index) => {
+                return index !== post_index;
+            });
+
+            dispatch(deletePost(_post))
+
+            window.alert("삭제완료! 😞");
+            history.replace("/");
+        }).catch((error)=>{
+            console.log("포스트 삭제실패", error);
+        });
     }
 };
 
-
-
-
-
-
 export default handleActions ({
     [GET_POST]: (state, action) => produce(state, (draft) => {
-        console.log(action.payload.type);
-        // if(action.payload.type === "like"){
-        //     draft.list.sort((a,b) => {
-        //         return b.likeCnt - a.likeCnt
-        //     })
-        // }
-        draft.list = action.payload.post_list
-      
+        draft.list = action.payload.post_list;   
     }),
     [SET_POST]: (state, action) => produce(state, (draft) => {
-        
+        draft.list.unshift(action.payload.post);
     }),
     [EDIT_POST]: (state, action) => produce(state, (draft) => {
-        
+        let idx = draft.list.findIndex((p) => p.postId === action.payload.postId);
+        draft.list[idx] = { ...draft.list[idx], ...action.payload.post };     
     }),
     [DELETE_POST]: (state, action) => produce(state, (draft) => {
-        
+        draft.list = action.payload.post_list;
     }),
 },initialState);
 
 
 const actionCreators = { //액션 생성자 내보내기
     getPostDB,
-    getPostLikeDB,
+    getOnePostDB,
     addPostDB,
     editPostDB,
     deletePostDB

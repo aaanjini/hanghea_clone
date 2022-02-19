@@ -16,7 +16,7 @@ const CommentList = (props) => {
                 </Grid>                
             </Grid>
             <Grid padding="0 15px" margin="0 0 20px">
-                <CommentInput/>
+                <CommentInput postId={props.postId}/>
             </Grid>            
         </React.Fragment>
     );

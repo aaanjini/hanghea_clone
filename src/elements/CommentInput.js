@@ -1,13 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import { FiArrowUp } from 'react-icons/fi';
-import { Grid, Text, Button, Image } from "../elements/Index";
 
 const CommentInput = (props) => {
+    const dispatch = useDispatch();
+    const [comment,setComment] = React.useState("");
+
+    const addComment = () => {
+       dispatch()
+    }
+
     return(
         <React.Fragment>
             <InputWrap>                
-                <Input placeholder="답글을 입력하세요."></Input>
+                <Input placeholder="답글을 입력하세요."
+                    onChange={(e)=>{
+                        setComment(e.target.value)
+                    }}
+                ></Input>
                 <Btn onClick={()=>{
                     console.log("안녕");
                 }}><FiArrowUp/></Btn>

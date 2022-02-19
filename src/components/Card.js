@@ -11,7 +11,6 @@ const Card = (props) => {
             relative="relative"
             display="inline-block"
             _onClick={()=>{
-                console.log("카드눌림");
                 history.push(`/post/${props.postId}`)
                 props={...props}
             }}>
