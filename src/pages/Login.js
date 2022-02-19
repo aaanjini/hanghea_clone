@@ -28,7 +28,7 @@ const Login = () => {
     return (
       <React.Fragment>
         <Header text="로그인"/>
-        <Grid padding="16px">  
+        <Grid padding="16px" margin="50px 0 70px">  
           <Grid padding="16px 0px" is_flex>
             <Input              
               radius="6px"

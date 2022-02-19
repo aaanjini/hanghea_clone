@@ -12,28 +12,30 @@ const Card = (props) => {
             display="inline-block"
             _onClick={()=>{
                 console.log("카드눌림");
+                history.push(`/post/${props.postId}`)
+                props={...props}
             }}>
                 <Clip src="https://d2gvnkv9lw8qqa.cloudfront.net/item_tape_61_1587714959439.png"/>
                 <Grid padding="8px 8px 4px">
                 <Image 
                         shape="rectangle" 
-                        src="https://d2gvnkv9lw8qqa.cloudfront.net/item_165362_1_0_title_0.jpeg?d=250x250"
+                        src={props.imgUrl !== "" ? props.imgUrl : ""}
                         radius="15px"
                         width="100%"
                     />
                 </Grid>
                 <Grid padding="0 20px" margin="0 0 16px">
-                    <Text bold size="14px" margin="0">제목입니다</Text>
-                    <Grid width="auto" padding="4px 0 6px">
+                    <Text bold size="14px" margin="5px 0 0">{props.title}</Text>
+                    <Grid width="auto" padding="4px 0 6px" height="23px">
                         <Image 
                             inline_block 
                             size="16"
-                            profile="https://d2gvnkv9lw8qqa.cloudfront.net/item_165362_1_0_title_0.jpeg?d=250x250"
+                            profile={props.profileUrl === null? "https://www.garyqi.com/wp-content/uploads/2017/01/default-avatar-500x500.jpg" : props.profileUrl}
                         />
                         <Text inline_block margin="0 0 0 5px" align="text-top"
                             color="#585858"
                             size="12px"
-                        >닉네임</Text>
+                        >{props.nickname}</Text>
                     </Grid>
                     <Grid>
                         <Grid margin="0 10px 0 0" width="auto" display="inline-block" >
@@ -43,7 +45,7 @@ const Card = (props) => {
                                 letterSpacing:" -.015em",
                                 fontSize: "10px",
                                 lineHeight: "10px",
-                            }}>30</span>
+                            }}>{props.likeCnt}</span>
                         </Grid>
                         <Grid margin="0 10px 0 0" width="auto" display="inline-block">
                             <img src="https://colley.kr/_nuxt/img/comment.5264184.png" style={{height: "10px", width: "auto",marginRight: "5px"}}/>
@@ -52,7 +54,7 @@ const Card = (props) => {
                                 letterSpacing:" -.015em",
                                 fontSize: "10px",
                                 lineHeight: "10px",
-                            }}>30</span>
+                            }}>{props.commentCnt}</span>
                         </Grid>                            
                     </Grid>
                 </Grid>
@@ -67,7 +69,7 @@ const Card = (props) => {
 const Clip = styled.img`
     width: 75px;
     height: 25px;
-    top: -10px;
+    top: -5px;
     transform: translateX(-50%) rotate(-4deg);
     position: absolute;
     left: 50%;

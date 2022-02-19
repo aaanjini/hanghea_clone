@@ -1,14 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 import { history } from "../redux/configureStore";
-import { Button } from "../elements/Index";
+import { Button, Text} from "../elements/Index";
 import { IoIosArrowBack } from 'react-icons/io';
 
 const Header = (props) => {
-    const {text,children,details, is_flex} = props;
+    const {text,children,details, is_flex, is_title} = props;
     const styles = {
         is_flex,
+
     };
+    if(is_title){
+        return(
+            <HeaderBox {...styles} >                
+                <Button width="25px" height="25px" size="25px" padding="0" bg="transparent" 
+                    _onClick={()=>{
+                        history.go(-1);
+                    }}>
+                    <IoIosArrowBack style={{color:"#262626"}}
+                /></Button>
+                <Text bold size="15px" margin="0">{text? text: children}</Text>
+            </HeaderBox>
+        );
+    }
 
     if(details){
         return(
@@ -37,6 +51,7 @@ Header.DafaultProps = {
     width: "100%",
     details:false,
     is_flex:false,
+    is_title:false
 };
 
 const HeaderBox = styled.div`

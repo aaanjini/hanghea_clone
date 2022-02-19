@@ -20,10 +20,10 @@ const initialState = {
 };
 
 //회원가입 요청 post
-export const signupAction = (username, nickname, password) => {
+export const signupAction = (username, nickname, password, passwordcheck) => {
     return function(dispatch, getState, {history}) {
-
-        userApis.signup(username, nickname, password)
+        console.log(username, nickname, password, passwordcheck);
+        userApis.signup(username, nickname, password, passwordcheck)
         .then((res) => {
             console.log(res,"회원가입");
             window.alert("회원가입 되셨습니다.");

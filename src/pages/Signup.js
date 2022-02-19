@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, Text, Input, Button } from "../elements/Index";
-import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { emailCheck, passwordCheck} from "../shared/common";
@@ -36,7 +35,7 @@ const Signup = () => {
       return;
     }
     console.log("회원가입완료!");
-    dispatch(userActions.signupAction(id,nick_name,pwd));
+    dispatch(userActions.signupAction(id,nick_name,pwd,pwd_check));
   }; 
 
   const idCheck = () => {
