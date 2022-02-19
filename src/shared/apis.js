@@ -56,8 +56,10 @@ export const postApis = {
     //게시글 삭제
     deletePost: (postId) => 
         apis.delete(`/post/${postId}`)
-    ,   
-
+    ,  
+    likePost: (postId) => 
+        apis.post(`/like/${postId}`) 
+    ,
 }
 
 export const commentApis = {

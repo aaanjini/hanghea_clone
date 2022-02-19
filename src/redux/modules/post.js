@@ -113,6 +113,18 @@ const deletePostDB = (postId) => {
     }
 };
 
+
+const likeDB = (postId) => {
+    return function (dispatch, getState, {history}){
+        postApis.likePost(postId)
+        .then((res)=>{
+            console.log("좋아요성공",res);
+        }).catch((err)=>{
+            console.log("좋아요실패",err);
+        })
+    }
+}
+
 export default handleActions ({
     [GET_POST]: (state, action) => produce(state, (draft) => {
         draft.list = action.payload.post_list;   
@@ -135,7 +147,8 @@ const actionCreators = { //액션 생성자 내보내기
     getOnePostDB,
     addPostDB,
     editPostDB,
-    deletePostDB
+    deletePostDB,
+    likeDB
 };
 
 export {actionCreators};

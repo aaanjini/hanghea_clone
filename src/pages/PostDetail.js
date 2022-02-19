@@ -18,9 +18,15 @@ const PostDetail = (props) => {
     const post_idx = post_list.findIndex(p => p.postId === parseInt(postId));
     const post = post_list[post_idx];
 
-    const [is_like, setIsLike] = React.useState(false);
+    const [is_like, setIsLike] = React.useState(post.islike);
+    const [likeCnt, setLikeCnt] = React.useState(post.likeCnt);
+
+
     const likeClick = () => {
         setIsLike(!is_like);
+        setLikeCnt(likeCnt + (is_like ? -1 : +1));
+
+        dispatch(postActions.likeDB(postId));
     }
 
     const deletePost = () => {
@@ -80,7 +86,7 @@ const PostDetail = (props) => {
                                     fontSize: "14px",
                                     lineHeight: "20px",
                                     verticalAlign: "super",
-                                }}>{post.likeCnt}</span>
+                                }}>{likeCnt}</span>
                             </Grid>
                             <Grid margin="0 10px 0 0" width="auto" display="inline-block">
                                 <img src="https://colley.kr/_nuxt/img/comment.5264184.png" style={{height: "20px", width: "auto",marginRight: "5px"}}/>
