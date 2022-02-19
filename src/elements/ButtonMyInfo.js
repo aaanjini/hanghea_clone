@@ -21,7 +21,7 @@ const Button = styled.button`
     border: "1px solid black";
     height: "20px";
     border-radius: "15px";
-    padding:"20px 20px";
+    padding:"10px 10px";
 `
 
 export default ButtonMyInfo;
