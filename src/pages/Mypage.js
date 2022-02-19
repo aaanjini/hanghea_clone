@@ -1,27 +1,24 @@
 import React from "react";
 import {
   Button,
-  MobileViewMyInfo,
   Grid,
-  CardMyInfo,
-  Text,
   Image,
 } from "../elements/Index";
-import styled from "styled-components";
+// import styled from "styled-components";
 import Header from "../components/Header";
 import Card from "../components/Card";
 import { history } from "../redux/configureStore";
-// import { useSelector, useDispatch } from "react-redux";
-// import { actionCreators as MyActions } from "../redux/modules/mypage";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as MyActions } from "../redux/modules/mypage";
 
 const Mypage = (props) => {
-  //   const dispatch = useDispatch();
-  //   const post_list = useSelector((state) => state.mypage.my_list);
-  //   console.log(post_list);
+    const dispatch = useDispatch();
+    const post_list = useSelector((state) => state.mypage.my_list);
+    console.log(post_list);
 
-  //   React.useEffect(() => {
-  //     dispatch(MyActions.myPostDB());
-  //   }, []);
+    React.useEffect(() => {
+      dispatch(MyActions.myPostDB());
+    }, []);
 
   return (
     <React.Fragment>
@@ -54,14 +51,21 @@ const Mypage = (props) => {
             내가 작성한 글
           </p>
         </Grid>
+        {post_list.map((p, idx) => {
+          return (
+            <Grid margin="10px">
+              <Card key={p.id} {...p} />
+            </Grid>
+          );
+        })}
         <Grid padding="16px 8px">
           <Card />
+          {/* <Card />
           <Card />
           <Card />
           <Card />
           <Card />
-          <Card />
-          <Card />
+          <Card /> */}
         </Grid>
       </Grid>
     </React.Fragment>

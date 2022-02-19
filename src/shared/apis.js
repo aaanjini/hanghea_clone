@@ -59,3 +59,7 @@ export const postApis = {
     },
 
 }
+
+export const mypageApis = {
+    mypost: () => apis.get("/user/mypost"),
+  };
