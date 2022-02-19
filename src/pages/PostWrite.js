@@ -2,15 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Text, Input, Button, Image } from "../elements/Index";
 import { history } from "../redux/configureStore";
+import { useDispatch } from "react-redux";
+import { actionCreators as postActions } from "../redux/modules/post";
 
 //page
 import Header from "../components/Header";
 
 //아이콘
 import { VscChromeClose } from 'react-icons/vsc';
+import { postApis } from "../shared/apis";
 
 
 const PostWrite = (props) => {
+    const dispatch = useDispatch();
     // const preview = useSelector((state) => state.image.preview); //프리뷰
 
     const [title,setTitle] = React.useState("");
@@ -19,17 +23,18 @@ const PostWrite = (props) => {
     // console.log(title , "title");
     // console.log(content , "content");
 
-    const titleInput = () => {
-        
-    };
-    const contentInput = () => {
-        
-    };
-
     const addClick = () => {
         if(title === ""){
             window.alert("제목을 입력해주세요!");
+            return;
         }
+        const post = {
+            title:title,
+            content:content,
+            imgUrl:"",
+        };
+
+        dispatch(postActions.addPostDB(post));
     };
 
 

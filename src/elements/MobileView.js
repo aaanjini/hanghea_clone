@@ -24,7 +24,7 @@ const View = styled.div`
     height: 85vh;
     border: 1px solid #eee;
     border-radius: 5px;
-    margin: 50px auto 0; 
+    margin: 20px auto 0; 
     position: relative;
     overflow: hidden;
     background-color: white;

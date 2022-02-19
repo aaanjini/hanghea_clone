@@ -1,19 +1,35 @@
 import React from "react";
 import styled from "styled-components";
+import { history } from "../redux/configureStore";
 import { CgSearch } from 'react-icons/cg';
 
 
 const SearchBox = (props) => {
+    const {value, _onChange} = props;
+    
+
     return(
         <React.Fragment>
             <SearchWrap>
                 <Icon><CgSearch style={{color:"#999"}}/></Icon>
-                <SearchInput placeholder="검색어를 입력하세요"></SearchInput>
+                <SearchInput placeholder="검색어를 입력하세요"             
+                onKeyPress={(e) => {
+                    if(e.key === "Enter"){
+                      history.push("/search")
+                    }
+                }}
+                ></SearchInput>
             </SearchWrap>
             
         </React.Fragment>
     );
 };
+
+
+SearchBox.defaultProps = {
+    _onChange: () => {}
+
+}
 
 const SearchWrap = styled.div`
     position: relative;

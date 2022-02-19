@@ -71,6 +71,7 @@ const AspectInner = styled.div`
     background-size: cover;
     background-position: center;
     border-radius: ${(props) => props.radius};
+    background-color: #f2f2f2;
 `;
 
 const ImageCircle = styled.div`
