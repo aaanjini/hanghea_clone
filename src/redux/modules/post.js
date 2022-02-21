@@ -40,6 +40,7 @@ const getOnePostDB = (postId) => {
         postApis.getOnePost(postId)
         .then((res)=>{
             const post = res.data
+            console.log("1개 가져오기",post);
             dispatch(getPost([post]));
         }).catch((error)=>{
             console.log("포스트 1개 가져오기 실패", error);

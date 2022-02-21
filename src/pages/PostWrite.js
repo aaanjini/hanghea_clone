@@ -31,7 +31,7 @@ const PostWrite = (props) => {
     const fileInput = React.useRef();
 
 
-    console.log(fileInput);
+    //console.log(fileInput.current.files[0]);
 
 
 
@@ -40,7 +40,7 @@ const PostWrite = (props) => {
         const file = fileInput.current.files[0];
         const icon = document.getElementById('photoIcon');
 
-        reader.readAsDataURL(file); //파일 내용 읽어오기        
+        reader.readAsDataURL(file); //파일 내용 읽어오기a
         // onloadend: 읽기가 끝나면 발생하는 이벤트 핸들러
         reader.onloadend = () => {
             // reader.result는 파일의 컨텐츠(내용물)입니다!
@@ -123,10 +123,9 @@ const PostWrite = (props) => {
             window.alert("제목을 입력해주세요!");
             return;
         }
-        if(image === ""){
-            window.alert("이미지를 올려주세요!");
-            return;
-        }
+        // if(fileInput !== ""){
+            
+        // }
         const fromData = new FormData();
 
         fromData.append("title",title);
@@ -148,7 +147,7 @@ const PostWrite = (props) => {
         }        
     },[]);
 
-    console.log(post);
+    console.log(fileInput);
 
     return(
         <React.Fragment>

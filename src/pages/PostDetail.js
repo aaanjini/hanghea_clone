@@ -43,6 +43,8 @@ const PostDetail = (props) => {
         dispatch(postActions.deletePostDB(parseInt(postId)));
     }
 
+    console.log("상세",post);
+
     return(
         <React.Fragment>
             {post && (
