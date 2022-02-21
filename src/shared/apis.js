@@ -7,9 +7,21 @@ const apis = axios.create({
         "http://13.124.76.130:8080", //*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/
 });
 
+const imageApis = axios.create({
+    baseURL:
+        "http://13.124.76.130:8080", //*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/
+});
+
 apis.interceptors.request.use(function (config) {
     const token = getCookie("token");
     config.headers["Content-Type"] = "application/json;charset=UTF-8; charset=UTF-8";
+    config.headers.common["authorization"] = `${token}`;
+    return config;
+});
+
+imageApis.interceptors.request.use(function (config) {
+    const token = getCookie("token");
+    config.headers["Content-Type"] = "multipart/form-data";
     config.headers.common["authorization"] = `${token}`;
     return config;
 });
@@ -46,9 +58,7 @@ export const postApis = {
     getOnePost: (postId) => apis.get(`/post/${postId}`),
 
     //게시글 추가하기
-    addPost: (post) => 
-        apis.post("/post",post)
-    ,
+    addPost: (post) => apis.post("/post",post),
     //게시글 수정
     editPost: (postId, post) => 
         apis.put(`/post/${postId}`, post)
@@ -70,6 +80,7 @@ export const commentApis = {
     addComment: (postId,comment) => apis.post(`/comment/${postId}`,{
         comment:comment
     }),
-
+    //댓글 삭제하기
+    deleteComment: (commentId) => apis.delete(`/comment/${commentId}`),
 
 }

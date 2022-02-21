@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 const Button = (props) => {
-    const {inline_block, id, text, size, children, _onClick, margin, width, height, color, bg, padding , border, double, zIndex, relative} = props;
+    const {inline_block, id, text, size, bold, children, _onClick, margin, width, height, color, bg, padding , border, double, zIndex, relative} = props;
     const styles = {
         margin: margin,
         width: width,
@@ -18,6 +18,7 @@ const Button = (props) => {
         relative:relative,
         id:id,
         inline_block:inline_block,
+        bold:bold,
     }
     if(double){
         return(
@@ -53,6 +54,7 @@ Button.defaultProps = {
     relative:false,
     id:"",
     inline_block:false,
+    bold:"bold",
 };
 
 const DefaultButton = styled.button`    
@@ -71,6 +73,7 @@ const DefaultButton = styled.button`
     z-index: 2;
     ${(props) => (props.size? `font-size: ${props.size};` : '')};
     ${(props) => (props.relative ? `position: relative` : "")};
+    font-weight: ${(props) => (props.bold? "bold" : "400")};
 `;
 
 const DoubleBtn = styled.button`

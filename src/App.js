@@ -31,6 +31,7 @@ function App() {
     if (token && !user) {//쿠키는 있는데 유저 정보가 없으면 바로 불러오기
       dispatch(userActions.loginCheckDB());
     }    
+    dispatch(postActions.getPostDB()); //게시글 불러오기
   });
 
   return (

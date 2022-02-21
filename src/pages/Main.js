@@ -41,7 +41,7 @@ const Main = (props) => {
     };
 
     React.useEffect(() => {
-        dispatch(postActions.getPostDB()); //게시글 불러오기
+        
         const post_type = localStorage.getItem("postType");
         if(post_type === "like"){
             const like = document.getElementById('sliderOne');

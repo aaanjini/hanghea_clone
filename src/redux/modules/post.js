@@ -47,15 +47,20 @@ const getOnePostDB = (postId) => {
     }
 }
 
-const addPostDB = (post) => {
+const addPostDB = (post,image) => {
     return function (dispatch, getState, {history}){
+        console.log(post,image);
+
+        const ImageForm = new FormData();
+        ImageForm.append("imgUrl",image);
+
         postApis.addPost(post)
         .then((res)=>{
             console.log("포스트 등록성공",res.data);
             const postId = res.data;
             postApis.getOnePost(postId)
             .then((res)=>{
-                dispatch(setPost(res.data));                
+                dispatch(setPost(res.data));
             }).catch((err)=>{
                 console.log("포스트 등록 가져오기 오류", err);
             })
@@ -70,19 +75,22 @@ const addPostDB = (post) => {
 const editPostDB = (postId, post) => {
     return function (dispatch, getState, {history}){
         console.log("포스트수정",postId, post);
+
+        const postList = getState().post.list
+        console.log("수정용",postList);
+
         postApis.editPost(postId, post)
         .then((res)=>{
             console.log("포스트 수정성공", res);
-
             postApis.getOnePost(postId)
             .then((res)=>{
                 console.log("포스트 수정",res.data);
-                dispatch(editPost(res.data));                
+                dispatch(editPost(res.data));
             }).catch((err)=>{
                 console.log("포스트 수정 가져오기 오류", err);
             })
             window.alert("수정완료! 😚");
-            history.replace("/");
+            history.push("/");
         }).catch((error)=>{
             console.log("포스트 수정실패", error);
         });
@@ -133,8 +141,8 @@ export default handleActions ({
         draft.list.unshift(action.payload.post);
     }),
     [EDIT_POST]: (state, action) => produce(state, (draft) => {
-        let idx = draft.list.findIndex((p) => p.postId === action.payload.postId);
-        draft.list[idx] = { ...draft.list[idx], ...action.payload.post };     
+        let idx = draft.list.findIndex((p) => p.postId === parseInt(action.payload.postId));
+        draft.list[idx] = { ...draft.list[idx], ...action.payload.post };
     }),
     [DELETE_POST]: (state, action) => produce(state, (draft) => {
         draft.list = action.payload.post_list;

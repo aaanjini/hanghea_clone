@@ -1,12 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import {Input} from "../elements/Index"
 import { useDispatch } from "react-redux";
 import { actionCreators as commentActions } from "../redux/modules/comment";
 import { FiArrowUp } from 'react-icons/fi';
 
 const CommentInput = (props) => {
     const dispatch = useDispatch();
-    const [comment,setComment] = React.useState("");
+    const [comment,setComment] = React.useState();
+
+    const onChange = (e) => { //인풋 값 가져오기
+        setComment(e.target.value);
+    };
 
     const addComment = () => {
         if (comment === "") {
@@ -20,14 +25,15 @@ const CommentInput = (props) => {
     return(
         <React.Fragment>
             <InputWrap>                
-                <Input placeholder="답글을 입력하세요."
-                    onChange={(e)=>{
-                        setComment(e.target.value)
-                    }}
+                <Input 
+                    placeholder="댓글 내용을 입력해주세요 :)"  
+                    radius="5px"
+                    _onChange={onChange}
+                    value={comment}
+                    onSubmit={addComment}
+                    comment
                 ></Input>
-                <Btn onClick={()=>{
-                    addComment()
-                }}><FiArrowUp/></Btn>
+                <Btn onClick={addComment}><FiArrowUp/></Btn>
             </InputWrap>
             
         </React.Fragment>
@@ -44,17 +50,6 @@ const InputWrap = styled.div`
     box-sizing: border-box;
     background-color: white;
     font-size: 16px;    
-`;
-
-const Input = styled.input`
-    width: calc(100% - 50px);
-    height: 30px;
-    background: none;
-    border: none;
-    outline: none;
-    ::placeholder {
-        color:#ccc
-    }
 `;
 
 const Btn = styled.button`

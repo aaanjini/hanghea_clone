@@ -4,11 +4,24 @@ import styled from "styled-components";
 import {Text, Grid, Button} from "./Index";
 
 const Input = (props) => {
-    const {label, placeholder, _onChange , type, multiLine, value, bold, radius, size, is_submit, onSubmit,double, details} = props;   
+    const {label, placeholder, _onChange , type, multiLine, value, bold, radius, size, is_submit, onSubmit,double, details, comment} = props;   
     const styles = {
       size,
       bold,
     };
+
+    if(comment){
+      return (
+        <React.Fragment>
+            <CommentInput {...styles} type={type} placeholder={placeholder} value={value} onChange={_onChange} radius={radius} 
+            onKeyPress={(e) => {
+              if(e.key === "Enter"){
+                onSubmit(e);
+              }
+            }}/>
+        </React.Fragment>
+      );
+    }
 
     if(details){
       return (
@@ -80,6 +93,7 @@ Input.defaultProps = {
     size:"16px",
     is_submit: false,
     details:false,
+    comment:false,
     bold:false,
     onSubmit: () => {},
     _onChange: () => {}
@@ -140,6 +154,18 @@ const NolineInput = styled.input`
   text-align: center;
   font-weight: ${(props) => props.bold? "bold" : ""};;
 `;
+
+const CommentInput = styled.input`
+    width: calc(100% - 50px);
+    height: 30px;
+    background: none;
+    border: none;
+    outline: none;
+    ::placeholder {
+        color:#ccc
+    }
+`;
+
 
 
 export default Input;

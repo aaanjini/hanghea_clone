@@ -7,8 +7,10 @@ import { actionCreators as postActions } from "../redux/modules/post";
 import Header from "../components/Header";
 import VeiwContent from "../elements/VeiwContent";
 import CommentList from "../components/CommentList";
+import TagList from "../components/TagList";
 import { BsHeart } from 'react-icons/bs';
 import { BsHeartFill } from 'react-icons/bs';
+
 
 const PostDetail = (props) => {    
     const dispatch = useDispatch();   
@@ -18,6 +20,14 @@ const PostDetail = (props) => {
     const post_list = useSelector(store => store.post.list);    
     const post_idx = post_list.findIndex(p => p.postId === parseInt(postId));
     const post = post_list[post_idx];
+
+    React.useEffect(() => {
+        if(!post){
+            return;
+        }
+        dispatch(postActions.getOnePostDB(postId));
+    },[]);
+    
 
     const [is_like, setIsLike] = React.useState(post.islike);
     const [likeCnt, setLikeCnt] = React.useState(post.likeCnt);
@@ -31,15 +41,7 @@ const PostDetail = (props) => {
 
     const deletePost = () => {
         dispatch(postActions.deletePostDB(parseInt(postId)));
-    }   
-    
-    React.useEffect(() => {
-        if(post){
-            return;
-        }
-        dispatch(postActions.getOnePostDB(postId));
-    },[]);
-
+    }
 
     return(
         <React.Fragment>
@@ -104,6 +106,11 @@ const PostDetail = (props) => {
                             <Text>{post.title}</Text>
                             <VeiwContent>{post.content}</VeiwContent>
                         </Grid>
+                        {/* 태그 영역 */}
+                        <Grid center margin="10px 0">
+                            <TagList/>
+                        </Grid>
+                        {/* 태그 영역 */}
                         <Grid >
                             <Grid margin="40px 0 20px">
                                 <CommentWrap >
