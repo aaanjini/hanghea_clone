@@ -1,86 +1,79 @@
 import React from "react";
+import styled from "styled-components";
 import { Image, Grid, Button, Input } from "../elements/Index";
-// import Upload from "../shared/Upload";
+import Header from "../components/Header";
+
 
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as postActions } from "../redux/modules/post";
-import { actionCreators as imageActions } from "../redux/modules/image";
 
-// import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import Upload from "../components/Upload";
 
 const MyWrite = (props) => {
+  const { history } = props;
   const dispatch = useDispatch();
-  const target_id = useParams().postId;
 
-  //이미 App.js에서 세션이 있는지 확인했으니, is_login만 확인하면 된다.
-  // const is_login = useSelector((state) => state.user.is_login);
-  const target = useSelector((state) => state.post.target);
-  console.log(target);
-  const preview = useSelector((state) => state.image.preview);
+  //   const target_id = useParams().postId;
+  //   //이미 App.js에서 세션이 있는지 확인했으니, is_login만 확인하면 된다.
+  //   const is_login = useSelector((state) => state.user.is_login);
+  //   const target = useSelector((state) => state.post.target);
+  //   const preview = useSelector((state) => state.image.preview);
 
-  
+   const userInfo = useSelector((state) => state.user.user);
+
   // const [image, setImage] = React.useState("");
-  const [nickname, setNickname] = React.useState(target ? target.nickname : "");
-  const [intro, setIntro] = React.useState(target ? target.intro : "");
-  // const [post_list, setPostList] = React.useState({});
+    const [nickname, setNickname] = React.useState(userInfo ? userInfo.nickname : "");
+    const [intro, setIntro] = React.useState("");
 
   const editInfo = () => {
-    console.log(nickname, intro);
-
-    // setPostList(temp_list);
-
-    dispatch(
-      postActions.editInfoDB(
-        target_id,
-        nickname,
-        intro
-      )
-    );
+    dispatch(postActions.editInfoDB(nickname, intro));
   };
-    
+
   return (
     <React.Fragment>
-      <Button is_flex width="18%" margin="20px 20px 20px 300px" _onClick={editInfo}
-          _disabled={
-            nickname === "" ||
-            intro === ""
-              ? true
-              : false
-          }>
-        {" "}
-        완료
-      </Button>
-      <Grid center>
-      <Image size="150" shape="circle" display="flex" margin="0 auto" src={preview ? preview : target.img_url}/>
-      <Upload/>
-      </Grid>
-      <Button is_flex width="30%" margin="auto">
-        프로필 사진 변경
-      </Button>
-      <div style={{ margin: "30px 0 20px 38px" }}>닉네임</div>
-      <label>
-        <input
-          type="text"
-          name="nickname"
-          style={{ display: "block", margin: "auto", width: "80%" }}
-          value={nickname}
-          _onChange={(e) => {
-            setNickname(e.target.value);
-          }}
-          label="닉네임"
-          placeholder="닉네임"
-        />
-      </label>
+        <Header text="프로필 수정" edit is_flex>
+            <Button bg="transparent" color="#00c8d2" width="auto" padding="0" bold size="16px"
+                _onClick={()=>{
 
-      <div style={{ margin: "30px 0 20px 38px" }} >소개</div>
-      <Grid padding="0 40px 0 40px">
-        <Input value={intro} multiline width="80%" border="1px solid black" placeholder="소개를 작성해주세요" _onChange={(e) => {
-            setIntro(e.target.value);
-          }}></Input>
-      </Grid>
-      
+                }}
+            
+            >완료</Button>
+        </Header>
+
+        <Grid margin="70px 0">        
+            <Grid center>
+                <Image size="130" shape="circle" inline_block></Image>
+                <Button bg="transparent" width="120px" padding="10px" margin="auto" border="1px solid #00c8d2" radius="10px" color="#00c8d2">
+                    프로필 사진 변경
+                </Button>
+            </Grid>
+            <Grid padding="0 16px" margin="20px 0">                
+                <Grid margin="20px 0">
+                    <Input              
+                        radius="6px"
+                        label="닉네임"
+                        placeholder="닉네임을 입력해주세요."
+                        value={nickname}
+                        _onChange={(e) => {
+                            setNickname(e.target.value);
+                        }}
+                    />
+                </Grid>
+                <Grid>
+                    <Input       
+                        multiLine       
+                        radius="6px"
+                        label="소개"
+                        placeholder="자신을 소개할 수 있는 글을 적어주세요."
+                        value={intro}
+                        _onChange={(e) => {
+                            setIntro(e.target.value);
+                        }}
+                    />
+                </Grid>
+            </Grid>
+        </Grid>      
     </React.Fragment>
   );
 };

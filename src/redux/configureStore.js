@@ -6,6 +6,7 @@ import { connectRouter } from "connected-react-router";
 import User from "./modules/user"; //user의 리듀서
 import Post from "./modules/post"; //image의 리듀서
 import Image from "./modules/image"; //image의 리듀서
+import Comment from "./modules/comment"; //comment 리듀서
 import Mypage from "./modules/mypage"; // mypage의 리듀서
 
 export const history = createBrowserHistory();
@@ -13,8 +14,9 @@ const rootReducer = combineReducers({ //우리가 만든 리듀서 뭉치기
     user:User,
     post:Post,
     image:Image,
+    comment:Comment,
     mypage:Mypage,
-    router: connectRouter(history),// 우리가 만든 히스토리랑 router가 연결이 되는 것임.
+    router: connectRouter(history),
 });
 
 const middlewares = [thunk.withExtraArgument({history: history})]; //내가 사용할 미들웨어 넣기위해 배열형태
@@ -41,7 +43,6 @@ const enhancer = composeEnhancers(
     applyMiddleware(...middlewares)
 );
 
-// 스토어 만들기 : 미들웨어와 루트 리듀서 엮기
 let store = (initialStore) => createStore(rootReducer, enhancer);
 
 export default store();

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 const Button = (props) => {
-    const {inline_block, id, text, size, children, _onClick, margin, width, height, color, bg, padding , border, double, zIndex, relative} = props;
+    const {inline_block, id, text, size,radius, bold, children, _onClick, margin, width, height, color, bg, padding , border, double, zIndex, relative} = props;
     const styles = {
         margin: margin,
         width: width,
@@ -18,6 +18,8 @@ const Button = (props) => {
         relative:relative,
         id:id,
         inline_block:inline_block,
+        bold:bold,
+        radius:radius,
     }
     if(double){
         return(
@@ -53,6 +55,8 @@ Button.defaultProps = {
     relative:false,
     id:"",
     inline_block:false,
+    bold:"bold",
+    radius:"25px",
 };
 
 const DefaultButton = styled.button`    
@@ -64,13 +68,14 @@ const DefaultButton = styled.button`
     padding: ${(props) => props.padding};
     box-sizing: border-box;
     border: none;
-    border-radius: 25px;
+    border-radius:  ${(props) => (props.radius? `${props.radius}` : "25px")};
     ${(props) => (props.margin? `margin: ${props.margin};` : '')};
     border: ${(props) => props.border};
     cursor: pointer;
     z-index: 2;
     ${(props) => (props.size? `font-size: ${props.size};` : '')};
     ${(props) => (props.relative ? `position: relative` : "")};
+    font-weight: ${(props) => (props.bold? "bold" : "400")};
 `;
 
 const DoubleBtn = styled.button`

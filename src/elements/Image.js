@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MdOutlineAddAPhoto } from 'react-icons/md';
 
 const Image = (props) => {
-    const {shape , src , size, profile, radius, inline_block,is_preview, margin } = props;
+    const {shape , src , size, profile, radius, align, inline_block,is_preview,children } = props;
     const styles = {
         src:src,
         size:size,
@@ -11,20 +11,13 @@ const Image = (props) => {
         radius:radius,
         inline_block:inline_block,
         is_preview:is_preview,
-        margin: margin,
+        align:align,
     };
 
     if(is_preview){
         return (
             <AspectOutter>
-                <PreviewBox {...styles}><MdOutlineAddAPhoto style={{
-                    position: "absolute",
-                    width: "50px",
-                    fontSize: "50px",
-                    color: "#555",
-                    left: "43%",
-                    top: "45%"
-                }}/></PreviewBox>
+                <PreviewBox {...styles}>{children}</PreviewBox>
             </AspectOutter>
         );
     }
@@ -57,8 +50,8 @@ Image.defaultProps = {
     radius:"0",
     inline_block:false,
     is_preview:false,
-    margin: "0",
-
+    align:false,
+    children: null,
 }
 
 const AspectOutter = styled.div`
@@ -85,7 +78,7 @@ const ImageCircle = styled.div`
     border-radius:var(--size);
     background-image: url("${(props) => props.profile}");
     background-size: cover;
-    margin: ${(props) => props.margin}
+    vertical-align: ${(props) => props.align};
 `;
 
 const PreviewBox = styled.div`

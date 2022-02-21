@@ -4,17 +4,41 @@ import styled from "styled-components";
 import {Text, Grid, Button} from "./Index";
 
 const Input = (props) => {
-    const {label, placeholder, _onChange , type, multiLine, value, bold, radius, size, is_submit, onSubmit,double, details, width } = props;   
+    const {label, placeholder, _onChange , type, multiLine, value, bold, radius, size, is_submit, onSubmit,double, details, comment, tag} = props;   
     const styles = {
       size,
       bold,
-      width,
     };
+
+    if(tag){
+      return (    
+          <TagInput {...styles} type={type} placeholder={placeholder} value={value} onChange={_onChange} radius={radius} 
+          onKeyPress={(e) => {
+            if(e.key === "Enter"){
+              onSubmit(e);
+            }
+          }}/>
+      );
+    }
+
+
+    if(comment){
+      return (
+        <React.Fragment>
+            <CommentInput {...styles} type={type} placeholder={placeholder} value={value} onChange={_onChange} radius={radius} 
+            onKeyPress={(e) => {
+              if(e.key === "Enter"){
+                onSubmit(e);
+              }
+            }}/>
+        </React.Fragment>
+      );
+    }
 
     if(details){
       return (
         <React.Fragment>
-            <NolineInput {...styles} type={type} placeholder={placeholder} onChange={_onChange} radius={radius}/>
+            <NolineInput {...styles} type={type} placeholder={placeholder} value={value} onChange={_onChange} radius={radius}/>
         </React.Fragment>
       );
     }
@@ -31,14 +55,13 @@ const Input = (props) => {
     if(multiLine){
       return (
         <Grid>
-          {label && <Text margin="0px">{label}</Text>}
+          {label && <Text color="#333" margin="0 0 10px 0" size="16px" bold>{label}</Text>}
           <ElTextarea
             value={value}
             rows={10}
             placeholder={placeholder}
             onChange={_onChange}
             radius={radius}
-            width={width}
           ></ElTextarea>
         </Grid>
       );
@@ -82,21 +105,28 @@ Input.defaultProps = {
     size:"16px",
     is_submit: false,
     details:false,
+    comment:false,
     bold:false,
     onSubmit: () => {},
     _onChange: () => {},
-    width: "",
+    onkeyup: () => {},
     
 }
 
 const ElTextarea = styled.textarea`
-  border: 1px solid black;
-  width: ${(props) => props.width};
+  border: none;
+  width: 100%;
   padding: 12px 4px;
   box-sizing: border-box;
   background-color:#eee;
-  border-radius: 10px;
+  border-radius: 6px;
   outline: none;
+  background-color: white;
+  border: 1px solid #ddd;
+  color:#333;
+  ::placeholder {
+    color: #999;
+  }
 `;
 
 const ElInput = styled.input`
@@ -107,7 +137,7 @@ const ElInput = styled.input`
     box-sizing: border-box;
     border-radius: ${(props) => props.radius};
     background-color: inherit;
-    color:#999;
+    color:#333;
     outline: none;
     ::placeholder {
       color: #999;
@@ -143,6 +173,32 @@ const NolineInput = styled.input`
   text-align: center;
   font-weight: ${(props) => props.bold? "bold" : ""};;
 `;
+
+const CommentInput = styled.input`
+    width: calc(100% - 50px);
+    height: 30px;
+    background: none;
+    border: none;
+    outline: none;
+    ::placeholder {
+        color:#ccc
+    }
+`;
+
+
+const TagInput = styled.input`
+    width: -webkit-fill-available;
+    height: 35px;
+    background: white;
+    border: 1px solid #aaa;
+    border-radius: ${(props) => props.radius};
+    padding: 0 10px;
+    outline: none;
+    ::placeholder {
+        color:#ccc
+    }
+`;
+
 
 
 export default Input;

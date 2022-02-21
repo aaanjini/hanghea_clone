@@ -31,11 +31,11 @@ const Upload = (props) => {
   };
 
   // 파이어베이스 storage에 파일 업로드 하기
-  // const uploadFB = () => {
-  //   let image = fileInput.current.files[0];
-  //   console.log(image);
-  //   // dispatch(imageActions.uploadImageFB(image));
-  // };
+  const uploadFB = () => {
+    let image = fileInput.current.files[0];
+    console.log(image);
+    // dispatch(imageActions.uploadImageFB(image));
+  };
 
   return (
     <React.Fragment>

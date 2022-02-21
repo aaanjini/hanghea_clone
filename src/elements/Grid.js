@@ -32,7 +32,6 @@ const Grid = (props) => {
 Grid.defaultProps = {
     children:null,
     is_flex: false,
-    is_flex2: false,
     width:"100%",
     height:"auto",
     padding: false,    
@@ -66,7 +65,7 @@ const GridBox = styled.div`
     border: ${(props) => props.border};
     border-radius: ${(props) => props.radius};
     ${(props)=>props.min_height ? `min-height: ${props.min_height};` : ''};
-    ${(props) => (!props.is_flex && props.display ? `display: ${props.display};` : "block")};
+    ${(props) => (!props.is_flex  && props.display ? `display: ${props.display};` : "block")};
     ${(props) => (props.relative ? `position: relative` : "")};
     ${(props) => (props.align ? `vertical-align: ${props.align}` : "")};
     ${(props) => (props.is_scroll ? `overflow-y: scroll` : "")};

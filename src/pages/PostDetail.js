@@ -1,73 +1,143 @@
 import React from "react";
-import { Grid, Text, Input, Button, Image } from "../elements/index";
+import styled from "styled-components";
+import { Grid, Text, Input, Button, Image , CommentInput} from "../elements/Index";
+import { history } from "../redux/configureStore";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as postActions } from "../redux/modules/post";
 import Header from "../components/Header";
 import VeiwContent from "../elements/VeiwContent";
 import CommentList from "../components/CommentList";
+import TagList from "../components/TagList";
 import { BsHeart } from 'react-icons/bs';
 import { BsHeartFill } from 'react-icons/bs';
 
-const PostDetail = () => {
-    const [is_like, setIsLike] = React.useState(false);
+
+const PostDetail = (props) => {    
+    const dispatch = useDispatch();   
+    const is_login = useSelector((state) => state.user.is_login);
+    const postId = props.match.params.postId;
+    const userInfo = useSelector((state) => state.user.user);
+    const post_list = useSelector(store => store.post.list);    
+    const post_idx = post_list.findIndex(p => p.postId === parseInt(postId));
+    const post = post_list[post_idx];
+
+    React.useEffect(() => {
+        if(post){
+            return;
+        }
+        dispatch(postActions.getOnePostDB(postId));
+    },[]);
+    
+
+    const [is_like, setIsLike] = React.useState(post?post.islike : false);
+    const [likeCnt, setLikeCnt] = React.useState(post? post.likeCnt: 0);
 
     const likeClick = () => {
         setIsLike(!is_like);
+        setLikeCnt(likeCnt + (is_like ? -1 : +1));
+
+        dispatch(postActions.likeDB(postId));
     }
+
+    const deletePost = () => {
+        dispatch(postActions.deletePostDB(parseInt(postId)));
+    }
+
     return(
         <React.Fragment>
-            <Header details is_flex>
-            </Header>
-
-            <Grid margin="51px 0 70px" height="calc(100% - 121px)" is_scroll>
-                <Grid padding="8px 15px">
-                    <Image shape="circle" size="40" inline_block></Image>
-                    <Grid width="auto" display="inline-block"  margin="0 0 0 8px" align="super">
-                        <Text margin="0" size="16px" color="#262626" bold>닉네임입니다</Text>
-                        <Text margin="0" color="#585858" size="10px" >2022.02.18</Text>
+            {post && (
+                <>
+                    <Header details is_flex>
+                        {is_login?userInfo.nickname === post.nickname? (
+                            <Grid width="auto">                
+                                <Button width="50px" padding="5px 0" inline_block margin="0 5px 0 0"
+                                    _onClick={()=>{
+                                        history.push(`/write/${postId}`);
+                                    }}
+                                    preview={post.imgUrl}
+                                >수정</Button>
+                                <Button width="50px" padding="5px 0" bg="#EF7C8E" inline_block
+                                    _onClick={()=>{
+                                        deletePost()
+                                    }}
+                                >삭제</Button>
+                            </Grid>
+                        ) : "" : ""}
+                    </Header>
+                    <Grid margin="51px 0 70px" height="calc(100% - 121px)" is_scroll>
+                        <Grid padding="8px 15px">
+                            <Image shape="circle" size="40" inline_block></Image>
+                            <Grid width="auto" display="inline-block"  margin="0 0 0 8px" align="super">
+                                <Text margin="0" size="16px" color="#262626" bold>{post.nickname}</Text>
+                                <Text margin="0" color="#585858" size="10px" >{post.postDate}</Text>
+                            </Grid>
+                        </Grid>
+                        <Image shape="rectangle" 
+                            src={post.imgUrl? post.imgUrl : ""}
+                        />
+                        <Grid padding="8px 15px" margin="10px 0 20px">
+                            <Grid margin="0 10px 0 0" width="auto" display="inline-block" >
+                                <Button width="auto" bg="transparent" padding="0" inline_block size="20px" margin="0 5px 0 0 "
+                                    _onClick={()=>{
+                                        likeClick()
+                                    }}
+                                >
+                                    {is_like?  (<BsHeartFill style={{color:"ff8c32"}}/>) : (<BsHeart style={{color:"#9a9a9a"}}/>)}                            
+                                </Button>
+                                <span style={{
+                                    color: "#9a9a9a",
+                                    letterSpacing:" -.015em",
+                                    fontSize: "14px",
+                                    lineHeight: "20px",
+                                    verticalAlign: "super",
+                                }}>{likeCnt}</span>
+                            </Grid>
+                            <Grid margin="0 10px 0 0" width="auto" display="inline-block">
+                                <img src="https://colley.kr/_nuxt/img/comment.5264184.png" style={{height: "20px", width: "auto",marginRight: "5px"}}/>
+                                <span style={{
+                                    color: "#9a9a9a",
+                                    letterSpacing:" -.015em",
+                                    fontSize: "14px",
+                                    lineHeight: "20px",
+                                    verticalAlign: "super",
+                                }}>{post.commentCnt}</span>
+                            </Grid>                            
+                        </Grid>
+                        <Grid center>
+                            <Text>{post.title}</Text>
+                            <VeiwContent>{post.content}</VeiwContent>
+                        </Grid>
+                        {/* 태그 영역 */}
+                        <Grid center margin="10px 0">
+                            <TagList tags={post.tags}/>
+                        </Grid>
+                        {/* 태그 영역 */}
+                        <Grid >
+                            <Grid margin="40px 0 0">
+                                <CommentWrap >
+                                    <Text margin="0 0 20px" bold>댓글</Text>                    
+                                </CommentWrap>
+                                <Grid padding="15px">
+                                    <CommentList postId={postId}/>             
+                                </Grid>                
+                            </Grid>
+                            <Grid padding="0 15px" margin="0 0 20px">
+                                <CommentInput postId={postId}/>
+                            </Grid>            
+                        </Grid>                        
                     </Grid>
-                </Grid>
-                <Image shape="rectangle" src="https://d2gvnkv9lw8qqa.cloudfront.net/item_165362_1_0_title_0.jpeg?d=250x250"/>
-                <Grid padding="8px 15px" margin="10px 0 20px">
-                    <Grid margin="0 10px 0 0" width="auto" display="inline-block" >
-<<<<<<< HEAD
-                        <Button width="auto" bg="transparent" padding="0" inline_block size="20px" margin="0 5px 0 0 "
-                            _onClick={()=>{
-                                likeClick()
-                            }}
-                        >
-                            {is_like?  (<BsHeartFill style={{color:"ff8c32"}}/>) : (<BsHeart style={{color:"#9a9a9a"}}/>)}                            
-                        </Button>
-=======
-                        <img src="https://colley.kr/_nuxt/img/like.4df78e7.png" style={{height: "20px", width: "auto",marginRight: "5px"}} alt="react"/>
->>>>>>> sojh2
-                        <span style={{
-                            color: "#9a9a9a",
-                            letterSpacing:" -.015em",
-                            fontSize: "14px",
-                            lineHeight: "20px",
-                            verticalAlign: "super",
-                        }}>30</span>
-                    </Grid>
-                    <Grid margin="0 10px 0 0" width="auto" display="inline-block">
-                        <img src="https://colley.kr/_nuxt/img/comment.5264184.png" style={{height: "20px", width: "auto",marginRight: "5px"}} alt="react"/>
-                        <span style={{
-                            color: "#9a9a9a",
-                            letterSpacing:" -.015em",
-                            fontSize: "14px",
-                            lineHeight: "20px",
-                            verticalAlign: "super",
-                        }}>30</span>
-                    </Grid>                            
-                </Grid>
-                <Grid center>
-                    <Text>💙 라따뚜이 💙</Text>
-                    <VeiwContent>라따뚜이는 굿즈가 별로 없어서 너무 비쌌는데..   
-                        드디어 저렴하고 예쁜 굿즈가 나왔습니다 👏👏   
-                        이건 개봉하고 미개봉용 하나 더 사야겠어요 😻</VeiwContent>
-                </Grid>
-                <CommentList/>
-            </Grid>
+                </>
+            )}
+            
+           
         </React.Fragment>
     );
 }
+
+
+const CommentWrap = styled.div`
+    padding: 8px 15px;
+    border-bottom: 1px solid #eee;
+`;
 
 export default PostDetail;

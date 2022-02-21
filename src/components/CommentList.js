@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector , useDispatch} from "react-redux";
 import styled from "styled-components";
 <<<<<<< HEAD
 import { Grid, Text, Input, Button, Image, CommentInput } from "../elements/Index";
@@ -6,32 +7,43 @@ import { Grid, Text, Input, Button, Image, CommentInput } from "../elements/Inde
 import { Grid, Text } from "../elements";
 >>>>>>> sojh2
 import Comment from "./Comment";
-
+import { actionCreators as commentActions } from "../redux/modules/comment";
 
 const CommentList = (props) => {
+    const dispatch = useDispatch();
+    const { postId } = props;
+    const commentList = useSelector((state) => state.comment.list);
+
+    React.useEffect(()=>{
+        if (commentList[postId]) {
+            return;
+          }
+        dispatch(commentActions.getCommentDB(postId));
+    },[]);
+
     return(
-        <React.Fragment>
-            <Grid margin="40px 0 20px">
-                <CommentWrap >
-                    <Text margin="0 0 20px" bold>댓글</Text>                    
-                </CommentWrap>
-                <Grid padding="15px">
-                    <Comment/>
-                </Grid>                
-            </Grid>
-            <Grid padding="0 15px" margin="0 0 20px">
-                <CommentInput/>
-            </Grid>            
+        <React.Fragment>            
+            {commentList[postId] && 
+                commentList[postId].map((el, i) => {
+                    return(                
+                        <Comment
+                            key={el.commentId}
+                            {...el}
+                            postId={postId}
+                            idx={i}
+                        />
+                    );
+            })}
+
+        
         </React.Fragment>
     );
 
 };
 
-const CommentWrap = styled.div`
-    padding: 8px 15px;
-    border-bottom: 1px solid #eee;
-`;
 
-
+CommentList.defaultProps = {
+    postId: "",
+};
 
 export default CommentList;

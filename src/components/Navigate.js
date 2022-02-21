@@ -8,32 +8,42 @@ import { BsEmojiSmile } from 'react-icons/bs';
 
 
 const SearchBox = (props) => {
+    const [activeNav, setActiveNav] = React.useState(1);
+
     return(
         <React.Fragment>
             <NaviWrap>
                 <Grid width="50px" center>
-                    <Button padding="0" width="100%" bg="transparent" color="#aaa" size="25px"
+                    <Button padding="0" width="100%" bg="transparent"  size="25px"
                         _onClick={()=>{
+                            setActiveNav(1)
                             history.push("/")
                         }}
-                    ><GoHome/></Button>
-                    <Text margin="0" size="12px" color="#aaa">홈</Text>
-                </Grid>   
+                    >{activeNav === 1? (<GoHome style={{color:"#00c8d2"}}/>):(<GoHome style={{color:"#aaa"}}/>)}</Button>
+                    <Text margin="0" size="12px" 
+                        color={activeNav === 1? "#00c8d2": "#aaa"}
+                        >홈
+                    </Text>
+                </Grid>
                 <Grid width="50px" center>
-                    <Button padding="0" width="100%" bg="transparent" color="#aaa" size="25px"
+                    <Button padding="0" width="100%" bg="transparent" size="25px"
                         _onClick={()=>{
+                            setActiveNav(2)
                             history.push("/write")
                         }}
-                    ><AiOutlinePlus/></Button>
-                    <Text margin="0" size="12px" color="#aaa">플러스</Text>
+                    >{activeNav === 2?<AiOutlinePlus style={{color:"#00c8d2"}}/>:<AiOutlinePlus style={{color:"#aaa"}}/>}</Button>
+                    <Text margin="0" size="12px" 
+                        color={activeNav === 2? "#00c8d2": "#aaa"}>플러스
+                        </Text>
                 </Grid>
                 <Grid width="50px" center>
                     <Button padding="0" width="100%" bg="transparent" color="#aaa" size="25px"
                         _onClick={()=>{
+                            setActiveNav(3)
                             history.push("/mypage")
                         }}
-                    ><BsEmojiSmile/></Button>
-                    <Text margin="0" size="12px" color="#aaa">내정보</Text>
+                    >{activeNav === 3?<BsEmojiSmile style={{color:"#00c8d2"}}/>:<BsEmojiSmile style={{color:"#aaa"}}/>}</Button>
+                    <Text margin="0" size="12px" color={activeNav === 3? "#00c8d2": "#aaa"}>내정보</Text>
                 </Grid>             
             </NaviWrap>
         </React.Fragment>
