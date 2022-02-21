@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { Button } from "../elements";
+import { Button } from "../elements/Index";
 // import { storage } from "./firebase";
 import { actionCreators as imageActions } from "../redux/modules/image";
 
@@ -31,11 +31,11 @@ const Upload = (props) => {
   };
 
   // 파이어베이스 storage에 파일 업로드 하기
-  const uploadFB = () => {
-    let image = fileInput.current.files[0];
-    console.log(image);
-    // dispatch(imageActions.uploadImageFB(image));
-  };
+  // const uploadFB = () => {
+  //   let image = fileInput.current.files[0];
+  //   console.log(image);
+  //   // dispatch(imageActions.uploadImageFB(image));
+  // };
 
   return (
     <React.Fragment>
