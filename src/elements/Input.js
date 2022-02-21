@@ -55,7 +55,7 @@ const Input = (props) => {
     if(multiLine){
       return (
         <Grid>
-          {label && <Text margin="0px">{label}</Text>}
+          {label && <Text color="#333" margin="0 0 10px 0" size="16px" bold>{label}</Text>}
           <ElTextarea
             value={value}
             rows={10}
@@ -119,8 +119,14 @@ const ElTextarea = styled.textarea`
   padding: 12px 4px;
   box-sizing: border-box;
   background-color:#eee;
-  border-radius: 10px;
+  border-radius: 6px;
   outline: none;
+  background-color: white;
+  border: 1px solid #ddd;
+  color:#333;
+  ::placeholder {
+    color: #999;
+  }
 `;
 
 const ElInput = styled.input`
@@ -131,7 +137,7 @@ const ElInput = styled.input`
     box-sizing: border-box;
     border-radius: ${(props) => props.radius};
     background-color: inherit;
-    color:#999;
+    color:#333;
     outline: none;
     ::placeholder {
       color: #999;

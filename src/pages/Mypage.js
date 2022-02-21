@@ -20,7 +20,7 @@ const Mypage = (props) => {
   
 
   React.useEffect(() => {
-    dispatch(MyActions.myPostDB());
+    //dispatch(MyActions.myPostDB());
   }, []);
 
   return (
@@ -44,6 +44,7 @@ const Mypage = (props) => {
             _onClick={() => {
               history.push("/mypage/edit");
             }}
+            props={userInfo} //수정페이지로 유저정보 넘기기
           >
             <GrEdit style={{ color: "white" }} />
           </Button>

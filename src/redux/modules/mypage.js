@@ -27,6 +27,14 @@ const myPostDB = () => {
   };
 };
 
+const myEditDB = (profileUrl, nickname, introduce) => {
+  return function (dispatch, getState, { history }) {
+    console.log(profileUrl, nickname, introduce);
+
+  }
+
+}
+
 
 
 export default handleActions(

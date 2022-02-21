@@ -5,11 +5,26 @@ import { Button, Text} from "../elements/Index";
 import { IoIosArrowBack } from 'react-icons/io';
 
 const Header = (props) => {
-    const {text,children,details, is_flex, is_title} = props;
+    const {text,children,details, is_flex, is_title,edit} = props;
     const styles = {
         is_flex,
 
     };
+
+    if(edit){
+        return(
+            <HeaderBox {...styles} >                
+                <Button width="25px" height="25px" size="25px" padding="0" bg="transparent" 
+                    _onClick={()=>{
+                        history.go(-1);
+                    }}>
+                    <IoIosArrowBack style={{color:"#262626"}}                    
+                /></Button>
+                <Text bold size="15px" margin="0">{text? text: children}</Text>
+               {children}
+            </HeaderBox>
+        );
+    }
 
     if(is_title){
         return(
@@ -53,6 +68,7 @@ Header.DafaultProps = {
     details:false,
     is_flex:false,
     is_title:false,
+    edit:false
 };
 
 const HeaderBox = styled.div`
