@@ -1,31 +1,17 @@
 import React from "react";
-import { Grid, Text, Input, Button, Image } from "../elements/Index";
+import { Grid, Text, Input, Button, Image } from "../elements/index";
 import Header from "../components/Header";
 import VeiwContent from "../elements/VeiwContent";
 import CommentList from "../components/CommentList";
-import { useDispatch, useSelector } from "react-redux";
 import { BsHeart } from 'react-icons/bs';
 import { BsHeartFill } from 'react-icons/bs';
 
-const PostDetail = (props) => {
-    
-    const dispatch = useDispatch();   
-    const is_login = useSelector((state) => state.user.is_login);
-    const user_info = useSelector((state) => state.user.user);
-    const postList = useSelector((state) => state.post.list);
-    const params_id = props.match.params.postId;    
-    const post_idx = postList.findIndex((p) => p.postId === parseInt(params_id));    
-    const post = postList[post_idx]; 
-
-
+const PostDetail = () => {
     const [is_like, setIsLike] = React.useState(false);
 
     const likeClick = () => {
         setIsLike(!is_like);
     }
-
-    console.log("디테일", post);
-
     return(
         <React.Fragment>
             <Header details is_flex>
@@ -35,15 +21,14 @@ const PostDetail = (props) => {
                 <Grid padding="8px 15px">
                     <Image shape="circle" size="40" inline_block></Image>
                     <Grid width="auto" display="inline-block"  margin="0 0 0 8px" align="super">
-                        <Text margin="0" size="16px" color="#262626" bold>{post.nickname}</Text>
-                        <Text margin="0" color="#585858" size="10px" >{post.postDate}</Text>
+                        <Text margin="0" size="16px" color="#262626" bold>닉네임입니다</Text>
+                        <Text margin="0" color="#585858" size="10px" >2022.02.18</Text>
                     </Grid>
                 </Grid>
-                <Image shape="rectangle" 
-                    src={post.imgUrl !== "" ? post.imgUrl : ""}
-                />
+                <Image shape="rectangle" src="https://d2gvnkv9lw8qqa.cloudfront.net/item_165362_1_0_title_0.jpeg?d=250x250"/>
                 <Grid padding="8px 15px" margin="10px 0 20px">
                     <Grid margin="0 10px 0 0" width="auto" display="inline-block" >
+<<<<<<< HEAD
                         <Button width="auto" bg="transparent" padding="0" inline_block size="20px" margin="0 5px 0 0 "
                             _onClick={()=>{
                                 likeClick()
@@ -51,28 +36,33 @@ const PostDetail = (props) => {
                         >
                             {is_like?  (<BsHeartFill style={{color:"ff8c32"}}/>) : (<BsHeart style={{color:"#9a9a9a"}}/>)}                            
                         </Button>
+=======
+                        <img src="https://colley.kr/_nuxt/img/like.4df78e7.png" style={{height: "20px", width: "auto",marginRight: "5px"}} alt="react"/>
+>>>>>>> sojh2
                         <span style={{
                             color: "#9a9a9a",
                             letterSpacing:" -.015em",
                             fontSize: "14px",
                             lineHeight: "20px",
                             verticalAlign: "super",
-                        }}>{post.likeCnt}</span>
+                        }}>30</span>
                     </Grid>
                     <Grid margin="0 10px 0 0" width="auto" display="inline-block">
-                        <img src="https://colley.kr/_nuxt/img/comment.5264184.png" style={{height: "20px", width: "auto",marginRight: "5px"}}/>
+                        <img src="https://colley.kr/_nuxt/img/comment.5264184.png" style={{height: "20px", width: "auto",marginRight: "5px"}} alt="react"/>
                         <span style={{
                             color: "#9a9a9a",
                             letterSpacing:" -.015em",
                             fontSize: "14px",
                             lineHeight: "20px",
                             verticalAlign: "super",
-                        }}>{post.commentCnt}</span>
+                        }}>30</span>
                     </Grid>                            
                 </Grid>
                 <Grid center>
-                    <Text>{post.title}</Text>
-                    <VeiwContent>내용</VeiwContent>
+                    <Text>💙 라따뚜이 💙</Text>
+                    <VeiwContent>라따뚜이는 굿즈가 별로 없어서 너무 비쌌는데..   
+                        드디어 저렴하고 예쁜 굿즈가 나왔습니다 👏👏   
+                        이건 개봉하고 미개봉용 하나 더 사야겠어요 😻</VeiwContent>
                 </Grid>
                 <CommentList/>
             </Grid>
