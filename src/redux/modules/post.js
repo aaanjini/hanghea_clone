@@ -47,12 +47,9 @@ const getOnePostDB = (postId) => {
     }
 }
 
-const addPostDB = (post,image) => {
+const addPostDB = (post) => {
     return function (dispatch, getState, {history}){
-        console.log(post,image);
-
-        const ImageForm = new FormData();
-        ImageForm.append("imgUrl",image);
+        console.log(post);
 
         postApis.addPost(post)
         .then((res)=>{
@@ -74,11 +71,6 @@ const addPostDB = (post,image) => {
 
 const editPostDB = (postId, post) => {
     return function (dispatch, getState, {history}){
-        console.log("포스트수정",postId, post);
-
-        const postList = getState().post.list
-        console.log("수정용",postList);
-
         postApis.editPost(postId, post)
         .then((res)=>{
             console.log("포스트 수정성공", res);

@@ -3,7 +3,7 @@ import { produce } from "immer";
 
 import axios from "axios";
 import { commentApis } from "../../shared/apis";
-
+import { actionCreators as postActions } from "./post";
 
 const GET_COMMENT = "GET_COMMENT";
 const ADD_COMMENT = "ADD_COMMENT";
@@ -50,11 +50,18 @@ const addCommentDB = (postId,comment) => {
                     return item.commentId === commentId;
                 });
 
-                dispatch(addComment(postId,_comment));               
+                const post = getState().post.list.find(l => l.postId === parseInt(postId));
+                
+                console.log("댓글포스트",post);
+
+                dispatch(addComment(postId,_comment));
+                
+                if(post){ //포스트가 있을 경우 포스트 하나에 대한 댓글갯수를 수정 (댓글 수 숫자로 변환하기)
+                    dispatch(postActions.editPost(postId, { commentCnt: parseInt(post.commentCnt) +1 }));
+                }
 
             }).catch((err)=>{
                 console.log("댓글 불러오기 실패",err);
-                history.replace("/");
             });            
             window.alert("댓글 작성 성공! 😝")
         }).catch((err)=>{

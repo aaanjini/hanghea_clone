@@ -3,10 +3,14 @@ import styled from "styled-components";
 import {Tag} from "../elements/Index";
 
 const TagList = (props) => {
-    
+    const tagList = props.tags;
     return(
-        <>
-            <Tag>안녕</Tag><Tag>스폰지밥</Tag><Tag>디즈니</Tag>
+        <>  
+            {tagList?tagList.map((el,i)=>{
+                return(
+                    <Tag key={i}>{el}</Tag>
+                );                
+            }): null}
         </>
 
     );
@@ -14,10 +18,6 @@ const TagList = (props) => {
 
 
 };
-
-TagList.defaultProps = {
-    children: null,
-}
 
 
 export default TagList;

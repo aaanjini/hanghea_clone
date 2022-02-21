@@ -58,10 +58,11 @@ export const postApis = {
     getOnePost: (postId) => apis.get(`/post/${postId}`),
 
     //게시글 추가하기
-    addPost: (post) => apis.post("/post",post),
+    addPost: (post) => imageApis.post("/post",post), //폼데이터로 보내기
+
     //게시글 수정
     editPost: (postId, post) => 
-        apis.put(`/post/${postId}`, post)
+        apis.patch(`/post/${postId}`, post)
     ,
     //게시글 삭제
     deletePost: (postId) => 
@@ -83,4 +84,8 @@ export const commentApis = {
     //댓글 삭제하기
     deleteComment: (commentId) => apis.delete(`/comment/${commentId}`),
 
+}
+
+export const mypageApis = {
+    getMypost: () => apis.get("/user/mypost"),
 }

@@ -6,7 +6,8 @@ import { connectRouter } from "connected-react-router";
 import User from "./modules/user"; //user의 리듀서
 import Post from "./modules/post"; //image의 리듀서
 import Image from "./modules/image"; //image의 리듀서
-import Comment from "./modules/comment"; //image의 리듀서
+import Comment from "./modules/comment"; //comment 리듀서
+import Mypage from "./modules/mypage"; // mypage의 리듀서
 
 export const history = createBrowserHistory();
 const rootReducer = combineReducers({ //우리가 만든 리듀서 뭉치기
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({ //우리가 만든 리듀서 뭉치기
     post:Post,
     image:Image,
     comment:Comment,
+    mypage:Mypage,
     router: connectRouter(history),
 });
 

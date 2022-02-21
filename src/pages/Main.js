@@ -40,8 +40,7 @@ const Main = (props) => {
         window.localStorage.setItem('postType', "time");
     };
 
-    React.useEffect(() => {
-        
+    React.useEffect(() => {        
         const post_type = localStorage.getItem("postType");
         if(post_type === "like"){
             const like = document.getElementById('sliderOne');

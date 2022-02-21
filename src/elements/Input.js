@@ -4,11 +4,23 @@ import styled from "styled-components";
 import {Text, Grid, Button} from "./Index";
 
 const Input = (props) => {
-    const {label, placeholder, _onChange , type, multiLine, value, bold, radius, size, is_submit, onSubmit,double, details, comment} = props;   
+    const {label, placeholder, _onChange , type, multiLine, value, bold, radius, size, is_submit, onSubmit,double, details, comment, tag} = props;   
     const styles = {
       size,
       bold,
     };
+
+    if(tag){
+      return (    
+          <TagInput {...styles} type={type} placeholder={placeholder} value={value} onChange={_onChange} radius={radius} 
+          onKeyPress={(e) => {
+            if(e.key === "Enter"){
+              onSubmit(e);
+            }
+          }}/>
+      );
+    }
+
 
     if(comment){
       return (
@@ -96,7 +108,8 @@ Input.defaultProps = {
     comment:false,
     bold:false,
     onSubmit: () => {},
-    _onChange: () => {}
+    _onChange: () => {},
+    onkeyup: () => {},
     
 }
 
@@ -160,6 +173,20 @@ const CommentInput = styled.input`
     height: 30px;
     background: none;
     border: none;
+    outline: none;
+    ::placeholder {
+        color:#ccc
+    }
+`;
+
+
+const TagInput = styled.input`
+    width: -webkit-fill-available;
+    height: 35px;
+    background: white;
+    border: 1px solid #aaa;
+    border-radius: ${(props) => props.radius};
+    padding: 0 10px;
     outline: none;
     ::placeholder {
         color:#ccc

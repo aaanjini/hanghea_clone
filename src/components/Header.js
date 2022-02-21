@@ -10,6 +10,7 @@ const Header = (props) => {
         is_flex,
 
     };
+
     if(is_title){
         return(
             <HeaderBox {...styles} >                
@@ -51,7 +52,7 @@ Header.DafaultProps = {
     width: "100%",
     details:false,
     is_flex:false,
-    is_title:false
+    is_title:false,
 };
 
 const HeaderBox = styled.div`

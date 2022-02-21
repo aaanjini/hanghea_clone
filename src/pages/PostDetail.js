@@ -22,15 +22,15 @@ const PostDetail = (props) => {
     const post = post_list[post_idx];
 
     React.useEffect(() => {
-        if(!post){
+        if(post){
             return;
         }
         dispatch(postActions.getOnePostDB(postId));
     },[]);
     
 
-    const [is_like, setIsLike] = React.useState(post.islike);
-    const [likeCnt, setLikeCnt] = React.useState(post.likeCnt);
+    const [is_like, setIsLike] = React.useState(post?post.islike : false);
+    const [likeCnt, setLikeCnt] = React.useState(post? post.likeCnt: 0);
 
     const likeClick = () => {
         setIsLike(!is_like);
@@ -54,6 +54,7 @@ const PostDetail = (props) => {
                                     _onClick={()=>{
                                         history.push(`/write/${postId}`);
                                     }}
+                                    preview={post.imgUrl}
                                 >수정</Button>
                                 <Button width="50px" padding="5px 0" bg="#EF7C8E" inline_block
                                     _onClick={()=>{
@@ -72,7 +73,7 @@ const PostDetail = (props) => {
                             </Grid>
                         </Grid>
                         <Image shape="rectangle" 
-                            src={post.imgUrl !== "" ? post.imgUrl : ""}
+                            src={post.imgUrl? post.imgUrl : ""}
                         />
                         <Grid padding="8px 15px" margin="10px 0 20px">
                             <Grid margin="0 10px 0 0" width="auto" display="inline-block" >
@@ -108,11 +109,11 @@ const PostDetail = (props) => {
                         </Grid>
                         {/* 태그 영역 */}
                         <Grid center margin="10px 0">
-                            <TagList/>
+                            <TagList tags={post.tags}/>
                         </Grid>
                         {/* 태그 영역 */}
                         <Grid >
-                            <Grid margin="40px 0 20px">
+                            <Grid margin="40px 0 0">
                                 <CommentWrap >
                                     <Text margin="0 0 20px" bold>댓글</Text>                    
                                 </CommentWrap>
