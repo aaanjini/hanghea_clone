@@ -44,8 +44,7 @@ const PostWrite = (props) => {
         if (file) {
             setImage(file);
         }
-    };
-    
+    };    
 
     //모달 -------------------------------------------
     const ModalOn = () => {        

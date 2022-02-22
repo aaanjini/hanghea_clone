@@ -19,9 +19,9 @@ const myPostDB = () => {
     mypageApis
       .getMypost()
       .then((res) => {
-        console.log("마이포스트 확인",res);
-        const my_post = res.data;
-        //dispatch(setMyPost(my_post));
+        console.log("마이포스트 확인",res.data.mainResponseDtoList);
+        const my_list = res.data.mainResponseDtoList;
+        dispatch(setMyPost(my_list));
       })
       .catch((err) => console.log(err));
   };
@@ -41,7 +41,7 @@ export default handleActions(
   {
     [SET_MYPOST]: (state, action) =>
       produce(state, (draft) => {
-        draft.my_list = action.payload.my_post;
+        draft.list = action.payload.my_list;
       }),
 
   },

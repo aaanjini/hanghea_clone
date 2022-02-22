@@ -17,7 +17,7 @@ const SearchBox = (props) => {
                     <Button padding="0" width="100%" bg="transparent"  size="25px"
                         _onClick={()=>{
                             setActiveNav(1)
-                            history.push("/")
+                            history.push("/main")
                         }}
                     >{activeNav === 1? (<GoHome style={{color:"#00c8d2"}}/>):(<GoHome style={{color:"#aaa"}}/>)}</Button>
                     <Text margin="0" size="12px" 

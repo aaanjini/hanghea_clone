@@ -14,9 +14,10 @@ import { GrEdit } from "react-icons/gr";
 const Mypage = (props) => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.user);
-  const post_list = useSelector((state) => state.mypage.my_list);
+  const my_list = useSelector((state) => state.mypage.list);
 
   
+  console.log("마이리스트",my_list);
   const logout = () => {
       dispatch(userActions.loginOutAction());
   };
@@ -54,12 +55,17 @@ const Mypage = (props) => {
           </Button>
         </Grid>
 
-        <Wrap>
-            {/* {post_list.map((p, idx) => {
+        <StyleText>나의 글</StyleText>
+        <Wrap>            
+            {my_list.map((p, idx) => {
                 return (                
-                    <Card key={p.id} {...p} />
+                    <Card 
+                      key={p.id} 
+                      {...p} 
+                      postId={p.postId}
+                    />
                 );
-            })} */}
+            })}
         </Wrap>        
       </Grid>
     </React.Fragment>
@@ -70,8 +76,23 @@ const Mypage = (props) => {
 const Wrap = styled.div`
     box-sizing: border-box;
     width: 100%;   
-    border-bottom : 1px solid #f2f2f2;
+    border-top : 1px solid #f2f2f2;
+    padding:16px; 
 
 `;
+
+const StyleText = styled.p`
+  @font-face {
+      font-family: 'OTWelcomeRA';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+  }
+  font-family: 'OTWelcomeRA';
+  width: max-content;
+  border-bottom: 3px solid #00c8d2;
+  margin: 20px 20px 0;
+  padding-bottom: 5px;
+`; 
 
 export default Mypage;

@@ -28,7 +28,7 @@ export const signupAction = (username, nickname, password, passwordcheck) => {
         .then((res) => {
             console.log(res,"회원가입");
             window.alert("회원가입 되셨습니다.");
-            history.push("/login");
+            history.push("/");
         }).catch((error) => {
             window.alert("회원가입 오류입니다!");
             console.log("회원가입 실패:",error);
