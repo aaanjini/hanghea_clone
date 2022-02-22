@@ -6,11 +6,13 @@ import { postApis } from "../../shared/apis";
 
 
 const GET_POST = "GET_POST";
+const GET_DETAIL = "GET_DETAIL";
 const SET_POST = "SET_POST";
 const EDIT_POST = "EDIT_POST";
 const DELETE_POST = "DELETE_POST";
 
 const getPost = createAction(GET_POST,(post_list)=>({post_list}));
+const getDetail = createAction(GET_DETAIL,(target_list)=>({target_list}));
 const setPost = createAction(SET_POST, (post)=>({post}));
 const editPost = createAction(EDIT_POST, (postId, post)=>({postId, post}));
 const deletePost = createAction(DELETE_POST, (post_list)=>({post_list}));
@@ -26,7 +28,6 @@ const getPostDB = () => {
     return function (dispatch, getState, {history}){
         postApis.getPost()
         .then((res)=>{
-            //console.log("포스트리스트 가져오기", res.data);
             const post_list = res.data
             dispatch(getPost(post_list)); //받아온 리스트 리덕스 저장
         }).catch((error)=>{
@@ -41,7 +42,7 @@ const getOnePostDB = (postId) => {
         .then((res)=>{
             const post = res.data
             console.log("1개 가져오기",post);
-            dispatch(getPost([post]));
+            dispatch(getDetail(post));
         }).catch((error)=>{
             console.log("포스트 1개 가져오기 실패", error);
         });
@@ -115,20 +116,24 @@ const deletePostDB = (postId) => {
 };
 
 
-const likeDB = (postId) => {
+const likeDB = (postId,isLike) => {
     return function (dispatch, getState, {history}){
-        postApis.likePost(postId)
-        .then((res)=>{
-            console.log("좋아요성공",res);
-        }).catch((err)=>{
-            console.log("좋아요실패",err);
-        })
+        console.log("좋아요확인",postId,isLike);
+        // postApis.likePost(postId)
+        // .then((res)=>{
+        //     console.log("좋아요성공",res);
+        // }).catch((err)=>{
+        //     console.log("좋아요실패",err);
+        // })
     }
 }
 
 export default handleActions ({
     [GET_POST]: (state, action) => produce(state, (draft) => {
         draft.list = action.payload.post_list;   
+    }),
+    [GET_DETAIL]: (state, action) => produce(state, (draft) => {
+      draft.target = action.payload.target_list;
     }),
     [SET_POST]: (state, action) => produce(state, (draft) => {
         draft.list.unshift(action.payload.post);

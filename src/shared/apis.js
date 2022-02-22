@@ -70,7 +70,7 @@ export const postApis = {
     ,  
     //좋아요 
     likePost: (postId) => 
-        apis.post(`/like/${postId}`) 
+        apis.get(`/like/${postId}`)
     ,
 }
 

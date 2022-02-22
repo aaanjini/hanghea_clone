@@ -18,9 +18,11 @@ const PostWrite = (props) => {
     const dispatch = useDispatch();
     const postId = props.match.params.postId;
     const is_edit = postId ? true : false;
-    const post_list = useSelector(store => store.post.list);    
-    const post_idx = post_list.findIndex(p => p.postId === parseInt(postId));
-    const post = post_list[post_idx];
+    // const post_list = useSelector(store => store.post.list);    
+    // const post_idx = post_list.findIndex(p => p.postId === parseInt(postId));
+    // const post = post_list[post_idx];
+
+    const post = useSelector((state) => state.post.target);
     
 
     const [title,setTitle] = React.useState(post? post.title : "");
@@ -147,7 +149,7 @@ const PostWrite = (props) => {
         }        
     },[]);
 
-    console.log(fileInput);
+    //console.log(fileInput);
 
     return(
         <React.Fragment>

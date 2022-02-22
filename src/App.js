@@ -32,7 +32,7 @@ function App() {
       dispatch(userActions.loginCheckDB());
     }    
     dispatch(postActions.getPostDB()); //게시글 불러오기
-  });
+  },[]);
 
   return (
     <React.Fragment>      

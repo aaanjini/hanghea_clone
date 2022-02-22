@@ -17,33 +17,35 @@ const PostDetail = (props) => {
     const is_login = useSelector((state) => state.user.is_login);
     const postId = props.match.params.postId;
     const userInfo = useSelector((state) => state.user.user);
-    const post_list = useSelector(store => store.post.list);    
-    const post_idx = post_list.findIndex(p => p.postId === parseInt(postId));
-    const post = post_list[post_idx];
+    // const post_list = useSelector((state) => state.post.list);
+    // const post_idx = post_list.findIndex(p => p.postId === parseInt(postId));
+    // const post = post_list[post_idx];
+
+
+    const post = useSelector((state) => state.post.target);
 
     React.useEffect(() => {
-        if(post){
-            return;
-        }
         dispatch(postActions.getOnePostDB(postId));
-    },[]);
+    }, []);
     
 
-    const [is_like, setIsLike] = React.useState(post?post.islike : false);
+    const [isLike, setIsLike] = React.useState(post?post.isLike : false);
     const [likeCnt, setLikeCnt] = React.useState(post? post.likeCnt: 0);
+    
 
-    const likeClick = () => {
-        setIsLike(!is_like);
-        setLikeCnt(likeCnt + (is_like ? -1 : +1));
 
-        dispatch(postActions.likeDB(postId));
+    const likeClick = () => {        
+        setIsLike(isLike => !isLike);
+        setLikeCnt(likeCnt + (isLike ? -1 : +1));
+
+        dispatch(postActions.likeDB(postId,isLike));
     }
 
     const deletePost = () => {
         dispatch(postActions.deletePostDB(parseInt(postId)));
     }
 
-    console.log("상세",post);
+    console.log(post.profileUrl);
 
     return(
         <React.Fragment>
@@ -68,7 +70,9 @@ const PostDetail = (props) => {
                     </Header>
                     <Grid margin="51px 0 70px" height="calc(100% - 121px)" is_scroll>
                         <Grid padding="8px 15px">
-                            <Image shape="circle" size="40" inline_block></Image>
+                            <Image shape="circle" size="40" inline_block
+                                profile={post.profileUrl? post.profileUrl : "https://www.garyqi.com/wp-content/uploads/2017/01/default-avatar-500x500.jpg"}                                    
+                            ></Image>
                             <Grid width="auto" display="inline-block"  margin="0 0 0 8px" align="super">
                                 <Text margin="0" size="16px" color="#262626" bold>{post.nickname}</Text>
                                 <Text margin="0" color="#585858" size="10px" >{post.postDate}</Text>
@@ -84,7 +88,7 @@ const PostDetail = (props) => {
                                         likeClick()
                                     }}
                                 >
-                                    {is_like?  (<BsHeartFill style={{color:"ff8c32"}}/>) : (<BsHeart style={{color:"#9a9a9a"}}/>)}                            
+                                    {isLike?  (<BsHeartFill style={{color:"ff8c32"}}/>) : (<BsHeart style={{color:"#9a9a9a"}}/>)}                            
                                 </Button>
                                 <span style={{
                                     color: "#9a9a9a",
@@ -109,11 +113,11 @@ const PostDetail = (props) => {
                             <Text>{post.title}</Text>
                             <VeiwContent>{post.content}</VeiwContent>
                         </Grid>
-                        {/* 태그 영역 */}
+                        {/* 태그 영역---- */}
                         <Grid center margin="10px 0">
                             <TagList tags={post.tags}/>
                         </Grid>
-                        {/* 태그 영역 */}
+                        {/* ----태그 영역 */}
                         <Grid >
                             <Grid margin="40px 0 0">
                                 <CommentWrap >
