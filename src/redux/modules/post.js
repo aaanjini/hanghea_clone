@@ -64,7 +64,7 @@ const addPostDB = (post) => {
                 console.log("포스트 등록 가져오기 오류", err);
             })
             window.alert("등록완료! 😚");
-            history.replace("/");
+            history.replace("/main");
         }).catch((error)=>{
             console.log("포스트 등록실패", error);
         });
@@ -73,6 +73,9 @@ const addPostDB = (post) => {
 
 const editPostDB = (postId, post) => {
     return function (dispatch, getState, {history}){
+        
+        console.log(post);
+
         postApis.editPost(postId, post)
         .then((res)=>{
             console.log("포스트 수정성공", res);
@@ -84,7 +87,7 @@ const editPostDB = (postId, post) => {
                 console.log("포스트 수정 가져오기 오류", err);
             })
             window.alert("수정완료! 😚");
-            history.push("/");
+            history.push("/main");
         }).catch((error)=>{
             console.log("포스트 수정실패", error);
         });
@@ -108,7 +111,7 @@ const deletePostDB = (postId) => {
             dispatch(deletePost(_post))
 
             window.alert("삭제완료! 😞");
-            history.replace("/");
+            history.replace("/main");
         }).catch((error)=>{
             console.log("포스트 삭제실패", error);
         });
@@ -116,17 +119,17 @@ const deletePostDB = (postId) => {
 };
 
 
-const likeDB = (postId,isLike) => {
-    return function (dispatch, getState, {history}){
-        console.log("좋아요확인",postId,isLike);
-        // postApis.likePost(postId)
-        // .then((res)=>{
-        //     console.log("좋아요성공",res);
-        // }).catch((err)=>{
-        //     console.log("좋아요실패",err);
-        // })
-    }
-}
+// const likeDB = (postId) => {
+//     return function (dispatch, getState, {history}){
+//         console.log("좋아요확인",postId);
+//         postApis.likePost(postId)
+//         .then((res)=>{
+//             console.log("좋아요성공",res);
+//         }).catch((err)=>{
+//             console.log("좋아요실패",err);
+//         })
+//     }
+// }
 
 export default handleActions ({
     [GET_POST]: (state, action) => produce(state, (draft) => {
@@ -154,7 +157,7 @@ const actionCreators = { //액션 생성자 내보내기
     addPostDB,
     editPostDB,
     deletePostDB,
-    likeDB
+    
 };
 
 export {actionCreators};

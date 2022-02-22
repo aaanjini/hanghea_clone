@@ -53,6 +53,9 @@ const Main = (props) => {
 
             setType("like");
         }
+
+
+        dispatch(postActions.getPostDB()); //게시글 불러오기
     },[type]);    
     
 

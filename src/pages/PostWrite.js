@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid, Text, Input, Button, Image } from "../elements/Index";
-import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as postActions } from "../redux/modules/post";
 
 //page
 import Header from "../components/Header";
-import Upload from "../shared/Upload";
 
 //아이콘
 import { VscChromeClose } from 'react-icons/vsc';
@@ -18,23 +16,15 @@ const PostWrite = (props) => {
     const dispatch = useDispatch();
     const postId = props.match.params.postId;
     const is_edit = postId ? true : false;
-    // const post_list = useSelector(store => store.post.list);    
-    // const post_idx = post_list.findIndex(p => p.postId === parseInt(postId));
-    // const post = post_list[post_idx];
-
     const post = useSelector((state) => state.post.target);
     
 
-    const [title,setTitle] = React.useState(post? post.title : "");
-    const [content,setContent] = React.useState(post? post.content : "");
+    const [title,setTitle] = React.useState(is_edit? post.title : "");
+    const [content,setContent] = React.useState(is_edit? post.content : "");
     const [image,setImage] = React.useState("");
-    const [preview,setPreview] = React.useState(post? post.imgUrl : "");
+    const [preview,setPreview] = React.useState(is_edit? post.imgUrl : "");
     
     const fileInput = React.useRef();
-
-
-    //console.log(fileInput.current.files[0]);
-
 
 
     const selectFile = (e) => {
@@ -42,7 +32,7 @@ const PostWrite = (props) => {
         const file = fileInput.current.files[0];
         const icon = document.getElementById('photoIcon');
 
-        reader.readAsDataURL(file); //파일 내용 읽어오기a
+        reader.readAsDataURL(file); //파일 내용 읽어오기
         // onloadend: 읽기가 끝나면 발생하는 이벤트 핸들러
         reader.onloadend = () => {
             // reader.result는 파일의 컨텐츠(내용물)입니다!
@@ -52,7 +42,7 @@ const PostWrite = (props) => {
         };
 
         setImage(file);
-    };    
+    };
     
 
     //모달 -------------------------------------------
@@ -66,7 +56,7 @@ const PostWrite = (props) => {
     };
 
     const [tag,setTag] = React.useState();
-    const [tagList, setTagList] = React.useState(post? [...post.tags] : []);
+    const [tagList, setTagList] = React.useState(is_edit? [...post.tags] : []);
 
     const onChange = (e) => {
         setTag(e.target.value);
@@ -119,20 +109,20 @@ const PostWrite = (props) => {
     };
 
     const editPost = () => { 
-        
-        
+        const fromData = new FormData();
+
         if(title === ""){
             window.alert("제목을 입력해주세요!");
             return;
         }
-        // if(fileInput !== ""){
-            
-        // }
-        const fromData = new FormData();
+        if(image !== ""){
+            fromData.append("image",image);
+        }else{
+            fromData.append("image","");
+        }
 
         fromData.append("title",title);
         fromData.append("content",content);
-        fromData.append("image",image);
         fromData.append("tags",tagList);
 
 
@@ -145,7 +135,6 @@ const PostWrite = (props) => {
 
            const icon = document.getElementById('photoIcon');
            icon.style.display = "none";
-
         }        
     },[]);
 
@@ -253,13 +242,15 @@ const PostWrite = (props) => {
                         </TagHeader>
                         <WriteBody>
                             <TagWrap>
-                                {tagList.map((el,i) => {
-                                    return(
-                                        <Tag className="tag" key={i}>{el}
-                                            <Btn onClick={()=>{delTag(i)}}><RiCloseFill style={{color:"#555",fontSize:"21px"}}/></Btn>
-                                        </Tag>
-                                    );                                    
-                                })}
+                                {
+                                    tagList.map((el,i) => {
+                                        return(
+                                            <Tag className="tag" key={i}>{el}
+                                                <Btn onClick={()=>{delTag(i)}}><RiCloseFill style={{color:"#555",fontSize:"21px"}}/></Btn>
+                                            </Tag>
+                                        );                                    
+                                    }                                
+                                )}
                             </TagWrap>
                             <Write>
                                 <Input

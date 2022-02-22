@@ -4,6 +4,9 @@ import { Grid, Text, Input, Button, Image , CommentInput} from "../elements/Inde
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as postActions } from "../redux/modules/post";
+import { postApis } from "../shared/apis";
+
+
 import Header from "../components/Header";
 import VeiwContent from "../elements/VeiwContent";
 import CommentList from "../components/CommentList";
@@ -17,35 +20,38 @@ const PostDetail = (props) => {
     const is_login = useSelector((state) => state.user.is_login);
     const postId = props.match.params.postId;
     const userInfo = useSelector((state) => state.user.user);
-    // const post_list = useSelector((state) => state.post.list);
-    // const post_idx = post_list.findIndex(p => p.postId === parseInt(postId));
-    // const post = post_list[post_idx];
-
-
+    const is_like = useSelector((state) => state.post.target);       
     const post = useSelector((state) => state.post.target);
 
+
+    const [isLike, setIsLike] = React.useState(false);
+    const [likeCnt, setLikeCnt] = React.useState(0);   
+
+
+    const likeClick = async () => {
+        const res = await postApis.likePost(postId);
+        setIsLike(!isLike);
+        setLikeCnt(res.data.likeCnt);
+    };
+
+
     React.useEffect(() => {
-        dispatch(postActions.getOnePostDB(postId));
+        dispatch(postActions.getOnePostDB(postId));        
+
+        async function likeSet() {
+            const res = await postApis.getOnePost(postId);
+            setLikeCnt(res.data.likeCnt);
+            if (res.data.isLike === true) {
+                setIsLike(true);
+            }
+        }
+        likeSet();        
     }, []);
-    
 
-    const [isLike, setIsLike] = React.useState(post?post.isLike : false);
-    const [likeCnt, setLikeCnt] = React.useState(post? post.likeCnt: 0);
-    
-
-
-    const likeClick = () => {        
-        setIsLike(isLike => !isLike);
-        setLikeCnt(likeCnt + (isLike ? -1 : +1));
-
-        dispatch(postActions.likeDB(postId,isLike));
-    }
 
     const deletePost = () => {
         dispatch(postActions.deletePostDB(parseInt(postId)));
     }
-
-    console.log(post.profileUrl);
 
     return(
         <React.Fragment>
@@ -75,7 +81,9 @@ const PostDetail = (props) => {
                             ></Image>
                             <Grid width="auto" display="inline-block"  margin="0 0 0 8px" align="super">
                                 <Text margin="0" size="16px" color="#262626" bold>{post.nickname}</Text>
-                                <Text margin="0" color="#585858" size="10px" >{post.postDate}</Text>
+                                <Text margin="0" color="#585858" size="10px" >
+                                    {post.postDate?.split("T")[0]}{" "}                                    
+                                </Text>
                             </Grid>
                         </Grid>
                         <Image shape="rectangle" 
@@ -84,9 +92,7 @@ const PostDetail = (props) => {
                         <Grid padding="8px 15px" margin="10px 0 20px">
                             <Grid margin="0 10px 0 0" width="auto" display="inline-block" >
                                 <Button width="auto" bg="transparent" padding="0" inline_block size="20px" margin="0 5px 0 0 "
-                                    _onClick={()=>{
-                                        likeClick()
-                                    }}
+                                    _onClick={likeClick}
                                 >
                                     {isLike?  (<BsHeartFill style={{color:"ff8c32"}}/>) : (<BsHeart style={{color:"#9a9a9a"}}/>)}                            
                                 </Button>

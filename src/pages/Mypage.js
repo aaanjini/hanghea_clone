@@ -5,9 +5,8 @@ import Header from "../components/Header";
 import Card from "../components/Card";
 import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as MyActions } from "../redux/modules/mypage";
-import { actionCreators as postActions } from "../redux/modules/post";
 import { actionCreators as userActions } from "../redux/modules/user";
+import { actionCreators as MyActions } from "../redux/modules/mypage";
 
 //아이콘
 import { GrEdit } from "react-icons/gr";
@@ -18,9 +17,12 @@ const Mypage = (props) => {
   const post_list = useSelector((state) => state.mypage.my_list);
 
   
+  const logout = () => {
+      dispatch(userActions.loginOutAction());
+  };
 
   React.useEffect(() => {
-    //dispatch(MyActions.myPostDB());
+    dispatch(MyActions.myPostDB());
   }, []);
 
   return (
@@ -32,7 +34,9 @@ const Mypage = (props) => {
             <Grid width="calc(100% - 100px)" margin="0 0 0 10px" align="top">
                 <Text margin="0" bold size="18px" margin="0 0 6px 0">{userInfo?userInfo.nickname:""}</Text>
                 <Text margin="0">소개글</Text>
-                <Button bg="transparent" color="#aaa" width="auto" padding="0" margin="10px 0 0">로그아웃</Button>
+                <Button bg="transparent" color="#aaa" width="auto" padding="0" margin="10px 0 0"
+                  _onClick={logout}
+                >로그아웃</Button>
             </Grid>
           <Button
             width="30px"

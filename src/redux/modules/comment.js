@@ -29,7 +29,7 @@ const getCommentDB = (postId) => {
             dispatch(getComment(postId,res.data));
         }).catch((err)=>{
             console.log("댓글 불러오기 실패",err);
-            history.replace("/");
+            history.replace("/main");
         })
 
     }

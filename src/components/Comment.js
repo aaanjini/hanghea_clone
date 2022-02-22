@@ -3,14 +3,16 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commentActions } from "../redux/modules/comment";
 import { Grid, Text, Input, Button, Image } from "../elements/Index";
-
+import moment from "moment";
+import 'moment/locale/ko'
 
 const Comment = (props) => {
-    const {username, commentId, postId} = props;
+    moment.locale('ko');
+
+    const {username, commentId, postId, profileUrl} = props;
     const dispatch = useDispatch();
     const userInfo = useSelector(state => state.user.user?.username);
     const is_me = userInfo === username;
-
 
     const deleteComment = () => {
         window.confirm("댓글을 정말 삭제하시겠습니까?");
@@ -20,10 +22,14 @@ const Comment = (props) => {
     return(
         <React.Fragment>
             <Grid margin="0 0 15px">
-                <Image shape="circle" size="30" inline_block align="top"></Image>
+                <Image shape="circle" size="30" inline_block align="top"
+                    profile={profileUrl?profileUrl:"https://www.garyqi.com/wp-content/uploads/2017/01/default-avatar-500x500.jpg"}
+                ></Image>
                 <Grid width="auto" display="inline-block"  margin="0 0 0 8px" >
                     <Text margin="0" size="13px" color="#262626">{props.comment}</Text>
-                    <Text margin="0" color="#585858" size="12px" ><After>{props.nickname}</After><After>{props.commentDate}</After></Text>
+                    <Text margin="0" color="#585858" size="12px" ><After>{props.nickname}</After><After>
+                        {moment(props.commentDate).startOf('hour').fromNow('')}
+                    </After></Text>
                     {is_me? (
                         <Button color="#585858" size="12px" bg="transparent" width="auto" padding="5px 0" bold 
                             _onClick={()=>{

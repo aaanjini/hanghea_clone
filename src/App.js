@@ -24,14 +24,12 @@ import Navigete from "./components/Navigate";
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const token = getCookie("authorization");
-
+  const token = getCookie("token");
   
-  React.useEffect(() => {    
+  React.useEffect(() => {   
     if (token && !user) {//쿠키는 있는데 유저 정보가 없으면 바로 불러오기
       dispatch(userActions.loginCheckDB());
     }    
-    dispatch(postActions.getPostDB()); //게시글 불러오기
   },[]);
 
   return (
@@ -39,8 +37,8 @@ function App() {
       <img src={logo} style={{width:"120px",display:"block",margin:"20px auto"}}/>  
       <MobileView> 
         <ConnectedRouter history={history}>
-          <Route path="/" exact component={Main}/>{/* 메인페이지 */}
-          <Route path="/login" exact component={Login}/>{/* 로그인 */}
+          <Route path="/main" exact component={Main}/>{/* 메인페이지 */}
+          <Route path="/" exact component={Login}/>{/* 로그인 */}
           <Route path="/signup" exact component={Signup}/>{/* 회원가입 */}
           <Route path="/write" exact component={PostWrite}/>{/* 작성페이지 */}
           <Route path="/write/:postId" exact component={PostWrite}/>{/* 수정페이지 */}

@@ -87,5 +87,13 @@ export const commentApis = {
 }
 
 export const mypageApis = {
-    getMypost: () => apis.get("/user/mypost"),
+    //내가 쓴 글 가져오기
+    getMypost: () => apis.get("/user/mypost"),    
+}
+
+export const searchApis = {
+    //검색결과 가져오기
+    getSearch: (findword) => apis.get(`/search/${findword}`),
+
+
 }

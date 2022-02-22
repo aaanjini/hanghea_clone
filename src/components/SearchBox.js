@@ -2,22 +2,35 @@ import React from "react";
 import styled from "styled-components";
 import { history } from "../redux/configureStore";
 import { CgSearch } from 'react-icons/cg';
-
+import { actionCreators as searchAction } from "../redux/modules/search";
+import { useDispatch } from "react-redux";
 
 const SearchBox = (props) => {
-    const {value, _onChange} = props;
-    
+    const dispatch = useDispatch();
+    const [word,setWord] = React.useState("");
+
+    const onChange = (e) => {
+        setWord(e.target.value);
+    };
+
+
+    const searchDB = ()=>{
+        dispatch(searchAction.getSearchDB(word));
+    }
 
     return(
         <React.Fragment>
             <SearchWrap>
                 <Icon><CgSearch style={{color:"#999"}}/></Icon>
-                <SearchInput placeholder="검색어를 입력하세요"             
+                <SearchInput placeholder="검색어를 입력하세요"  
+                //value={word}  
+                onChange={onChange}
                 onKeyPress={(e) => {
                     if(e.key === "Enter"){
+                        searchDB()
                       history.push("/search")
                     }
-                }}
+                }}            
                 ></SearchInput>
             </SearchWrap>
             
