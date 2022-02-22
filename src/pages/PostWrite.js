@@ -45,7 +45,7 @@ const PostWrite = (props) => {
         reader.onloadend = () => {
             // reader.result는 파일의 컨텐츠(내용물)입니다!
 
-            icon.style.display = "none"
+        icon.style.display = "none"
            setPreview(reader.result);
         };
 

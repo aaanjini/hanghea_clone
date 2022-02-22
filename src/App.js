@@ -39,7 +39,7 @@ function App() {
       <img src={logo} style={{width:"120px",display:"block",margin:"20px auto"}}/>  
       <MobileView> 
         <ConnectedRouter history={history}>
-          <Route path="/" exact component={Main}/>{/* 메인페이지 */}
+          <Route path="/main" exact component={Main}/>{/* 메인페이지 */}
           <Route path="/login" exact component={Login}/>{/* 로그인 */}
           <Route path="/signup" exact component={Signup}/>{/* 회원가입 */}
           <Route path="/write" exact component={PostWrite}/>{/* 작성페이지 */}

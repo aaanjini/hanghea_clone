@@ -20,8 +20,8 @@ const myPostDB = () => {
       .getMypost()
       .then((res) => {
         console.log("마이포스트 확인",res);
-        // let my_post = res.data.postResponseDto;
-        // dispatch(setMyPost(my_post));
+        let my_post = res.data.postResponseDto;
+        dispatch(setMyPost(my_post));
       })
       .catch((err) => console.log(err));
   };
