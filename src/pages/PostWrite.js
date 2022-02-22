@@ -21,7 +21,7 @@ const PostWrite = (props) => {
 
     const [title,setTitle] = React.useState(is_edit? post.title : "");
     const [content,setContent] = React.useState(is_edit? post.content : "");
-    const [image,setImage] = React.useState("");
+    const [image,setImage] = React.useState(null);
     const [preview,setPreview] = React.useState(is_edit? post.imgUrl : "");
     
     const fileInput = React.useRef();
@@ -41,7 +41,9 @@ const PostWrite = (props) => {
            setPreview(reader.result);
         };
 
-        setImage(file);
+        if (file) {
+            setImage(file);
+        }
     };
     
 
@@ -89,7 +91,7 @@ const PostWrite = (props) => {
     //-------------------모달끝
 
     const addPost = () => {
-        const fromData = new FormData();
+        let formData = new FormData();
 
         if(title === ""){
             window.alert("제목을 입력해주세요!");
@@ -100,33 +102,30 @@ const PostWrite = (props) => {
             return;
         }
 
-        fromData.append("title",title);
-        fromData.append("content",content);
-        fromData.append("image",image);
-        fromData.append("tags",tagList);
+        formData.append("image",image);
+        formData.append("title",title);
+        formData.append("content",content);        
+        formData.append("tags",tagList);
 
-        dispatch(postActions.addPostDB(fromData));
+
+
+        dispatch(postActions.addPostDB(formData));
     };
 
     const editPost = () => { 
-        const fromData = new FormData();
+        let formData = new FormData();
 
         if(title === ""){
             window.alert("제목을 입력해주세요!");
             return;
         }
-        if(image !== ""){
-            fromData.append("image",image);
-        }else{
-            fromData.append("image","");
-        }
-
-        fromData.append("title",title);
-        fromData.append("content",content);
-        fromData.append("tags",tagList);
+        formData.append("image",image);
+        formData.append("title",title);
+        formData.append("content",content);
+        formData.append("tags",tagList);
 
 
-        dispatch(postActions.editPostDB(postId,fromData));
+        dispatch(postActions.editPostDB(postId,formData));
     }
 
     React.useEffect(() => {
