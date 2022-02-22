@@ -119,18 +119,6 @@ const deletePostDB = (postId) => {
 };
 
 
-// const likeDB = (postId) => {
-//     return function (dispatch, getState, {history}){
-//         console.log("좋아요확인",postId);
-//         postApis.likePost(postId)
-//         .then((res)=>{
-//             console.log("좋아요성공",res);
-//         }).catch((err)=>{
-//             console.log("좋아요실패",err);
-//         })
-//     }
-// }
-
 export default handleActions ({
     [GET_POST]: (state, action) => produce(state, (draft) => {
         draft.list = action.payload.post_list;   

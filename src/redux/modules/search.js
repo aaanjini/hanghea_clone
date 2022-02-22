@@ -4,9 +4,8 @@ import { produce } from "immer";
 import { searchApis } from "../../shared/apis";
 
 const GET_SEARCH = "GET_SEARCH";
-const getSearch = createAction(GET_SEARCH, (search_list)=>({search_list}));
 
-
+const getSearch = createAction(GET_SEARCH,(search_list)=>({search_list}));
 
 const initialState = {
     list:[],
@@ -15,15 +14,15 @@ const initialState = {
 
 const getSearchDB = (word) => {
     return function (dispatch, getState, {history}){
-
         console.log("검색중",word);
-
-        // searchApis.getSearch()
-        // .then((res)=>{
-        //     console.log("검색결과",res);
-        // }).catch((err)=>{
-        //     console.log("검색에러",err)
-        // });
+        searchApis.getSearch(word)
+        .then((res)=>{
+            console.log("검색결과",res.data.searchlist);
+            const _list = res.data.searchlist;
+            dispatch(getSearch(_list));
+        }).catch((err)=>{
+            console.log("검색에러",err)
+        });
     };
 };
 
@@ -32,7 +31,8 @@ const getSearchDB = (word) => {
 
 export default handleActions ({
     [GET_SEARCH]: (state, action) => produce(state, (draft) => {
-        draft.list = action.payload.search_list;   
+        console.log("화긴",action.payload.search_list);
+        draft.list = action.payload.search_list;  
     }),
     
 },initialState);

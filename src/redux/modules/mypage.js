@@ -19,7 +19,7 @@ const myPostDB = () => {
     mypageApis
       .getMypost()
       .then((res) => {
-        console.log("마이포스트 확인",res.data.mainResponseDtoList);
+        console.log("마이포스트 확인",res.data);
         const my_list = res.data.mainResponseDtoList;
         dispatch(setMyPost(my_list));
       })

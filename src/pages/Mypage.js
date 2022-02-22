@@ -60,7 +60,7 @@ const Mypage = (props) => {
             {my_list.map((p, idx) => {
                 return (                
                     <Card 
-                      key={p.id} 
+                      key={p.postId} 
                       {...p} 
                       postId={p.postId}
                     />
