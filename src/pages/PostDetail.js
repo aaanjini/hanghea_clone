@@ -28,6 +28,8 @@ const PostDetail = (props) => {
     const [likeCnt, setLikeCnt] = React.useState(0);   
 
 
+    console.log(userInfo, post);
+
     const likeClick = async () => {
         const res = await postApis.likePost(postId);
         setIsLike(!isLike);
@@ -58,7 +60,7 @@ const PostDetail = (props) => {
             {post && (
                 <>
                     <Header details is_flex>
-                        {is_login?userInfo.nickname === post.nickname? (
+                        {is_login?userInfo.username === post.username? (
                             <Grid width="auto">                
                                 <Button width="50px" padding="5px 0" inline_block margin="0 5px 0 0"
                                     _onClick={()=>{
