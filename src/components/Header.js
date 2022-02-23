@@ -10,6 +10,7 @@ const Header = (props) => {
         is_flex,
 
     };
+    
 
     if(edit){
         return(
@@ -68,7 +69,7 @@ Header.DafaultProps = {
     details:false,
     is_flex:false,
     is_title:false,
-    edit:false
+    edit:false,
 };
 
 const HeaderBox = styled.div`
@@ -94,10 +95,20 @@ const HeaderBox = styled.div`
         font-family: 'OTWelcomeRA';
         margin: 0;
         font-size: 20px;
-    }
-
-    
+    }    
 `;
+
+const SearchHeader = styled.div`
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 16px;
+
+`;
+
+
 
 
 export default Header;

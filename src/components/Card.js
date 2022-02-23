@@ -16,7 +16,7 @@ const Card = (props) => {
             }}>
                 <Clip src="https://d2gvnkv9lw8qqa.cloudfront.net/item_tape_61_1587714959439.png"/>
                 <Grid padding="8px 8px 4px">
-                <Image 
+                    <Image 
                         shape="rectangle" 
                         src={props.imgUrl !== "" ? props.imgUrl : ""}
                         radius="15px"
@@ -24,7 +24,7 @@ const Card = (props) => {
                     />
                 </Grid>
                 <Grid padding="0 20px" margin="0 0 16px">
-                    <Text bold size="14px" margin="5px 0 0">{props.title}</Text>
+                    <Text bold size="14px" margin="5px 0 0" ellipsis>{props.title}</Text>
                     <Grid width="auto" padding="4px 0 6px" height="23px">
                         <Image 
                             inline_block 

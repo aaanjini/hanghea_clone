@@ -10,7 +10,7 @@ const SearchBox = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [word,setWord] = React.useState("");
+    const [word,setWord] = React.useState("");   
 
     const onChange = (e) => {
         setWord(e.target.value);        
@@ -26,12 +26,11 @@ const SearchBox = (props) => {
                     onKeyPress={(e) => {
                         if(e.key === "Enter"){
                             history.push({                                
-                                pathname: "/search",
+                                pathname: "/search/main",
                                 state: {targetWord: word},                                  
                             })
                         }
                     }}
-                    word={word}
                 ></SearchInput>
             </SearchWrap>
             
@@ -41,6 +40,7 @@ const SearchBox = (props) => {
 
 
 SearchBox.defaultProps = {
+    search:false,
     _onChange: () => {}
 
 }
@@ -54,7 +54,8 @@ const SearchWrap = styled.div`
     color: #999;
     box-sizing: border-box;
     background-color: #f2f2f2;
-    font-size: 16px;    
+    font-size: 16px;  
+    display : flex;
 `;
 
 const SearchInput = styled.input`
@@ -68,8 +69,9 @@ const SearchInput = styled.input`
 `;
 
 const Icon = styled.span`
-    margin: 3px 10px 0 0;
+    margin-right: 10px;
     display: inline-block;
+    vertical-align: sub;
 `;
 
 export default SearchBox;

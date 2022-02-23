@@ -10,20 +10,11 @@ const Text = (props) => {
     size: size, 
     margin:margin, 
     inline_block:inline_block,
-    ellipsis:ellipsis,
-    align:align,
+    align:align
   };
-
-  if(ellipsis){
-    return (
-      <Ellipsis {...styles}>
-          {children}
-      </Ellipsis>
-    )
-  }
   
   return (
-      <P {...styles}>
+      <P {...styles} ellipsis={ellipsis}>
           {children}
       </P>
   )
@@ -36,7 +27,8 @@ Text.defaultProps = {
   size: "14px",
   margin: false,
   inline_block:false,
-  align:false
+  align:false,
+  ellipsis:false,
 };
 
 const P = styled.p`
@@ -48,6 +40,15 @@ const P = styled.p`
   white-space: normal;
   line-height: 16px;
   ${(props) => (props.align ? `vertical-align: ${props.align}` : "")};
+  ${(props) => (props.ellipsis ? 
+    `overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.2;` : 
+    ""
+  )};
 `;
 
 const Ellipsis = styled.p` //말줄임
@@ -55,7 +56,7 @@ const Ellipsis = styled.p` //말줄임
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   line-height: 1.4;
 `;

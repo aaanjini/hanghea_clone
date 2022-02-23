@@ -55,7 +55,7 @@ Button.defaultProps = {
     relative:false,
     id:"",
     inline_block:false,
-    bold:"bold",
+    bold:false,
     radius:"25px",
 };
 

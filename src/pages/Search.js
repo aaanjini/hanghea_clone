@@ -27,7 +27,7 @@ const Search = (props) => {
                 <Text bold margin="0">{word}</Text>
                 <Text bold></Text>
             </Header>
-            <Grid margin="46px 0 0" padding="16px">
+            <Grid padding="16px" margin="46px 0 70px" height="calc(100% - 116px)" is_scroll>
                 {search_list && search_list.length !== 0? (
                     <Grid>
                         {search_list.map((p, idx) => {

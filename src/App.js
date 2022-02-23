@@ -15,6 +15,7 @@ import Main from './pages/Main';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Search from './pages/Search';
+import SearchMain from './pages/SearchMain';
 import Mypage from './pages/Mypage';
 import MyWrite from './pages/MyWrite';
 import PostWrite from './pages/PostWrite';
@@ -46,6 +47,7 @@ function App() {
           <Route path="/mypage" exact component={Mypage}/>{/* 마이페이지 */}    
           <Route path="/mypage/edit" exact component={MyWrite}/>{/* 프로필 변경 페이지 */}
           <Route path="/search" exact component={Search}/>{/* 검색결과 페이지 */}
+          <Route path="/search/main" exact component={SearchMain}/>{/* 검색결과 리스트 페이지 */}
         </ConnectedRouter>    
         <Navigete/>    
       </MobileView>    
