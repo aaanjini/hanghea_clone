@@ -88,6 +88,7 @@ const loginCheckDB = () => {
 const logOutAction = () => {
     return function(dispatch, getState, {history}) {
         console.log("로그아웃 눌림");
+        deleteCookie("token"); // 쿠키에서 토큰 삭제
         dispatch(userlogOut());
         history.replace("/");
     };
@@ -102,7 +103,7 @@ export default handleActions ({
     [LOGOUT]: (state, action) => produce(state, (draft) => {
         draft.user = null;
         draft.is_login = false;
-        deleteCookie("token"); // 쿠키에서 토큰 삭제
+        
     }),
    
 },initialState);

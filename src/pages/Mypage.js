@@ -29,8 +29,6 @@ const Mypage = (props) => {
   }, []);
 
 
-
-
   return (
     <React.Fragment>
       <Header text="내정보"/>
@@ -42,7 +40,7 @@ const Mypage = (props) => {
           <Grid width="calc(100% - 100px)" margin="0 0 0 10px" align="top">
               <Text margin="0" bold size="18px" margin="0 0 6px 0">{my_Info?my_Info.nickname:""}</Text>
               <Text margin="0">{my_Info?my_Info.introduce:""}</Text>
-              <Button bg="transparent" color="#aaa" width="auto" padding="0" margin="10px 0 0"
+              <Button bg="transparent" color="#aaa" width="auto" padding="0" margin="10px 0 0" bold
                 _onClick={logout}
               >로그아웃</Button>
           </Grid>
