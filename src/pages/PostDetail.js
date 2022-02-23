@@ -22,7 +22,7 @@ const PostDetail = (props) => {
     const userInfo = useSelector((state) => state.user.user);
     const is_like = useSelector((state) => state.post.target);       
     const post = useSelector((state) => state.post.target);
-
+    const commentList = useSelector((state) => state.comment.list);
 
     const [isLike, setIsLike] = React.useState(false);
     const [likeCnt, setLikeCnt] = React.useState(0);   
@@ -112,7 +112,7 @@ const PostDetail = (props) => {
                                     fontSize: "14px",
                                     lineHeight: "20px",
                                     verticalAlign: "super",
-                                }}>{post.commentCnt}</span>
+                                }}>{commentList[postId]?commentList[postId].length:0}</span>
                             </Grid>                            
                         </Grid>
                         <Grid center>

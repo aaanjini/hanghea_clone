@@ -4,11 +4,21 @@ import styled from "styled-components";
 import {Text, Grid, Button} from "./Index";
 
 const Input = (props) => {
-    const {label, placeholder, _onChange , type, multiLine, value, bold, radius, size, is_submit, onSubmit,double, details, comment, tag} = props;   
+    const {label, placeholder, _onChange , type, multiLine, value, bold, radius, size, is_submit, onSubmit,double, details, comment, tag,edit} = props;   
     const styles = {
       size,
       bold,
     };
+
+    if(edit){
+      return(
+        <React.Fragment>
+          <Grid>
+            <ElInput type={type} placeholder={placeholder} onChange={_onChange} radius={radius} value={value}/>
+          </Grid>
+        </React.Fragment>
+      );
+    }
 
     if(tag){
       return (    
@@ -107,6 +117,7 @@ Input.defaultProps = {
     details:false,
     comment:false,
     bold:false,
+    edit:false,
     onSubmit: () => {},
     _onChange: () => {},
     onkeyup: () => {},
@@ -180,6 +191,7 @@ const CommentInput = styled.input`
     background: none;
     border: none;
     outline: none;
+    padding: 0 10px;
     ::placeholder {
         color:#ccc
     }

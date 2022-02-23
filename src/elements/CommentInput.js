@@ -41,7 +41,8 @@ const CommentInput = (props) => {
 };
 
 const InputWrap = styled.div`
-    position: relative;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     padding: 3px 5px;
     border:1px solid #f2f2f2;
@@ -53,7 +54,7 @@ const InputWrap = styled.div`
 `;
 
 const Btn = styled.button`
-    margin: 3px 10px 0 0;
+    margin: 1px 0 0 10px;
     display: inline-block;
     width:30px;
     height: 30px;

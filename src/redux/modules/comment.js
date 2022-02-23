@@ -50,8 +50,6 @@ const addCommentDB = (postId,comment) => {
                 const _comment = res.data.filter((item) => {
                     return item.commentId === commentId;
                 });
-
-                const post = getState().post.list.find(l => l.postId === parseInt(postId));            
                 dispatch(addComment(postId,_comment));
 
             }).catch((err)=>{

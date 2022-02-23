@@ -18,6 +18,8 @@ const Comment = (props) => {
         window.confirm("댓글을 정말 삭제하시겠습니까?");
         dispatch(commentActions.deleteCommentDB(postId,commentId));
     };
+    
+    console.log(props.commentDate);
 
     return(
         <React.Fragment>

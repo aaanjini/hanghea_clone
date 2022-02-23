@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Button, Grid, Image, Text } from "../elements/Index";
 import Header from "../components/Header";
 import Card from "../components/Card";
-import { history } from "../redux/configureStore";
+import {useHistory} from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { actionCreators as MyActions } from "../redux/modules/mypage";
@@ -13,32 +13,39 @@ import { GrEdit } from "react-icons/gr";
 
 const Mypage = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const userInfo = useSelector((state) => state.user.user);
   const my_list = useSelector((state) => state.mypage.list);
+  const my_Info = useSelector((state) => state.mypage.info);
 
   
-  console.log("마이리스트",my_list);
+  console.log("마이리스트",my_Info);
   const logout = () => {
-      dispatch(userActions.loginOutAction());
+      dispatch(userActions.logOutAction());
   };
 
   React.useEffect(() => {
     dispatch(MyActions.myPostDB());
   }, []);
 
+
+
+
   return (
     <React.Fragment>
       <Header text="내정보"/>
       <Grid margin="50px 0 50px" height="calc(100% - 121px)" is_scroll>
         <Grid padding="16px" is_flex display="flex">        
-            <Image size="70" shape="circle" margin="0 10px 3px 30px"/>
-            <Grid width="calc(100% - 100px)" margin="0 0 0 10px" align="top">
-                <Text margin="0" bold size="18px" margin="0 0 6px 0">{userInfo?userInfo.nickname:""}</Text>
-                <Text margin="0">소개글</Text>
-                <Button bg="transparent" color="#aaa" width="auto" padding="0" margin="10px 0 0"
-                  _onClick={logout}
-                >로그아웃</Button>
-            </Grid>
+          <Image size="70" shape="circle" margin="0 10px 3px 30px"
+            profile={my_Info?my_Info.profileUrl:"https://www.garyqi.com/wp-content/uploads/2017/01/default-avatar-500x500.jpg"}
+          />
+          <Grid width="calc(100% - 100px)" margin="0 0 0 10px" align="top">
+              <Text margin="0" bold size="18px" margin="0 0 6px 0">{my_Info?my_Info.nickname:""}</Text>
+              <Text margin="0">{my_Info?my_Info.introduce:""}</Text>
+              <Button bg="transparent" color="#aaa" width="auto" padding="0" margin="10px 0 0"
+                _onClick={logout}
+              >로그아웃</Button>
+          </Grid>
           <Button
             width="30px"
             height="30px"
@@ -47,14 +54,16 @@ const Mypage = (props) => {
             padding="8px"
             color="white"
             _onClick={() => {
-              history.push("/mypage/edit");
+              //history.push("/mypage/edit");
+              history.push({                                
+                pathname: "/mypage/edit",
+                state: {myInfo: my_Info},                                  
+              })
             }}
-            props={userInfo} //수정페이지로 유저정보 넘기기
           >
             <GrEdit style={{ color: "white" }} />
           </Button>
         </Grid>
-
         <StyleText>나의 글</StyleText>
         <Wrap>            
             {my_list.map((p, idx) => {

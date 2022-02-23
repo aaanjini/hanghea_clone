@@ -14,6 +14,7 @@ const Image = (props) => {
         align:align,
     };
 
+
     if(is_preview){
         return (
             <AspectOutter>

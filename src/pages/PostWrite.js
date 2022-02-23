@@ -41,6 +41,8 @@ const PostWrite = (props) => {
            setPreview(reader.result);
         };
 
+        console.log("파일확인",file);
+
         if (file) {
             setImage(file);
         }
@@ -191,6 +193,12 @@ const PostWrite = (props) => {
                             setTitle(e.target.value);
                           }}
                     ></Input>
+                    {/* <Input multiLine placeholder="본문을 입력하세요." size="14px"
+                        value={content} 
+                        _onChange={(e)=>{
+                            setContent(e.target.value);
+                        }}
+                    ></Input> */}
                     <Input details placeholder="본문을 입력하세요." size="14px"
                         value={content} 
                         _onChange={(e)=>{

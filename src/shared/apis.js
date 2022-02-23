@@ -62,7 +62,7 @@ export const postApis = {
 
     //게시글 수정
     editPost: (postId, post) => 
-        apis.patch(`/post/${postId}`, post)
+        imageApis.patch(`/post/${postId}`, post)
     ,
     //게시글 삭제
     deletePost: (postId) => 
@@ -89,6 +89,9 @@ export const commentApis = {
 export const mypageApis = {
     //내가 쓴 글 가져오기
     getMypost: () => apis.get("/user/mypost"),    
+    editMyInfo: (form) => 
+        imageApis.patch("/user/mypost/update",form)
+    ,
 }
 
 export const searchApis = {

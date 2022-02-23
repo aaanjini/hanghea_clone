@@ -85,7 +85,7 @@ const loginCheckDB = () => {
   };
 
 //로그아웃 get
-const loginOutAction = () => {
+const logOutAction = () => {
     return function(dispatch, getState, {history}) {
         console.log("로그아웃 눌림");
         dispatch(userlogOut());
@@ -112,7 +112,7 @@ const actionCreators = { //액션 생성자 내보내기
     signupAction,
     loginAction,
     loginCheckDB,
-    loginOutAction,
+    logOutAction,
 };
 
 export {actionCreators};

@@ -7,9 +7,9 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { BsEmojiSmile } from 'react-icons/bs';
 
 
-const SearchBox = (props) => {
+const SearchBox = (props) => {    
     const [activeNav, setActiveNav] = React.useState(1);
-
+    
     return(
         <React.Fragment>
             <NaviWrap>
