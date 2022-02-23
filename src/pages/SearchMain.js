@@ -62,7 +62,13 @@ const SearchMain = () => {
                         </div>
                         <CancleBtn onClick={cancel}><IoMdClose/></CancleBtn>
                     </SearchWrap>
-                    <Button width="60px" size="15px" padding="0" bg="transparent" color="#777">취소</Button>
+                    <Button width="60px" size="15px" padding="0" bg="transparent" color="#777"
+                        _onClick={()=>{
+                            history.push({                                
+                                pathname: "/main",                             
+                            })
+                        }}
+                    >취소</Button>
                 </Grid>
                 {search_list && search_list.length !== 0? (
                     <Grid margin="0 0 70px" height="calc(100% - 70px)" is_scroll>
