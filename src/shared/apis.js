@@ -4,12 +4,12 @@ import { getCookie } from "./cookie";
 
 const apis = axios.create({
     baseURL:
-        "http://13.124.76.130:8080", //*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/
+        "http://54.180.8.233:8080", //*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/
 });
 
 const imageApis = axios.create({
     baseURL:
-        "http://13.124.76.130:8080", //*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/
+        "http://54.180.8.233:8080", //*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/
 });
 
 apis.interceptors.request.use(function (config) {
