@@ -40,7 +40,6 @@ function App() {
           <Route path="/main" exact component={Main}/>{/* 메인페이지 */}
           <Route path="/login" exact component={Login}/>{/* 로그인 */}
           <Route path="/" exact component={Login}/>{/* 로그인 */}
-
           <Route path="/signup" exact component={Signup}/>{/* 회원가입 */}
           <Route path="/write" exact component={PostWrite}/>{/* 작성페이지 */}
           <Route path="/write/:postId" exact component={PostWrite}/>{/* 수정페이지 */}
