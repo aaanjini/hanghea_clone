@@ -19,15 +19,13 @@ const SearchMain = () => {
     const search_list = useSelector((state)=>state.search.list);
     const searchTarget = localStorage.getItem("searchWord");
 
-
-
     const [target, setTarget] = React.useState("");
-    const [searchWord,setSearchWord] = React.useState(searchTarget?searchTarget:word); 
+    const [searchWord,setSearchWord] = React.useState(searchTarget !== null ? searchTarget : word); 
 
     const onChange = (e) => {
         setTarget(e.target.value);
-
     };
+
     const keyPress = (e) =>{
         setSearchWord(target);
         window.localStorage.setItem('searchWord', target);
@@ -36,13 +34,14 @@ const SearchMain = () => {
         setSearchWord("");  
     };
 
-    React.useEffect(()=>{
-        const searchTarget = localStorage.getItem("searchWord");
-        if(searchTarget !== word){            
-            setSearchWord(searchTarget);
-        }        
+    React.useEffect(()=>{       
+        if(searchTarget === null && word){
+            setSearchWord(word);
+        }
         dispatch(searchAction.getSearchDB(searchWord));
     },[searchWord]);
+
+    console.log("검색확인중","target=",target,"searchTarget=",searchTarget,"searchWord=",searchWord,"word=",word);
 
     return( 
         <>

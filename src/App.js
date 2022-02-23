@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from "react-router-dom";
+import {Route, useParams} from "react-router-dom";
 import { ConnectedRouter } from 'connected-react-router';
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userActions } from "./redux/modules/user";
@@ -27,8 +27,9 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const token = getCookie("token");
-  
+
   React.useEffect(() => {   
+    window.localStorage.removeItem('searchWord');
     if (token && !user) {//쿠키는 있는데 유저 정보가 없으면 바로 불러오기
       dispatch(userActions.loginCheckDB());
     }    

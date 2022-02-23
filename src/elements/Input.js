@@ -4,11 +4,28 @@ import styled from "styled-components";
 import {Text, Grid, Button} from "./Index";
 
 const Input = (props) => {
-    const {label, placeholder, _onChange , type, multiLine, value, bold, radius, size, is_submit, onSubmit,double, details, comment, tag,edit} = props;   
+    const {label, placeholder, _onChange , type, multiLine, value, bold, radius, size, is_submit, onSubmit,double, details, comment, tag,edit,multiEdit} = props;   
     const styles = {
       size,
       bold,
     };
+
+
+    if(multiEdit){
+      return(
+        <React.Fragment>
+          <Grid>
+          <MultiEdit
+            value={value}
+            rows={1}
+            placeholder={placeholder}
+            onChange={_onChange}
+          ></MultiEdit>
+          </Grid>
+        </React.Fragment>
+      );
+    }
+
 
     if(edit){
       return(
@@ -135,6 +152,22 @@ const ElTextarea = styled.textarea`
   background-color: white;
   border: 1px solid #ddd;
   color:#333;
+  ::placeholder {
+    color: #999;
+  }
+`;
+
+const MultiEdit = styled.textarea`
+  border: none;
+  width: 100%;
+  padding: 5px 20px;
+  box-sizing: border-box;
+  background-color:white;
+  outline: none;
+  border: none;
+  color:#333;
+  font-size: 14px;
+  text-align: center;  
   ::placeholder {
     color: #999;
   }

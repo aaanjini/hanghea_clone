@@ -129,6 +129,14 @@ const PostWrite = (props) => {
         dispatch(postActions.editPostDB(postId,formData));
     }
 
+    const textArea = React.useRef();
+
+    const resize = () => {
+        const text = textArea.current;
+        text.style.height = 'auto';
+        text.style.height = text.scrollHeight + 'px';
+    }
+
     React.useEffect(() => {
         if(is_edit){
             dispatch(postActions.getOnePostDB(postId));
@@ -193,18 +201,22 @@ const PostWrite = (props) => {
                             setTitle(e.target.value);
                           }}
                     ></Input>
-                    {/* <Input multiLine placeholder="본문을 입력하세요." size="14px"
-                        value={content} 
-                        _onChange={(e)=>{
-                            setContent(e.target.value);
-                        }}
+                    {/* <Input multiEdit placeholder="본문을 입력하세요." size="14px" 
+                        value={content}
+                       
+                        onKeyUp={resize}
+                        ref={textArea}
                     ></Input> */}
-                    <Input details placeholder="본문을 입력하세요." size="14px"
-                        value={content} 
-                        _onChange={(e)=>{
+                    <MultiEdit 
+                        placeholder="본문을 입력하세요." 
+                        onKeyUp={resize}
+                        value={content}
+                        ref={textArea}
+                        onChange={(e)=>{
                             setContent(e.target.value);
+                            
                         }}
-                    ></Input>
+                    ></MultiEdit>
                 </Grid>
 
                 {/* 모달영역시작----------- */}
@@ -386,6 +398,22 @@ const Btn = styled.button`
     vertical-align: middle;
     padding:0;
     cursor: pointer;
+`;
+
+const MultiEdit = styled.textarea`
+  border: none;
+  width: 100%;
+  padding: 5px 20px;
+  box-sizing: border-box;
+  background-color:white;
+  outline: none;
+  border: none;
+  color:#333;
+  font-size: 14px;
+  text-align: center;  
+  ::placeholder {
+    color: #999;
+  }
 `;
 
 

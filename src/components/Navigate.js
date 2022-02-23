@@ -10,6 +10,11 @@ import { BsEmojiSmile } from 'react-icons/bs';
 const SearchBox = (props) => {    
     const [activeNav, setActiveNav] = React.useState(1);
     
+    const deleteWord = () => {
+        console.log( "되나");
+        window.localStorage.removeItem('searchWord');
+    }
+    
     return(
         <React.Fragment>
             <NaviWrap>
@@ -18,6 +23,7 @@ const SearchBox = (props) => {
                         _onClick={()=>{
                             setActiveNav(1)
                             history.push("/main")
+                            deleteWord()
                         }}
                     >{activeNav === 1? (<GoHome style={{color:"#00c8d2"}}/>):(<GoHome style={{color:"#aaa"}}/>)}</Button>
                     <Text margin="0" size="12px" 
@@ -30,6 +36,7 @@ const SearchBox = (props) => {
                         _onClick={()=>{
                             setActiveNav(2)
                             history.push("/write")
+                            deleteWord()
                         }}
                     >{activeNav === 2?<AiOutlinePlus style={{color:"#00c8d2"}}/>:<AiOutlinePlus style={{color:"#aaa"}}/>}</Button>
                     <Text margin="0" size="12px" 
@@ -41,6 +48,7 @@ const SearchBox = (props) => {
                         _onClick={()=>{
                             setActiveNav(3)
                             history.push("/mypage")
+                            deleteWord()
                         }}
                     >{activeNav === 3?<BsEmojiSmile style={{color:"#00c8d2"}}/>:<BsEmojiSmile style={{color:"#aaa"}}/>}</Button>
                     <Text margin="0" size="12px" color={activeNav === 3? "#00c8d2": "#aaa"}>내정보</Text>
