@@ -1,9 +1,9 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { mypageApis } from "../../shared/apis";
+import { deleteCookie } from "../../shared/cookie";
 
 
-const GET_MYPOST = "GET_MYPOST";
 const SET_MYPOST = "SET_MYPOST";
 
 const setMyPost = createAction(SET_MYPOST, (my_list) => ({my_list}));
@@ -19,9 +19,9 @@ const myPostDB = () => {
     mypageApis
       .getMypost()
       .then((res) => {
-        console.log("마이포스트 확인",res);
-        let my_post = res.data.postResponseDto;
-        dispatch(setMyPost(my_post));
+        console.log("마이포스트 확인",res.data);
+        const my_list = res.data.mainResponseDtoList;
+        dispatch(setMyPost(my_list));
       })
       .catch((err) => console.log(err));
   };
@@ -32,8 +32,8 @@ const myEditDB = (profileUrl, nickname, introduce) => {
     console.log(profileUrl, nickname, introduce);
 
   }
-
 }
+
 
 
 
@@ -41,7 +41,7 @@ export default handleActions(
   {
     [SET_MYPOST]: (state, action) =>
       produce(state, (draft) => {
-        draft.my_list = action.payload.my_post;
+        draft.list = action.payload.my_list;
       }),
 
   },

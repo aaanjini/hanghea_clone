@@ -1,23 +1,37 @@
 import React from "react";
 import styled from "styled-components";
-import { history } from "../redux/configureStore";
 import { CgSearch } from 'react-icons/cg';
+import { actionCreators as searchAction } from "../redux/modules/search";
+import { useDispatch } from "react-redux";
+import {useHistory} from "react-router";
 
 
 const SearchBox = (props) => {
-    const {value, _onChange} = props;
-    
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const [word,setWord] = React.useState("");
+
+    const onChange = (e) => {
+        setWord(e.target.value);        
+    };
 
     return(
         <React.Fragment>
             <SearchWrap>
                 <Icon><CgSearch style={{color:"#999"}}/></Icon>
-                <SearchInput placeholder="검색어를 입력하세요"             
-                onKeyPress={(e) => {
-                    if(e.key === "Enter"){
-                      history.push("/search")
-                    }
-                }}
+                <SearchInput placeholder="검색어를 입력하세요"  
+                    //value={word}  
+                    onChange={onChange}
+                    onKeyPress={(e) => {
+                        if(e.key === "Enter"){
+                            history.push({                                
+                                pathname: "/search",
+                                state: {targetWord: word},                                  
+                            })
+                        }
+                    }}
+                    word={word}
                 ></SearchInput>
             </SearchWrap>
             

@@ -4,12 +4,12 @@ import { getCookie } from "./cookie";
 
 const apis = axios.create({
     baseURL:
-        "http://13.124.76.130:8080", //*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/
+        "http://54.180.8.233:8080", //*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/
 });
 
 const imageApis = axios.create({
     baseURL:
-        "http://13.124.76.130:8080", //*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/
+        "http://54.180.8.233:8080", //*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/
 });
 
 apis.interceptors.request.use(function (config) {
@@ -70,7 +70,7 @@ export const postApis = {
     ,  
     //좋아요 
     likePost: (postId) => 
-        apis.post(`/like/${postId}`) 
+        apis.get(`/like/${postId}`)
     ,
 }
 
@@ -87,5 +87,13 @@ export const commentApis = {
 }
 
 export const mypageApis = {
-    getMypost: () => apis.get("/user/mypost"),
+    //내가 쓴 글 가져오기
+    getMypost: () => apis.get("/user/mypost"),    
+}
+
+export const searchApis = {
+    //검색결과 가져오기
+    getSearch: (findword) => apis.get(`/search/${findword}`),
+
+
 }

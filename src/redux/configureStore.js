@@ -8,6 +8,7 @@ import Post from "./modules/post"; //image의 리듀서
 import Image from "./modules/image"; //image의 리듀서
 import Comment from "./modules/comment"; //comment 리듀서
 import Mypage from "./modules/mypage"; // mypage의 리듀서
+import Search from "./modules/search"; // search의 리듀서
 
 export const history = createBrowserHistory();
 const rootReducer = combineReducers({ //우리가 만든 리듀서 뭉치기
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({ //우리가 만든 리듀서 뭉치기
     image:Image,
     comment:Comment,
     mypage:Mypage,
+    search:Search,
     router: connectRouter(history),
 });
 

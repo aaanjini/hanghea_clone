@@ -14,6 +14,7 @@ const userlogIn = createAction(LOGIN, (user)=>({user}));
 const userlogOut = createAction(LOGOUT, (user) => ({user}));
 const setUser = createAction(SET_USER, (user) => ({user}));
 
+
 const initialState = {
     user:null,
     is_login : null,
@@ -27,7 +28,7 @@ export const signupAction = (username, nickname, password, passwordcheck) => {
         .then((res) => {
             console.log(res,"회원가입");
             window.alert("회원가입 되셨습니다.");
-            history.push("/login");
+            history.push("/");
         }).catch((error) => {
             window.alert("회원가입 오류입니다!");
             console.log("회원가입 실패:",error);
@@ -57,7 +58,7 @@ const loginAction = (username, password) => {
                 }));
                 
             }).catch((error) => console.log("유저정보오류!",error))
-            history.push("/");
+            history.push("/main");
         })
         .catch((error) => {
             console.log("로그인오류입니다!", error);
@@ -72,7 +73,6 @@ const loginCheckDB = () => {
     userApis
         .getUser()
         .then((res) => {
-            //console.log("loginCheckDB",res.data);
             dispatch(
                 setUser({ //유저정보를 다시 세팅
                     username:res.data.username,
@@ -87,7 +87,7 @@ const loginCheckDB = () => {
 //로그아웃 get
 const loginOutAction = () => {
     return function(dispatch, getState, {history}) {
-        deleteCookie("token"); // 쿠키에서 토큰 삭제
+        console.log("로그아웃 눌림");
         dispatch(userlogOut());
         history.replace("/");
     };
@@ -102,6 +102,7 @@ export default handleActions ({
     [LOGOUT]: (state, action) => produce(state, (draft) => {
         draft.user = null;
         draft.is_login = false;
+        deleteCookie("token"); // 쿠키에서 토큰 삭제
     }),
    
 },initialState);
