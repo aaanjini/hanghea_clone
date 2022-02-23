@@ -10,12 +10,10 @@ const SET_MYINFO = "SET_MYINFO";
 const setMyPost = createAction(SET_MYPOST, (my_list) => ({my_list}));
 const setMyInfo = createAction(SET_MYINFO, (my_info) => ({my_info}));
 
-const initialState = {
-  userInfo:{
-    nickName:null,
-    introduce:"",
-    profileUrl:"",
-  },
+const initialState = {  
+  nickName:null,
+  introduce:"",
+  profileUrl:"",
   list: [],
 };
 
@@ -25,7 +23,7 @@ const myPostDB = () => {
     mypageApis
       .getMypost()
       .then((res) => {
-        console.log("마이포스트 확인",res.data);
+        //console.log("마이포스트 확인",res.data);
         const my_list = res.data.mainResponseDtoList;
         const myInfo = {
           introduce:res.data.introduce,

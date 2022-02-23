@@ -21,6 +21,7 @@ import MyWrite from './pages/MyWrite';
 import PostWrite from './pages/PostWrite';
 import PostDetail from './pages/PostDetail';
 import Navigete from "./components/Navigate";
+import Permit from './shared/Permit';
 
 function App() {
   const dispatch = useDispatch();
@@ -48,8 +49,10 @@ function App() {
           <Route path="/mypage/edit" exact component={MyWrite}/>{/* 프로필 변경 페이지 */}
           <Route path="/search" exact component={Search}/>{/* 검색결과 페이지 */}
           <Route path="/search/main" exact component={SearchMain}/>{/* 검색결과 리스트 페이지 */}
-        </ConnectedRouter>    
-        <Navigete/>    
+        </ConnectedRouter>   
+        <Permit>
+          <Navigete/>
+        </Permit>         
       </MobileView>    
       
     </React.Fragment>

@@ -9,8 +9,7 @@ import { CgSearch } from 'react-icons/cg';
 
 //components
 import SearchCard from "../components/SearchCard";
-//page
-import Header from "../components/Header";
+
 
 const SearchMain = () => {
     const dispatch = useDispatch();

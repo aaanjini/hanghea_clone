@@ -15,9 +15,9 @@ const MyWrite = (props) => {
   const my_Info = location.state.myInfo; 
 
     const [image, setImage] = React.useState(null);
-    const [preview, setPreview] = React.useState(my_Info? my_Info.profileUrl :"");    
+    const [preview, setPreview] = React.useState(my_Info? my_Info.profileUrl !== null ? my_Info.profileUrl : "https://www.garyqi.com/wp-content/uploads/2017/01/default-avatar-500x500.jpg" : "https://www.garyqi.com/wp-content/uploads/2017/01/default-avatar-500x500.jpg");    
     const [nickname, setNickname] = React.useState(my_Info ? my_Info.nickname : "");
-    const [intro, setIntro] = React.useState(my_Info? my_Info.introduce :"");
+    const [intro, setIntro] = React.useState(my_Info? my_Info.introduce !== null ? my_Info.introduce : "" : "");
 
     const fileInput = React.useRef();
 
@@ -32,7 +32,7 @@ const MyWrite = (props) => {
            setPreview(reader.result);
         };
 
-        console.log("파일확인",file);
+        //console.log("파일확인",file);
 
         if (file) {
             setImage(file);
@@ -65,7 +65,7 @@ const MyWrite = (props) => {
         <Grid margin="70px 0">        
             <Grid center>
                 <Image size="130" shape="circle" inline_block
-                    profile={preview?preview:""}
+                    profile={preview}
                 ></Image>
                 <FileBox>
                     {/* 이미지 업로드 */}                
@@ -110,7 +110,7 @@ const FileBox = styled.div`
     position: relative;
     .upload-box {
         display: block;
-        width: 100px;
+        width: 110px;
         height: 100%;
         margin: 10px auto 0;
         padding: 10px;

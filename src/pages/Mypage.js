@@ -18,8 +18,6 @@ const Mypage = (props) => {
   const my_list = useSelector((state) => state.mypage.list);
   const my_Info = useSelector((state) => state.mypage.info);
 
-  
-  console.log("마이리스트",my_Info);
   const logout = () => {
       dispatch(userActions.logOutAction());
   };
@@ -34,14 +32,18 @@ const Mypage = (props) => {
       <Header text="내정보"/>
       <Grid margin="50px 0 50px" height="calc(100% - 121px)" is_scroll>
         <Grid padding="16px" is_flex display="flex">        
-          <Image size="70" shape="circle" margin="0 10px 3px 30px"
-            profile={my_Info?my_Info.profileUrl:"https://www.garyqi.com/wp-content/uploads/2017/01/default-avatar-500x500.jpg"}
+          <Image 
+            size="70" 
+            margin="0 10px 3px 30px"
+            profile={my_Info? my_Info.profileUrl !== null  ? my_Info.profileUrl : "https://www.garyqi.com/wp-content/uploads/2017/01/default-avatar-500x500.jpg" : "https://www.garyqi.com/wp-content/uploads/2017/01/default-avatar-500x500.jpg"}
           />
           <Grid width="calc(100% - 100px)" margin="0 0 0 10px" align="top">
               <Text margin="0" bold size="18px" margin="0 0 6px 0">{my_Info?my_Info.nickname:""}</Text>
               <Text margin="0">{my_Info?my_Info.introduce:""}</Text>
               <Button bg="transparent" color="#aaa" width="auto" padding="0" margin="10px 0 0" bold
-                _onClick={logout}
+                _onClick={()=>{
+                  logout()
+                }}
               >로그아웃</Button>
           </Grid>
           <Button
@@ -52,7 +54,6 @@ const Mypage = (props) => {
             padding="8px"
             color="white"
             _onClick={() => {
-              //history.push("/mypage/edit");
               history.push({                                
                 pathname: "/mypage/edit",
                 state: {myInfo: my_Info},                                  

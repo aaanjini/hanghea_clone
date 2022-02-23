@@ -41,7 +41,7 @@ const PostWrite = (props) => {
            setPreview(reader.result);
         };
 
-        console.log("파일확인",file);
+        //console.log("파일확인",file);
 
         if (file) {
             setImage(file);
