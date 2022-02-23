@@ -12,34 +12,38 @@ import SearchCard from "../components/SearchCard";
 //page
 import Header from "../components/Header";
 
-
 const SearchMain = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
     const word = location.state.targetWord; 
     const search_list = useSelector((state)=>state.search.list);
+    const searchTarget = localStorage.getItem("searchWord");
 
 
-    const [searchWord,setSearchWord] = React.useState(word?word:"");
+
     const [target, setTarget] = React.useState("");
-
-    React.useEffect(()=>{        
-        dispatch(searchAction.getSearchDB(searchWord));
-    },[searchWord])
+    const [searchWord,setSearchWord] = React.useState(searchTarget?searchTarget:word); 
 
     const onChange = (e) => {
         setTarget(e.target.value);
 
     };
-    const keyPress = () =>{
+    const keyPress = (e) =>{
         setSearchWord(target);
+        window.localStorage.setItem('searchWord', target);
    };
     const cancel = () => {
         setSearchWord("");  
     };
 
-    console.log(target,"검색확인",searchWord);
+    React.useEffect(()=>{
+        const searchTarget = localStorage.getItem("searchWord");
+        if(searchTarget !== word){            
+            setSearchWord(searchTarget);
+        }        
+        dispatch(searchAction.getSearchDB(searchWord));
+    },[searchWord]);
 
     return( 
         <>
@@ -97,7 +101,7 @@ const SearchMain = () => {
                                         <SearchCard
                                             {...el}
                                             key={i}
-                                            postId={el.postId}
+                                            postId={el.postId}                                   
                                         />
                                     );
                                     

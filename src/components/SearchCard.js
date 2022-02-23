@@ -4,13 +4,15 @@ import { Grid, Text, Input, Button ,Image} from "../elements/Index";
 import { useSelector, useDispatch } from "react-redux";
 import {useLocation, useHistory} from "react-router";
 import { actionCreators as searchAction } from "../redux/modules/search";
-
+import { history } from "../redux/configureStore";
 const SearchCard = (props) => {
-
-
-
     return(        
-        <Grid width="140px" display="inline-block" align="top">            
+        <Grid width="140px" display="inline-block" align="top"
+            _onClick={()=>{
+                history.push(`/post/${props.postId}`)
+                props={...props}
+            }}        
+        >            
             <Grid padding="8px 8px 4px">
                 <Image 
                     shape="rectangle" 

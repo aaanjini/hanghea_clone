@@ -41,7 +41,7 @@ const getOnePostDB = (postId) => {
         postApis.getOnePost(postId)
         .then((res)=>{
             const post = res.data
-            console.log("1개 가져오기",post);
+            //console.log("1개 가져오기",post);
             dispatch(getDetail(post));
         }).catch((error)=>{
             console.log("포스트 1개 가져오기 실패", error);
@@ -51,8 +51,7 @@ const getOnePostDB = (postId) => {
 
 const addPostDB = (post) => {
     return function (dispatch, getState, {history}){
-        console.log(post);
-
+        //console.log(post);
         postApis.addPost(post)
         .then((res)=>{
             console.log("포스트 등록성공",res.data);
@@ -73,9 +72,6 @@ const addPostDB = (post) => {
 
 const editPostDB = (postId, post) => {
     return function (dispatch, getState, {history}){
-        
-        console.log(post);
-
         postApis.editPost(postId, post)
         .then((res)=>{
             console.log("포스트 수정성공", res);

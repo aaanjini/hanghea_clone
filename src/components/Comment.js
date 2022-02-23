@@ -19,8 +19,6 @@ const Comment = (props) => {
         dispatch(commentActions.deleteCommentDB(postId,commentId));
     };
     
-    console.log(props.commentDate);
-
     return(
         <React.Fragment>
             <Grid margin="0 0 15px">

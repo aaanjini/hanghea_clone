@@ -28,8 +28,6 @@ const PostDetail = (props) => {
     const [likeCnt, setLikeCnt] = React.useState(0);   
 
 
-    console.log(userInfo, post);
-
     const likeClick = async () => {
         const res = await postApis.likePost(postId);
         setIsLike(!isLike);
