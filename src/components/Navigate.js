@@ -11,10 +11,9 @@ const SearchBox = (props) => {
     const [activeNav, setActiveNav] = React.useState(1);
     
     const deleteWord = () => {
-        console.log( "되나");
         window.localStorage.removeItem('searchWord');
     }
-    
+
     return(
         <React.Fragment>
             <NaviWrap>
@@ -23,7 +22,7 @@ const SearchBox = (props) => {
                         _onClick={()=>{
                             setActiveNav(1)
                             history.push("/main")
-                            deleteWord()
+                            deleteWord()                       
                         }}
                     >{activeNav === 1? (<GoHome style={{color:"#00c8d2"}}/>):(<GoHome style={{color:"#aaa"}}/>)}</Button>
                     <Text margin="0" size="12px" 
