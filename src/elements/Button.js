@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 const Button = (props) => {
-    const {text, size, children, _onClick, margin, width, height, color, bg, padding , border, is_fixed} = props;
+    const {inline_block, id, text, size,radius, bold, children, _onClick, margin, width, height, color, bg, padding , border, double, zIndex, relative} = props;
     const styles = {
         margin: margin,
         width: width,
@@ -13,20 +13,26 @@ const Button = (props) => {
         padding: padding,
         border: border,
         size:size,
-        is_fixed:is_fixed,
+        double:double,
+        zIndex:zIndex,
+        relative:relative,
+        id:id,
+        inline_block:inline_block,
+        bold:bold,
+        radius:radius,
     }
-   
-    if(is_fixed){
+    if(double){
         return(
             <React.Fragment>
-                <FixedButton {...styles} type="button" onClick={_onClick}>{text? text: children}</FixedButton>
+                <DoubleBtn {...styles} type="button" onClick={_onClick}>{text? text: children}</DoubleBtn>
             </React.Fragment>
-        ); 
-
+        );
     }
+
+
     return(
         <React.Fragment>
-            <DefaultButton {...styles} type="button" onClick={_onClick}>{text? text: children}</DefaultButton>
+            <DefaultButton {...styles} type="button" id={id} onClick={_onClick}>{text? text: children}</DefaultButton>
         </React.Fragment>
     );
 };
@@ -38,15 +44,23 @@ Button.defaultProps = {
     margin: false,
     width: "100%",
     height: '',
-    color: "black",
-    bg: "#FFD662",
+    color: "white",
+    bg: "#ccc",
     padding: "12px 0px",
     border:"none",
     size:"",
     is_fixed:false,
+    double:false,
+    zIndex:"1",
+    relative:false,
+    id:"",
+    inline_block:false,
+    bold:false,
+    radius:"25px",
 };
 
 const DefaultButton = styled.button`    
+    display: ${(props) => (props.inline_block? "inline-block" : "block")};
     width: ${(props) => props.width};
     ${(props) => (props.height? `height: ${props.height};` : '')};
     background-color: ${(props) => props.bg};
@@ -54,26 +68,25 @@ const DefaultButton = styled.button`
     padding: ${(props) => props.padding};
     box-sizing: border-box;
     border: none;
-    border-radius: 5px;
+    border-radius:  ${(props) => (props.radius? `${props.radius}` : "25px")};
     ${(props) => (props.margin? `margin: ${props.margin};` : '')};
     border: ${(props) => props.border};
     cursor: pointer;
     z-index: 2;
     ${(props) => (props.size? `font-size: ${props.size};` : '')};
+    ${(props) => (props.relative ? `position: relative` : "")};
+    font-weight: ${(props) => (props.bold? "bold" : "400")};
 `;
 
-const FixedButton = styled.button`
-    width: 100%;
-    height: 50px;
-    background-color: #FFD662;
-    color: #02343F;
-    font-size: 16px;
-    border: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-    cursor: pointer;    
+const DoubleBtn = styled.button`
+  width: 30%;
+  margin-left: 10px;
+  padding: 12px 4px;
+  background-color: ${(props) => props.bg};
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 `;
 
 

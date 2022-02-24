@@ -22,10 +22,11 @@ Tag.defaultProps = {
 }
 
 const DefaultTag = styled.div`
+    display: inline-block;
     color: #00c8d2;
     border: 1px solid #00c8d2;
     border-radius: 30px;
-    line-height: 30px;
+    line-height: 25px;
     padding: 0 10px;
     font-size: 12px;
     letter-spacing: -.015em;

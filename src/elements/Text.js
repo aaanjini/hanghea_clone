@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Text = (props) => {
-  const { bold, color, size, children, margin , inline_block, align, ellipsis} = props;
+  const { bold, color, size, children, margin , inline_block, ellipsis, align} = props;
 
   const styles = {
     bold: bold, 
@@ -10,20 +10,11 @@ const Text = (props) => {
     size: size, 
     margin:margin, 
     inline_block:inline_block,
-    align:align,
-    ellipsis:ellipsis,
+    align:align
   };
-
-  if(ellipsis){
-    return (
-      <Ellipsis {...styles}>
-          {children}
-      </Ellipsis>
-    )
-  }
   
   return (
-      <P {...styles}>
+      <P {...styles} ellipsis={ellipsis}>
           {children}
       </P>
   )
@@ -36,8 +27,8 @@ Text.defaultProps = {
   size: "14px",
   margin: false,
   inline_block:false,
-  align:"left",
-  // overflow:"auto",
+  align:false,
+  ellipsis:false,
 };
 
 const P = styled.p`
@@ -46,8 +37,18 @@ const P = styled.p`
   font-size: ${(props) => props.size};
   font-weight: ${(props) => (props.bold? "600" : "400")};
   ${(props) => (props.margin? `margin: ${props.margin};` : '')};
-  ${(props) => (props.align? `text-align: ${props.align};` : 'left')};
   white-space: normal;
+  line-height: 16px;
+  ${(props) => (props.align ? `vertical-align: ${props.align}` : "")};
+  ${(props) => (props.ellipsis ? 
+    `overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.2;` : 
+    ""
+  )};
 `;
 
 const Ellipsis = styled.p` //말줄임
@@ -55,7 +56,7 @@ const Ellipsis = styled.p` //말줄임
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   line-height: 1.4;
 `;
