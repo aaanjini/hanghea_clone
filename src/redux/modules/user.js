@@ -23,16 +23,12 @@ const initialState = {
 //회원가입 요청 post
 export const signupAction = (username, nickname, password, passwordcheck) => {
     return function(dispatch, getState, {history}) {
-        console.log(username, nickname, password, passwordcheck);
         userApis.signup(username, nickname, password, passwordcheck)
         .then((res) => {
-            //console.log(res,"회원가입");
             window.alert("회원가입 되셨습니다.");
             history.push("/");
         }).catch((error) => {
-            window.alert("회원가입 오류입니다!");
-            //console.log("회원가입 실패:",error);
-            
+            window.alert("회원가입 오류입니다!");            
         });    
 
     };
@@ -41,17 +37,12 @@ export const signupAction = (username, nickname, password, passwordcheck) => {
 //로그인 요청 post
 const loginAction = (username, password) => {
     return function(dispatch, getState, {history}) {
-        console.log(username, password);
-
         userApis.login(username, password)
         .then((res) => {
-            //console.log(res.headers, "로그인 토큰확인");
             setCookie("token", res.headers["authorization"], 1);
 
             userApis.getUser()
             .then((res)=>{  
-                //console.log("loginAction",res.data);
-
                 dispatch(setUser({
                     username:res.data.username,
                     nickname:res.data.nickname
@@ -87,7 +78,6 @@ const loginCheckDB = () => {
 //로그아웃 get
 const logOutAction = () => {
     return function(dispatch, getState, {history}) {
-        console.log("로그아웃 눌림");
         deleteCookie("token"); // 쿠키에서 토큰 삭제
         dispatch(userlogOut());
         history.replace("/");

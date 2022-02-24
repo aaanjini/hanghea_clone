@@ -42,7 +42,7 @@ const myEditDB = (form) => {
   return function (dispatch, getState, { history }) {
     mypageApis.editMyInfo(form)
     .then((res)=>{
-      //console.log("수정확인",res);
+      console.log("수정확인",res);
       window.alert("프로필 수정이 되었습니다!🥳");
       history.replace("/mypage");
     }).catch((err)=>{
