@@ -54,7 +54,7 @@ const addPostDB = (post) => {
         //console.log(post);
         postApis.addPost(post)
         .then((res)=>{
-            console.log("포스트 등록성공",res.data);
+            //console.log("포스트 등록성공",res.data);
             const postId = res.data;
             postApis.getOnePost(postId)
             .then((res)=>{
@@ -74,10 +74,10 @@ const editPostDB = (postId, post) => {
     return function (dispatch, getState, {history}){
         postApis.editPost(postId, post)
         .then((res)=>{
-            console.log("포스트 수정성공", res);
+            //console.log("포스트 수정성공", res);
             postApis.getOnePost(postId)
             .then((res)=>{
-                console.log("포스트 수정",res.data);
+                //console.log("포스트 수정",res.data);
                 dispatch(editPost(res.data));
             }).catch((err)=>{
                 console.log("포스트 수정 가져오기 오류", err);
@@ -95,7 +95,7 @@ const deletePostDB = (postId) => {
         console.log("포스트삭제",postId);
         postApis.deletePost(postId)
         .then((res)=>{
-            console.log("포스트 삭제성공", res);
+            //console.log("포스트 삭제성공", res);
 
             const post_index = getState().post.list.findIndex(
                 (item) => item.postId === postId

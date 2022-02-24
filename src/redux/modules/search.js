@@ -16,7 +16,7 @@ const getSearchDB = (word) => {
     return function (dispatch, getState, {history}){
         searchApis.getSearch(word)
         .then((res)=>{
-            console.log("검색결과",res.data);
+            //console.log("검색결과",res.data);
             const _list = res.data.searchlist;
             dispatch(getSearch(_list));
         }).catch((err)=>{
