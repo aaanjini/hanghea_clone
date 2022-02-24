@@ -5,7 +5,7 @@ export const emailCheck = (email) => {
 }
 
 export const passwordCheck = (password) => {
-    let _reg = /^[a-zA-Z0-9]{8,30}$/;  // ()붙이고 뒤에 *을 붙이면 n번째 반복할수있다는걸 나타냄
+    let _reg = /^[a-zA-Z0-9]{8,30}$/;
     
     return _reg.test(password);
 }
