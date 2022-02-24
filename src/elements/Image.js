@@ -79,6 +79,7 @@ const ImageCircle = styled.div`
     border-radius:var(--size);
     background-image: url("${(props) => props.profile}");
     background-size: cover;
+    background-position: center;
     vertical-align: ${(props) => props.align};
 `;
 

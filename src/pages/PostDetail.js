@@ -45,8 +45,8 @@ const PostDetail = (props) => {
                 setIsLike(true);
             }
         }
-        likeSet();        
-    }, []);
+        likeSet();
+    }, [commentList]);
 
 
     const deletePost = () => {
