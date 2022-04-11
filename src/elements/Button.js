@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 const Button = (props) => {
-    const {text, size, children, _onClick, margin, width, height, color, bg, padding , border, double} = props;
+    const {inline_block, id, text, size,radius, bold, children, _onClick, margin, width, height, color, bg, padding , border, double, zIndex, relative} = props;
     const styles = {
         margin: margin,
         width: width,
@@ -14,6 +14,12 @@ const Button = (props) => {
         border: border,
         size:size,
         double:double,
+        zIndex:zIndex,
+        relative:relative,
+        id:id,
+        inline_block:inline_block,
+        bold:bold,
+        radius:radius,
     }
     if(double){
         return(
@@ -26,7 +32,7 @@ const Button = (props) => {
 
     return(
         <React.Fragment>
-            <DefaultButton {...styles} type="button" onClick={_onClick}>{text? text: children}</DefaultButton>
+            <DefaultButton {...styles} type="button" id={id} onClick={_onClick}>{text? text: children}</DefaultButton>
         </React.Fragment>
     );
 };
@@ -44,10 +50,17 @@ Button.defaultProps = {
     border:"none",
     size:"",
     is_fixed:false,
-    double:false
+    double:false,
+    zIndex:"1",
+    relative:false,
+    id:"",
+    inline_block:false,
+    bold:false,
+    radius:"25px",
 };
 
 const DefaultButton = styled.button`    
+    display: ${(props) => (props.inline_block? "inline-block" : "block")};
     width: ${(props) => props.width};
     ${(props) => (props.height? `height: ${props.height};` : '')};
     background-color: ${(props) => props.bg};
@@ -55,12 +68,14 @@ const DefaultButton = styled.button`
     padding: ${(props) => props.padding};
     box-sizing: border-box;
     border: none;
-    border-radius: 25px;
+    border-radius:  ${(props) => (props.radius? `${props.radius}` : "25px")};
     ${(props) => (props.margin? `margin: ${props.margin};` : '')};
     border: ${(props) => props.border};
     cursor: pointer;
     z-index: 2;
     ${(props) => (props.size? `font-size: ${props.size};` : '')};
+    ${(props) => (props.relative ? `position: relative` : "")};
+    font-weight: ${(props) => (props.bold? "bold" : "400")};
 `;
 
 const DoubleBtn = styled.button`

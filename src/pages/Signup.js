@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, Text, Input, Button } from "../elements/Index";
-import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { emailCheck, passwordCheck} from "../shared/common";
@@ -36,7 +35,7 @@ const Signup = () => {
       return;
     }
     console.log("회원가입완료!");
-    dispatch(userActions.signupAction(id,nick_name,pwd));
+    dispatch(userActions.signupAction(id,nick_name,pwd,pwd_check));
   }; 
 
   const idCheck = () => {
@@ -50,26 +49,15 @@ const Signup = () => {
     <React.Fragment>
       <Grid padding="16px">
         <Header text="회원가입"/>
-        <Grid padding="16px 0px">
-          <Text color="#333" margin="0 0 10px 0" size="16px" bold>아이디</Text>
-          <Grid>
+        <Grid padding="16px 0px" margin="30px 0 0">          
             <Input
-              double
               radius="6px"
               label="아이디"
               placeholder="아이디를 입력해주세요."
               _onChange={(e) => {
                 setId(e.target.value);
               }}
-            />
-            <Button double 
-              bg={id === "" ? "#ddd" : "#ff8c32"}
-              _onClick={()=>{
-                console.log("눌림")
-              }}
-            >중복확인</Button>
-          </Grid>
-          
+            />          
         </Grid>
 
         <Grid padding="16px 0px">
